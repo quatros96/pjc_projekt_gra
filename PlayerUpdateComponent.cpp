@@ -7,8 +7,6 @@
 
 void PlayerUpdateComponent::update(float fps)
 {
-    std::string runLeft = "RUNL";
-    std::string runRight = "RUNR";
     if(sf::Joystick::isConnected(0))
     {
         m_TC->getLocation().x += ((m_Speed / 100) * m_XExtent) * fps;
@@ -17,20 +15,22 @@ void PlayerUpdateComponent::update(float fps)
     if(m_IsHoldingLeft)
     {
         m_TC->moveLeft(fps);
-        m_AGC->play(runLeft, fps);
+        m_AGC->play("LEFT", fps);
     }
     else if(m_IsHoldingRight)
     {
         m_TC->moveRight(fps);
-        m_AGC->play(runRight, fps);
+        m_AGC->play("RIGHT", fps);
     }
     if(m_IsHoldingUp)
     {
         m_TC->moveUp(fps);
+        m_AGC->play("UP", fps);
     }
     else if(m_IsHoldingDown)
     {
         m_TC->moveDown(fps);
+        m_AGC->play("DOWN", fps);
     }
     m_RCC->setOrMoveCollider(m_TC->getLocation().x, m_TC->getLocation().y,
             m_TC->getSize().x, m_TC->getSize().y);
@@ -50,7 +50,25 @@ void PlayerUpdateComponent::update(float fps)
     {
         m_TC->getLocation().y = 0;
     }
-    
+    if(!m_IsHoldingLeft && !m_IsHoldingRight && !m_IsHoldingUp && !m_IsHoldingDown)
+    {
+	    if(m_lastDirection == "left")
+	    {
+            m_AGC->play("IDLE_LEFT", fps);
+	    }
+        else if (m_lastDirection == "right")
+        {
+            m_AGC->play("IDLE_RIGHT", fps);
+        }
+        else if (m_lastDirection == "up")
+        {
+            m_AGC->play("IDLE_UP", fps);
+        }
+        else
+        {
+            m_AGC->play("IDLE_DOWN", fps);
+        }
+    }
     
     
     
@@ -67,7 +85,7 @@ void PlayerUpdateComponent::moveLeft()
     stopRight();
     stopUp();
     stopDown();
-    m_lastDirection = "right";
+    m_lastDirection = "left";
 }
 void PlayerUpdateComponent::moveRight()
 {

@@ -55,21 +55,28 @@ void GameInputHandler::HandleKeyPressed(sf::Event &event, sf::RenderWindow &wind
         SoundEngine::playClick();
         getPointerToScreenManagerRemoteControl()->SwitchScreens("Select");
     }
-    if(event.key.code == sf::Keyboard::Left)
+    else if (event.key.code == sf::Keyboard::Left)
     {
         m_PUC->moveLeft();
     }
-    if(event.key.code == sf::Keyboard::Right)
+    else if (event.key.code == sf::Keyboard::Right)
     {
         m_PUC->moveRight();
     }
-    if(event.key.code == sf::Keyboard::Up)
+    else if(event.key.code == sf::Keyboard::Up)
     {
         m_PUC->moveUp();
     }
-    if(event.key.code == sf::Keyboard::Down)
+    else if(event.key.code == sf::Keyboard::Down)
     {
         m_PUC->moveDown();
+    }
+    else
+    {
+        m_PUC->stopUp();
+        m_PUC->stopDown();
+        m_PUC->stopLeft();
+        m_PUC->stopRight();
     }
 }
 void GameInputHandler::handleKeyReleased(sf::Event &event, sf::RenderWindow &window)
