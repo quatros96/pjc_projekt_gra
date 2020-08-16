@@ -56,10 +56,13 @@ public:
         m_RCC = std::static_pointer_cast<RectColliderComponent>(
                 self->getComponentByTypeAndSpecificType(
                         "collider", "rect"));
+        
         m_AGC = std::static_pointer_cast<AnimatedGraphicsComponent>(
             gos->findFirstObjectWithTag("Player")
             .getComponentByTypeAndSpecificType(
                 "graphics", "animated"));
+        
+    	
     }
     void update(float fps) override;
 };

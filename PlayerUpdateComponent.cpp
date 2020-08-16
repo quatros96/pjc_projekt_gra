@@ -15,20 +15,22 @@ void PlayerUpdateComponent::update(float fps)
     if(m_IsHoldingLeft)
     {
         m_TC->moveLeft(fps);
-        
+        m_AGC->play("LEFT", fps);
     }
     else if(m_IsHoldingRight)
     {
         m_TC->moveRight(fps);
-
+        m_AGC->play("RIGHT", fps);
     }
     if(m_IsHoldingUp)
     {
         m_TC->moveUp(fps);
+        m_AGC->play("UP", fps);
     }
     else if(m_IsHoldingDown)
     {
         m_TC->moveDown(fps);
+        m_AGC->play("DOWN", fps);
     }
     m_RCC->setOrMoveCollider(m_TC->getLocation().x, m_TC->getLocation().y,
             m_TC->getSize().x, m_TC->getSize().y);
@@ -48,8 +50,27 @@ void PlayerUpdateComponent::update(float fps)
     {
         m_TC->getLocation().y = 0;
     }
+    if(!m_IsHoldingLeft && !m_IsHoldingRight && !m_IsHoldingUp && !m_IsHoldingDown)
+    {
+	    if(m_lastDirection == "left")
+	    {
+            m_AGC->play("IDLE_LEFT", fps);
+	    }
+        else if (m_lastDirection == "right")
+        {
+            m_AGC->play("IDLE_RIGHT", fps);
+        }
+        else if (m_lastDirection == "up")
+        {
+            m_AGC->play("IDLE_UP", fps);
+        }
+        else
+        {
+            m_AGC->play("IDLE_DOWN", fps);
+        }
+    }
     
-    m_AGC->update(fps);
+    
     
     //m_TC->decelerate(fps);
 }
@@ -64,11 +85,7 @@ void PlayerUpdateComponent::moveLeft()
     stopRight();
     stopUp();
     stopDown();
-    //if (m_lastDirection != "left")
-    {
-        m_AGC->selectAnimation(0, 1, 7, 1);
-    }
-    m_lastDirection = "right";
+    m_lastDirection = "left";
 }
 void PlayerUpdateComponent::moveRight()
 {
@@ -76,10 +93,6 @@ void PlayerUpdateComponent::moveRight()
     stopLeft();
     stopUp();
     stopDown();
-	//if(m_lastDirection != "right")
-	{
-        m_AGC->selectAnimation(0, 0, 7, 0);
-    }
     m_lastDirection = "right";
 }
 void PlayerUpdateComponent::moveUp()

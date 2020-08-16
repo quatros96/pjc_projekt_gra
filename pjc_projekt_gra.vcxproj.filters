@@ -287,5 +287,8 @@
     <Image Include="graphics\animation.png">
       <Filter>Pliki zasobów</Filter>
     </Image>
+    <Image Include="graphics\animation-full.png">
+      <Filter>Pliki zasobów</Filter>
+    </Image>
   </ItemGroup>
 </Project>

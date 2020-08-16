@@ -108,6 +108,7 @@
     <Text Include="world\testlvl.txt" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="graphics\animation-full.png" />
     <Image Include="graphics\animation.png" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
