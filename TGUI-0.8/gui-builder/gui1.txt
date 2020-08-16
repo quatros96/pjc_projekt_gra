@@ -1,0 +1,1064 @@
+Renderer.1 {
+    arrowbackgroundcolor = #F5F5F5;
+    arrowbackgroundcolorhover = white;
+    arrowcolor = #3C3C3C;
+    arrowcolorhover = black;
+    backgroundcolor = #F5F5F5;
+    bordercolor = black;
+    borders = (1, 1, 1, 1);
+    padding = (0, 0, 0, 0);
+    textcolor = #3C3C3C;
+    texturearrow = None;
+    texturearrowhover = None;
+    texturebackground = None;
+}
+
+Renderer.2 {
+    backgroundcolor = transparent;
+    bordercolor = #3C3C3C;
+    borders = (0, 0, 0, 0);
+    textcolor = #3C3C3C;
+    texturebackground = None;
+}
+
+Renderer.3 {
+    backgroundcolor = #F5F5F5;
+    backgroundcolordisabled = #E6E6E6;
+    backgroundcolorhover = white;
+    bordercolor = #3C3C3C;
+    bordercolordisabled = #7D7D7D;
+    bordercolorhover = black;
+    borders = (1, 1, 1, 1);
+    caretcolor = black;
+    caretwidth = 1;
+    defaulttextcolor = #A0A0A0;
+    padding = (0, 0, 0, 0);
+    selectedtextbackgroundcolor = #006EFF;
+    selectedtextcolor = white;
+    textcolor = #3C3C3C;
+    textcolordisabled = #7D7D7D;
+    texture = None;
+    texturedisabled = None;
+    texturefocused = None;
+    texturehover = None;
+}
+
+Renderer.4 {
+    backgroundcolor = #B4B4B4;
+    textcolor = rgba(255, 255, 255, 215);
+    textstyle = Bold;
+    texturebackground = None;
+
+    scrollbar {
+        arrowbackgroundcolor = rgba(160, 160, 160, 215);
+        arrowbackgroundcolorhover = rgba(170, 170, 170, 215);
+        arrowcolor = rgba(200, 200, 200, 215);
+        arrowcolorhover = rgba(225, 225, 225, 215);
+        thumbcolor = rgba(185, 185, 185, 215);
+        thumbcolorhover = rgba(195, 195, 195, 215);
+        trackcolor = rgba(160, 160, 160, 215);
+        trackcolorhover = rgba(170, 170, 170, 215);
+    }
+}
+
+Renderer.5 {
+    backgroundcolor = transparent;
+    bordercolor = #3C3C3C;
+    borders = (0, 0, 0, 0);
+    textcolor = #3C3C3C;
+    texturebackground = None;
+}
+
+Label.Label1 {
+    HorizontalAlignment = Center;
+    Position = (10, 10);
+    ScrollbarPolicy = Never;
+    Size = (117.2, 18);
+    Text = "Podaj wartości długości";
+    TextSize = 13;
+    renderer = &4;
+}
+
+Label.Label2 {
+    HorizontalAlignment = Center;
+    Position = (10, 40);
+    ScrollbarPolicy = Never;
+    Size = (70, 18);
+    Text = "L1 [mm]";
+    TextSize = 13;
+    renderer = &4;
+}
+
+Label.Label3 {
+    Position = (10, 70);
+    ScrollbarPolicy = Never;
+    Size = (70, 18);
+    Text = "L2 [mm]";
+    TextSize = 13;
+    renderer = &4;
+}
+
+Label.Label4 {
+    Position = (10, 100);
+    ScrollbarPolicy = Never;
+    Size = (70, 18);
+    Text = "L3 [mm]";
+    TextSize = 13;
+    renderer = &4;
+}
+
+Label.Label5 {
+    Position = (10, 130);
+    ScrollbarPolicy = Never;
+    Size = (70, 18);
+    Text = "L4 [mm]";
+    TextSize = 13;
+    renderer = &4;
+}
+
+Label.Label6 {
+    Position = (10, 160);
+    ScrollbarPolicy = Never;
+    Size = (70, 18);
+    Text = "L5 [mm]";
+    TextSize = 13;
+    renderer = &4;
+}
+
+Label.Label7 {
+    Position = (10, 190);
+    ScrollbarPolicy = Never;
+    Size = (70, 18);
+    Text = "L6 [mm]";
+    TextSize = 13;
+    renderer = &4;
+}
+
+Label.Label8 {
+    Position = (10, 220);
+    ScrollbarPolicy = Never;
+    Size = (70, 18);
+    Text = "D [mm]";
+    TextSize = 13;
+    renderer = &4;
+}
+
+Label.Label9 {
+    Position = (10, 250);
+    ScrollbarPolicy = Never;
+    Size = (70, 18);
+    Text = "E [mm]";
+    TextSize = 13;
+    renderer = &4;
+}
+
+EditBox.L1 {
+    InputValidator = UInt;
+    Position = (90, 40);
+    Size = (60, 18);
+    Text = 50;
+    TextSize = 13;
+    renderer = &3;
+}
+
+EditBox.L2 {
+    InputValidator = UInt;
+    Position = (90, 70);
+    Size = (60, 18);
+    Text = 200;
+    TextSize = 13;
+    renderer = &3;
+}
+
+EditBox.L3 {
+    InputValidator = UInt;
+    Position = (90, 100);
+    Size = (60, 18);
+    Text = 240;
+    TextSize = 13;
+    renderer = &3;
+}
+
+EditBox.L4 {
+    InputValidator = UInt;
+    Position = (90, 130);
+    Size = (60, 18);
+    Text = 10;
+    TextSize = 13;
+    renderer = &3;
+}
+
+EditBox.L5 {
+    InputValidator = UInt;
+    Position = (90, 160);
+    Size = (60, 18);
+    Text = 50;
+    TextSize = 13;
+    renderer = &3;
+}
+
+EditBox.L6 {
+    InputValidator = UInt;
+    Position = (90, 190);
+    Size = (60, 18);
+    Text = 40;
+    TextSize = 13;
+    renderer = &3;
+}
+
+EditBox.Dvar {
+    InputValidator = UInt;
+    Position = (90, 220);
+    Size = (60, 18);
+    Text = 20;
+    TextSize = 13;
+    renderer = &3;
+}
+
+EditBox.Evar {
+    InputValidator = UInt;
+    Position = (90, 250);
+    Size = (60, 18);
+    Text = 0;
+    TextSize = 13;
+    renderer = &3;
+}
+
+Button.startButton {
+    Position = (10, 910);
+    Size = (160, 40);
+    Text = "START SYMULACJI";
+    TextSize = 13;
+
+    Renderer {
+        backgroundcolor = #AFC6DA;
+        backgroundcolordisabled = #E6E6E6;
+        backgroundcolordown = #EBEBEB;
+        backgroundcolorhover = white;
+        bordercolor = #3C3C3C;
+        bordercolordisabled = #7D7D7D;
+        bordercolordown = black;
+        bordercolorfocused = #1E1EB4;
+        bordercolorhover = black;
+        borders = (1, 1, 1, 1);
+        textcolor = #3C3C3C;
+        textcolordisabled = #7D7D7D;
+        textcolordown = black;
+        textcolorhover = black;
+        texture = None;
+        texturedisabled = None;
+        texturedown = None;
+        texturefocused = None;
+        texturehover = None;
+    }
+}
+
+Label.Label10 {
+    Position = (10, 310);
+    ScrollbarPolicy = Never;
+    Size = (70, 18);
+    Text = "δ1 [1/-1]";
+    TextSize = 13;
+    renderer = &4;
+}
+
+Label.Label11 {
+    Position = (10, 340);
+    ScrollbarPolicy = Never;
+    Size = (70, 18);
+    Text = "δ2 [1/-1]";
+    TextSize = 13;
+    renderer = &4;
+}
+
+Label.Label12 {
+    Position = (10, 370);
+    ScrollbarPolicy = Never;
+    Size = (70, 18);
+    Text = "δ5 [1/-1]";
+    TextSize = 13;
+    renderer = &4;
+}
+
+EditBox.delta1 {
+    InputValidator = Int;
+    Position = (90, 310);
+    Size = (60, 18);
+    Text = 1;
+    TextSize = 13;
+    renderer = &3;
+}
+
+EditBox.delta2 {
+    InputValidator = Int;
+    Position = (90, 340);
+    Size = (60, 18);
+    Text = 1;
+    TextSize = 13;
+    renderer = &3;
+}
+
+EditBox.delta5 {
+    InputValidator = Int;
+    Position = (90, 370);
+    Size = (60, 18);
+    Text = 1;
+    TextSize = 13;
+    renderer = &3;
+}
+
+Label.Label13 {
+    HorizontalAlignment = Center;
+    Position = (10, 430);
+    ScrollbarPolicy = Never;
+    Size = (70, 18);
+    Text = "θ [st.]";
+    TextSize = 13;
+    renderer = &4;
+}
+
+Label.Label14 {
+    HorizontalAlignment = Center;
+    Position = (10, 460);
+    ScrollbarPolicy = Never;
+    Size = (70, 18);
+    Text = "Ψ [st.]";
+    TextSize = 13;
+    renderer = &4;
+}
+
+EditBox.theta {
+    InputValidator = Int;
+    Position = (90, 430);
+    Size = (60, 18);
+    Text = 30;
+    TextSize = 13;
+    renderer = &3;
+}
+
+EditBox.psi {
+    InputValidator = Int;
+    Position = (90, 460);
+    Size = (60, 18);
+    Text = 45;
+    TextSize = 13;
+    renderer = &3;
+}
+
+Label.Label15 {
+    HorizontalAlignment = Center;
+    Position = (250, 10);
+    ScrollbarPolicy = Never;
+    Size = (177.2, 18);
+    Text = "Podaj wsp maszynowe";
+    TextSize = 13;
+    renderer = &4;
+}
+
+Label.Label16 {
+    HorizontalAlignment = Center;
+    Position = (250, 40);
+    ScrollbarPolicy = Never;
+    Size = (70, 18);
+    Text = "φ1 [mm]";
+    TextSize = 13;
+    renderer = &4;
+}
+
+EditBox.fi1 {
+    InputValidator = Int;
+    Position = (330, 40);
+    Size = (60, 18);
+    Text = 70;
+    TextSize = 13;
+    renderer = &3;
+}
+
+Label.Label17 {
+    HorizontalAlignment = Center;
+    Position = (250, 70);
+    ScrollbarPolicy = Never;
+    Size = (70, 18);
+    Text = "φ2 [mm]";
+    TextSize = 13;
+    renderer = &4;
+}
+
+Label.Label18 {
+    HorizontalAlignment = Center;
+    Position = (250, 100);
+    ScrollbarPolicy = Never;
+    Size = (70, 18);
+    Text = "φ3 [mm]";
+    TextSize = 13;
+    renderer = &4;
+}
+
+Label.Label19 {
+    HorizontalAlignment = Center;
+    Position = (250, 130);
+    ScrollbarPolicy = Never;
+    Size = (70, 18);
+    Text = "φ4 [mm]";
+    TextSize = 13;
+    renderer = &4;
+}
+
+Label.Label20 {
+    HorizontalAlignment = Center;
+    Position = (250, 160);
+    ScrollbarPolicy = Never;
+    Size = (70, 18);
+    Text = "φ5 [mm]";
+    TextSize = 13;
+    renderer = &4;
+}
+
+EditBox.fi2 {
+    InputValidator = Int;
+    Position = (330, 70);
+    Size = (60, 18);
+    Text = 60;
+    TextSize = 13;
+    renderer = &3;
+}
+
+EditBox.fi3 {
+    InputValidator = Int;
+    Position = (330, 100);
+    Size = (60, 18);
+    Text = "-30";
+    TextSize = 13;
+    renderer = &3;
+}
+
+EditBox.fi4 {
+    InputValidator = Int;
+    Position = (330, 130);
+    Size = (60, 18);
+    Text = "-40";
+    TextSize = 13;
+    renderer = &3;
+}
+
+EditBox.fi5 {
+    InputValidator = Int;
+    Position = (330, 160);
+    Size = (60, 18);
+    Text = "-60";
+    TextSize = 13;
+    renderer = &3;
+}
+
+Label.Label21 {
+    HorizontalAlignment = Center;
+    Position = (250, 220);
+    ScrollbarPolicy = Never;
+    Size = (177.2, 18);
+    Text = "PUNKT POCZATKOWY";
+    TextSize = 13;
+    renderer = &4;
+}
+
+Label.Label22 {
+    HorizontalAlignment = Center;
+    Position = (250, 250);
+    ScrollbarPolicy = Never;
+    Size = (70, 18);
+    Text = "X START";
+    TextSize = 13;
+    renderer = &4;
+}
+
+Label.Label23 {
+    HorizontalAlignment = Center;
+    Position = (250, 280);
+    ScrollbarPolicy = Never;
+    Size = (70, 18);
+    Text = "Y START";
+    TextSize = 13;
+    renderer = &4;
+}
+
+Label.Label24 {
+    HorizontalAlignment = Center;
+    Position = (250, 310);
+    ScrollbarPolicy = Never;
+    Size = (70, 18);
+    Text = "Z START";
+    TextSize = 13;
+    renderer = &4;
+}
+
+EditBox.Xstart {
+    InputValidator = UInt;
+    Position = (330, 250);
+    Size = (60, 18);
+    Text = 200;
+    TextSize = 13;
+    renderer = &3;
+}
+
+EditBox.Ystart {
+    InputValidator = UInt;
+    Position = (330, 280);
+    Size = (60, 18);
+    Text = 250;
+    TextSize = 13;
+    renderer = &3;
+}
+
+EditBox.Zstart {
+    InputValidator = UInt;
+    Position = (330, 310);
+    Size = (60, 18);
+    Text = 100;
+    TextSize = 13;
+    renderer = &3;
+}
+
+Label.Label25 {
+    HorizontalAlignment = Center;
+    Position = (250, 370);
+    ScrollbarPolicy = Never;
+    Size = (177.2, 18);
+    Text = "PUNKT KONCOWY";
+    TextSize = 13;
+    renderer = &4;
+}
+
+Label.Label26 {
+    HorizontalAlignment = Center;
+    Position = (250, 400);
+    ScrollbarPolicy = Never;
+    Size = (70, 18);
+    Text = "X END";
+    TextSize = 13;
+    renderer = &4;
+}
+
+Label.Label27 {
+    HorizontalAlignment = Center;
+    Position = (250, 430);
+    ScrollbarPolicy = Never;
+    Size = (70, 18);
+    Text = "Y END";
+    TextSize = 13;
+    renderer = &4;
+}
+
+Label.Label28 {
+    HorizontalAlignment = Center;
+    Position = (250, 460);
+    ScrollbarPolicy = Never;
+    Size = (70, 18);
+    Text = "Z END";
+    TextSize = 13;
+    renderer = &4;
+}
+
+EditBox.Xend {
+    InputValidator = UInt;
+    Position = (330, 400);
+    Size = (60, 18);
+    Text = 200;
+    TextSize = 13;
+    renderer = &3;
+}
+
+EditBox.Yend {
+    InputValidator = UInt;
+    Position = (330, 430);
+    Size = (60, 18);
+    Text = 250;
+    TextSize = 13;
+    renderer = &3;
+}
+
+EditBox.Zend {
+    InputValidator = UInt;
+    Position = (330, 460);
+    Size = (60, 18);
+    Text = 300;
+    TextSize = 13;
+    renderer = &3;
+}
+
+Label.Label29 {
+    HorizontalAlignment = Center;
+    Position = (10, 810);
+    ScrollbarPolicy = Never;
+    Size = (267.2, 18);
+    Text = "LICZBA PUNKTOW PODPOROWYCH";
+    TextSize = 13;
+    renderer = &4;
+}
+
+EditBox.stepValue {
+    InputValidator = UInt;
+    Position = (290, 810);
+    Size = (60, 18);
+    Text = 125;
+    TextSize = 13;
+    renderer = &3;
+}
+
+ComboBox.interpolacjaM {
+    ChangeItemOnScroll = true;
+    ExpandDirection = Down;
+    Items = [LINIOWA, "KOŁOWA"];
+    ItemsToDisplay = 0;
+    MaximumItems = 0;
+    Position = (10, 540);
+    SelectedItemIndex = 0;
+    Size = (160, 22);
+    TextSize = 13;
+    renderer = &1;
+}
+
+Label.Label30 {
+    HorizontalAlignment = Center;
+    Position = (10, 510);
+    ScrollbarPolicy = Never;
+    Size = (157.2, 18);
+    Text = INTERPOLACJA;
+    TextSize = 13;
+    renderer = &4;
+}
+
+Label.Label31 {
+    HorizontalAlignment = Center;
+    Position = (10, 620);
+    ScrollbarPolicy = Never;
+    Size = (157.2, 18);
+    Text = "REALIZACJA RUCHU";
+    TextSize = 13;
+    renderer = &4;
+}
+
+ComboBox.typRuchuM {
+    ChangeItemOnScroll = true;
+    ExpandDirection = Down;
+    Items = ["PUNKT START&END", "NASTAWY WSP MASZYNOWYCH"];
+    ItemsToDisplay = 0;
+    MaximumItems = 0;
+    Position = (10, 650);
+    SelectedItemIndex = 0;
+    Size = (160, 22);
+    TextSize = 13;
+    renderer = &1;
+}
+
+ProgressBar.pasekPostepu {
+    Maximum = 100;
+    Minimum = 0;
+    Position = (10, 880);
+    Size = (420, 22);
+    TextSize = 13;
+    Value = 0;
+
+    Renderer {
+        backgroundcolor = #F5F5F5;
+        bordercolor = black;
+        borders = (1, 1, 1, 1);
+        fillcolor = #006EFF;
+        textcolor = #3C3C3C;
+        textcolorfilled = white;
+        texturebackground = None;
+        texturefill = None;
+    }
+}
+
+Label.Label32 {
+    HorizontalAlignment = Center;
+    Position = (1050, 880);
+    ScrollbarPolicy = Never;
+    Size = (70, 18);
+    Text = "φ1 [st]";
+    TextSize = 13;
+    renderer = &4;
+}
+
+Label.Label33 {
+    HorizontalAlignment = Center;
+    Position = (1130, 880);
+    ScrollbarPolicy = Never;
+    Size = (70, 18);
+    Text = "φ2 [st]";
+    TextSize = 13;
+    renderer = &4;
+}
+
+Label.Label34 {
+    HorizontalAlignment = Center;
+    Position = (1210, 880);
+    ScrollbarPolicy = Never;
+    Size = (70, 18);
+    Text = "φ3 [st]";
+    TextSize = 13;
+    renderer = &4;
+}
+
+Label.Label35 {
+    HorizontalAlignment = Center;
+    Position = (1290, 880);
+    ScrollbarPolicy = Never;
+    Size = (70, 18);
+    Text = "φ4 [st]";
+    TextSize = 13;
+    renderer = &4;
+}
+
+Label.Label36 {
+    HorizontalAlignment = Center;
+    Position = (1370, 880);
+    ScrollbarPolicy = Never;
+    Size = (70, 18);
+    Text = "φ5 [st]";
+    TextSize = 13;
+    renderer = &4;
+}
+
+Label.fi1st {
+    AutoSize = true;
+    Position = (1050, 910);
+    ScrollbarPolicy = Never;
+    Size = (8.2, 18);
+    Text = "-";
+    TextSize = 13;
+    renderer = &2;
+}
+
+Label.fi2st {
+    AutoSize = true;
+    Position = (1130, 910);
+    ScrollbarPolicy = Never;
+    Size = (8.2, 18);
+    Text = "-";
+    TextSize = 13;
+    renderer = &2;
+}
+
+Label.fi3st {
+    AutoSize = true;
+    Position = (1210, 910);
+    ScrollbarPolicy = Never;
+    Size = (8.2, 18);
+    Text = "-";
+    TextSize = 13;
+    renderer = &2;
+}
+
+Label.fi4st {
+    AutoSize = true;
+    Position = (1290, 910);
+    ScrollbarPolicy = Never;
+    Size = (8.2, 18);
+    Text = "-";
+    TextSize = 13;
+    renderer = &2;
+}
+
+Label.fi5st {
+    AutoSize = true;
+    Position = (1370, 910);
+    ScrollbarPolicy = Never;
+    Size = (8.2, 18);
+    Text = "-";
+    TextSize = 13;
+    renderer = &2;
+}
+
+Label.XT {
+    HorizontalAlignment = Center;
+    Position = (1050, 950);
+    ScrollbarPolicy = Never;
+    Size = (70, 18);
+    Text = XT;
+    TextSize = 13;
+    renderer = &4;
+}
+
+Label.YT {
+    HorizontalAlignment = Center;
+    Position = (1130, 950);
+    ScrollbarPolicy = Never;
+    Size = (70, 18);
+    Text = YT;
+    TextSize = 13;
+    renderer = &4;
+}
+
+Label.ZT {
+    HorizontalAlignment = Center;
+    Position = (1210, 950);
+    ScrollbarPolicy = Never;
+    Size = (70, 18);
+    Text = ZT;
+    TextSize = 13;
+    renderer = &4;
+}
+
+Label.Xt {
+    AutoSize = true;
+    Position = (1050, 980);
+    ScrollbarPolicy = Never;
+    Size = (37.2, 18);
+    Text = Label;
+    TextSize = 13;
+    renderer = &2;
+}
+
+Label.Yt {
+    AutoSize = true;
+    Position = (1130, 980);
+    ScrollbarPolicy = Never;
+    Size = (37.2, 18);
+    Text = Label;
+    TextSize = 13;
+    renderer = &2;
+}
+
+Label.Zt {
+    AutoSize = true;
+    Position = (1210, 980);
+    ScrollbarPolicy = Never;
+    Size = (37.2, 18);
+    Text = Label;
+    TextSize = 13;
+    renderer = &2;
+}
+
+ChatBox.konsola {
+    LinesStartFromTop = false;
+    NewLinesBelowOthers = true;
+    Position = (1050, 640);
+    Size = (418, 222);
+    TextColor = black;
+    TextSize = 13;
+
+    Renderer {
+        backgroundcolor = #F5F5F5;
+        bordercolor = black;
+        borders = (1, 1, 1, 1);
+        padding = (0, 0, 0, 0);
+        texturebackground = None;
+    }
+}
+
+Label.Label37 {
+    HorizontalAlignment = Center;
+    Position = (1050, 620);
+    ScrollbarPolicy = Never;
+    Size = (70, 18);
+    Text = "φ1 [st]";
+    TextSize = 13;
+
+    Renderer {
+        backgroundcolor = #B4B4B4;
+        textcolor = rgba(255, 255, 255, 215);
+        textstyle = Bold;
+        texturebackground = None;
+
+        scrollbar {
+            arrowbackgroundcolor = rgba(160, 160, 160, 215);
+            arrowbackgroundcolorhover = rgba(170, 170, 170, 215);
+            arrowcolor = rgba(200, 200, 200, 215);
+            arrowcolorhover = rgba(225, 225, 225, 215);
+            thumbcolor = rgba(185, 185, 185, 215);
+            thumbcolorhover = rgba(195, 195, 195, 215);
+            trackcolor = rgba(160, 160, 160, 215);
+            trackcolorhover = rgba(170, 170, 170, 215);
+        }
+    }
+}
+
+Label.Label38 {
+    HorizontalAlignment = Center;
+    Position = (1130, 620);
+    ScrollbarPolicy = Never;
+    Size = (70, 18);
+    Text = "φ2 [st]";
+    TextSize = 13;
+
+    Renderer {
+        backgroundcolor = #B4B4B4;
+        textcolor = rgba(255, 255, 255, 215);
+        textstyle = Bold;
+        texturebackground = None;
+
+        scrollbar {
+            arrowbackgroundcolor = rgba(160, 160, 160, 215);
+            arrowbackgroundcolorhover = rgba(170, 170, 170, 215);
+            arrowcolor = rgba(200, 200, 200, 215);
+            arrowcolorhover = rgba(225, 225, 225, 215);
+            thumbcolor = rgba(185, 185, 185, 215);
+            thumbcolorhover = rgba(195, 195, 195, 215);
+            trackcolor = rgba(160, 160, 160, 215);
+            trackcolorhover = rgba(170, 170, 170, 215);
+        }
+    }
+}
+
+Label.Label39 {
+    HorizontalAlignment = Center;
+    Position = (1210, 620);
+    ScrollbarPolicy = Never;
+    Size = (70, 18);
+    Text = "φ3 [st]";
+    TextSize = 13;
+
+    Renderer {
+        backgroundcolor = #B4B4B4;
+        textcolor = rgba(255, 255, 255, 215);
+        textstyle = Bold;
+        texturebackground = None;
+
+        scrollbar {
+            arrowbackgroundcolor = rgba(160, 160, 160, 215);
+            arrowbackgroundcolorhover = rgba(170, 170, 170, 215);
+            arrowcolor = rgba(200, 200, 200, 215);
+            arrowcolorhover = rgba(225, 225, 225, 215);
+            thumbcolor = rgba(185, 185, 185, 215);
+            thumbcolorhover = rgba(195, 195, 195, 215);
+            trackcolor = rgba(160, 160, 160, 215);
+            trackcolorhover = rgba(170, 170, 170, 215);
+        }
+    }
+}
+
+Label.Label40 {
+    HorizontalAlignment = Center;
+    Position = (1290, 620);
+    ScrollbarPolicy = Never;
+    Size = (70, 18);
+    Text = "φ4 [st]";
+    TextSize = 13;
+
+    Renderer {
+        backgroundcolor = #B4B4B4;
+        textcolor = rgba(255, 255, 255, 215);
+        textstyle = Bold;
+        texturebackground = None;
+
+        scrollbar {
+            arrowbackgroundcolor = rgba(160, 160, 160, 215);
+            arrowbackgroundcolorhover = rgba(170, 170, 170, 215);
+            arrowcolor = rgba(200, 200, 200, 215);
+            arrowcolorhover = rgba(225, 225, 225, 215);
+            thumbcolor = rgba(185, 185, 185, 215);
+            thumbcolorhover = rgba(195, 195, 195, 215);
+            trackcolor = rgba(160, 160, 160, 215);
+            trackcolorhover = rgba(170, 170, 170, 215);
+        }
+    }
+}
+
+Label.Label41 {
+    HorizontalAlignment = Center;
+    Position = (1370, 620);
+    ScrollbarPolicy = Never;
+    Size = (70, 18);
+    Text = "φ5 [st]";
+    TextSize = 13;
+
+    Renderer {
+        backgroundcolor = #B4B4B4;
+        textcolor = rgba(255, 255, 255, 215);
+        textstyle = Bold;
+        texturebackground = None;
+
+        scrollbar {
+            arrowbackgroundcolor = rgba(160, 160, 160, 215);
+            arrowbackgroundcolorhover = rgba(170, 170, 170, 215);
+            arrowcolor = rgba(200, 200, 200, 215);
+            arrowcolorhover = rgba(225, 225, 225, 215);
+            thumbcolor = rgba(185, 185, 185, 215);
+            thumbcolorhover = rgba(195, 195, 195, 215);
+            trackcolor = rgba(160, 160, 160, 215);
+            trackcolorhover = rgba(170, 170, 170, 215);
+        }
+    }
+}
+
+Label.Label42 {
+    HorizontalAlignment = Center;
+    Position = (10, 720);
+    ScrollbarPolicy = Never;
+    Size = (197.2, 18);
+    Text = "SPOWOLNIENIE SYMULACJI";
+    TextSize = 13;
+
+    Renderer {
+        backgroundcolor = #B4B4B4;
+        textcolor = rgba(255, 255, 255, 215);
+        textstyle = Bold;
+        texturebackground = None;
+
+        scrollbar {
+            arrowbackgroundcolor = rgba(160, 160, 160, 215);
+            arrowbackgroundcolorhover = rgba(170, 170, 170, 215);
+            arrowcolor = rgba(200, 200, 200, 215);
+            arrowcolorhover = rgba(225, 225, 225, 215);
+            thumbcolor = rgba(185, 185, 185, 215);
+            thumbcolorhover = rgba(195, 195, 195, 215);
+            trackcolor = rgba(160, 160, 160, 215);
+            trackcolorhover = rgba(170, 170, 170, 215);
+        }
+    }
+}
+
+Slider.szybkoscSym {
+    ChangeValueOnScroll = true;
+    InvertedDirection = false;
+    Maximum = 500;
+    Minimum = 5;
+    Position = (10, 750);
+    Size = (200, 16);
+    Step = 1;
+    Value = 50;
+
+    Renderer {
+        bordercolor = #3C3C3C;
+        bordercolorhover = black;
+        borders = (1, 1, 1, 1);
+        texturethumb = None;
+        texturethumbhover = None;
+        texturetrack = None;
+        texturetrackhover = None;
+        thumbcolor = #F5F5F5;
+        thumbcolorhover = white;
+        trackcolor = #F5F5F5;
+        trackcolorhover = white;
+    }
+}
+
+Label.Label43 {
+    AutoSize = true;
+    Position = (530, 0);
+    ScrollbarPolicy = Never;
+    Size = (159, 33);
+    Text = "XY - od gory";
+    TextSize = 25;
+    renderer = &2;
+}
+
+Label.Label44 {
+    AutoSize = true;
+    Position = (1050, 0);
+    ScrollbarPolicy = Never;
+    Size = (38, 33);
+    Text = YZ;
+    TextSize = 25;
+    renderer = &5;
+}
+
+Label.Label45 {
+    AutoSize = true;
+    Position = (530, 530);
+    ScrollbarPolicy = Never;
+    Size = (40, 33);
+    Text = XZ;
+    TextSize = 25;
+    renderer = &5;
+}

@@ -1,0 +1,3 @@
+FormSize = (1550, 1080);
+RecentFiles = ["gui.txt"];
+Themes = ["themes/BabyBlue.txt", "themes/BabyBlue.txt", "themes/Black.txt", "themes/TransparentGrey.txt"];
