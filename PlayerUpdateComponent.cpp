@@ -7,6 +7,8 @@
 
 void PlayerUpdateComponent::update(float fps)
 {
+    std::string runLeft = "RUNL";
+    std::string runRight = "RUNR";
     if(sf::Joystick::isConnected(0))
     {
         m_TC->getLocation().x += ((m_Speed / 100) * m_XExtent) * fps;
@@ -15,12 +17,12 @@ void PlayerUpdateComponent::update(float fps)
     if(m_IsHoldingLeft)
     {
         m_TC->moveLeft(fps);
-        
+        m_AGC->play(runLeft, fps);
     }
     else if(m_IsHoldingRight)
     {
         m_TC->moveRight(fps);
-
+        m_AGC->play(runRight, fps);
     }
     if(m_IsHoldingUp)
     {
@@ -49,7 +51,8 @@ void PlayerUpdateComponent::update(float fps)
         m_TC->getLocation().y = 0;
     }
     
-    m_AGC->update(fps);
+    
+    
     
     //m_TC->decelerate(fps);
 }
@@ -64,10 +67,6 @@ void PlayerUpdateComponent::moveLeft()
     stopRight();
     stopUp();
     stopDown();
-    //if (m_lastDirection != "left")
-    {
-        m_AGC->selectAnimation(0, 1, 7, 1);
-    }
     m_lastDirection = "right";
 }
 void PlayerUpdateComponent::moveRight()
@@ -76,10 +75,6 @@ void PlayerUpdateComponent::moveRight()
     stopLeft();
     stopUp();
     stopDown();
-	//if(m_lastDirection != "right")
-	{
-        m_AGC->selectAnimation(0, 0, 7, 0);
-    }
     m_lastDirection = "right";
 }
 void PlayerUpdateComponent::moveUp()
