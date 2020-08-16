@@ -29,7 +29,7 @@ void AnimatedGraphicsComponent::update(float dt)
 void AnimatedGraphicsComponent::selectAnimation(int x_frame_s, int y_frame_s, int x_frame_e, int y_frame_e)
 {
 	m_StartRect = sf::IntRect(x_frame_s * width, y_frame_s * height, width, height);
-	//m_CurrRect = m_StartRect;
+	m_CurrRect = m_StartRect;
 	m_EndRect = sf::IntRect(x_frame_e * width, y_frame_e * height, width, height);
 }
 
