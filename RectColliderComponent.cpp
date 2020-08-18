@@ -4,9 +4,14 @@
 
 #include "RectColliderComponent.h"
 
-RectColliderComponent::RectColliderComponent(std::string name)
+RectColliderComponent::RectColliderComponent(std::string name, float widthOffset, float heightOffset) 
 {
     m_Tag = "" + name;
+    m_Collider.setFillColor(sf::Color::Transparent);
+    m_Collider.setOutlineColor(sf::Color::Red);
+    m_Collider.setOutlineThickness(1.f);
+    m_WidthOffset = widthOffset;
+    m_HeightOffset = heightOffset;
 }
 std::string RectColliderComponent::getColliderTag()
 {
@@ -14,12 +19,30 @@ std::string RectColliderComponent::getColliderTag()
 }
 void RectColliderComponent::setOrMoveCollider(float x, float y, float width, float height)
 {
-    m_Collider.left = x;
-    m_Collider.top = y;
-    m_Collider.width = width;
-    m_Collider.height = height;
+    m_Collider.setPosition(x + m_WidthOffset, y + m_HeightOffset);
+    m_Collider.setSize(sf::Vector2f(width, height));
 }
-sf::FloatRect& RectColliderComponent::getColliderRectF()
+sf::RectangleShape& RectColliderComponent::getColliderRectF()
 {
     return m_Collider;
+}
+
+void RectColliderComponent::draw(sf::RenderWindow& window)
+{
+    window.draw(m_Collider);
+}
+
+sf::Vector2f RectColliderComponent::getPosition()
+{
+    return sf::Vector2f(m_Collider.getPosition().x, m_Collider.getPosition().y);
+}
+
+sf::Vector2f RectColliderComponent::getSize()
+{
+    return m_Collider.getSize();
+}
+
+sf::Vector2f RectColliderComponent::getOffsets()
+{
+    return sf::Vector2f(m_WidthOffset, m_HeightOffset);
 }

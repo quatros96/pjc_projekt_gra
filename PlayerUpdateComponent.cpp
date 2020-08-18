@@ -34,22 +34,24 @@ void PlayerUpdateComponent::update(float fps)
     }
     m_RCC->setOrMoveCollider(m_TC->getLocation().x, m_TC->getLocation().y,
             m_TC->getSize().x, m_TC->getSize().y);
-    if(m_TC->getLocation().x > WorldState::WORLD_WIDTH - m_TC->getSize().x)
+	//EDGES OF WORLD COLLISIONS
+    if(m_RCC->getPosition().x > WorldState::WORLD_WIDTH - m_RCC->getSize().x)
     {
-        m_TC->getLocation().x = WorldState::WORLD_WIDTH - m_TC->getSize().x;
+        m_TC->getLocation().x = WorldState::WORLD_WIDTH - m_RCC->getSize().x - m_RCC->getOffsets().x;
     }
-    else if(m_TC->getLocation().x < 0)
+    else if(m_RCC->getPosition().x < 0)
     {
-        m_TC->getLocation().x = 0;
+        m_TC->getLocation().x = -m_RCC->getOffsets().x;
     }
     if(m_TC->getLocation().y > WorldState::WORLD_HEIGHT - m_TC->getSize().y)
     {
-        m_TC->getLocation().y = WorldState::WORLD_HEIGHT - m_TC->getSize().y;
+        m_TC->getLocation().y = WorldState::WORLD_HEIGHT - m_RCC->getSize().y - m_RCC->getOffsets().y;
     }
     else if(m_TC->getLocation().y < 0)
     {
-        m_TC->getLocation().y = 0;
+        m_TC->getLocation().y = -m_RCC->getOffsets().y;
     }
+	//END OF EDGES OF WORLD COLLISIONS
     if(!m_IsHoldingLeft && !m_IsHoldingRight && !m_IsHoldingUp && !m_IsHoldingDown)
     {
 	    if(m_lastDirection == "left")

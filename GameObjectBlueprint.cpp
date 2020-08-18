@@ -4,6 +4,26 @@
 
 #include "GameObjectBlueprint.h"
 
+float GameObjectBlueprint::getWidthOffset()
+{
+    return m_WidthOffset;
+}
+
+void GameObjectBlueprint::setWidthOffset(float widthoff)
+{
+    m_WidthOffset = widthoff;
+}
+
+float GameObjectBlueprint::getHeightOffset()
+{
+    return m_HeightOffset;
+}
+
+void GameObjectBlueprint::setHeightOffset(float heightoff)
+{
+    m_HeightOffset = heightoff;
+}
+
 float GameObjectBlueprint::getSpeed()
 {
     return m_Speed;

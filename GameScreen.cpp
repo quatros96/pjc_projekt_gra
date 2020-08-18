@@ -24,8 +24,9 @@ GameScreen::GameScreen(ScreenManagerRemoteControl *smrc, sf::Vector2i res)
     auto gouip = std::make_unique<GameOverUIPanel>(res);
     addPanel(std::move(gouip), smrc, m_GOIH);
     m_ScreenManagerRemoteControl = smrc;
-    float screenRatio = sf::VideoMode::getDesktopMode().width /
-            sf::VideoMode::getDesktopMode().height;
+    float screenWidth = sf::VideoMode::getDesktopMode().width;
+    float screenHeight = sf::VideoMode::getDesktopMode().height;
+    float screenRatio = screenWidth / screenHeight;
     WorldState::WORLD_HEIGHT = WorldState::WORLD_WIDTH / screenRatio;
     m_View.setSize(WorldState::WORLD_WIDTH, WorldState::WORLD_HEIGHT);
     m_View.setCenter(sf::Vector2f(WorldState::WORLD_WIDTH / 2,
