@@ -21,9 +21,15 @@ private:
     float m_LocationX;
     float m_LocationY;
     float m_Speed;
+    float m_WidthOffset;
+    float m_HeightOffset;
     bool m_EncompassingRectCollider {false};
     std::string m_EncompassingRectColliderLabel {""};
 public:
+    float getWidthOffset();
+    void setWidthOffset(float widthoff);
+    float getHeightOffset();
+    void setHeightOffset(float widthoff);
     float getSpeed();
     void setSpeed(float speed);
     float getWidth();

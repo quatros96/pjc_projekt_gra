@@ -72,7 +72,6 @@ void AnimatedGraphicsComponent::draw(sf::RenderWindow& window, std::shared_ptr<T
 	 */
 	m_currAnimationSprite.setPosition(t->getLocation());
 	window.draw(m_currAnimationSprite);
-	
 }
 
 void AnimatedGraphicsComponent::initializeGraphics(std::string bitmapName, sf::Vector2f objectSize)
@@ -80,7 +79,8 @@ void AnimatedGraphicsComponent::initializeGraphics(std::string bitmapName, sf::V
 	BitmapStore::addBitmap("graphics/" + bitmapName + ".png");
 	m_textureSheet =  BitmapStore::getBitmap("graphics/" + bitmapName + ".png");
 	m_Sprite.setTexture(m_textureSheet, true);
-	m_Sprite.setScale(float(objectSize.x) / 16, float(objectSize.y) / 9);
+	auto textureSize = m_Sprite.getTexture()->getSize();
+	//m_Sprite.setScale(float(objectSize.x) / Animation::m_width, float(objectSize.y) / textureSize.x);
 	//addAnimation("RUNL", 100.f, 0, 0, 7, 0, 108, 140);
 	//addAnimation("RUNR", 100.f, 0, 1, 7, 1, 108, 140);
 	addAnimation("UP", 100.f, 1, 8, 8, 8, 64, 64);

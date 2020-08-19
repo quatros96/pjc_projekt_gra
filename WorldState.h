@@ -8,7 +8,7 @@
 class WorldState
 {
 public:
-    static const int WORLD_WIDTH {100};
+    static const int WORLD_WIDTH {640};
     static int WORLD_HEIGHT;
     static int SCORE;
     static int LIVES;

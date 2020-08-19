@@ -64,7 +64,7 @@ void GameObjectFactoryPlayMode::buildGameObject(GameObjectBlueprint &bp, std::ve
     if(bp.getEncompassingRectCollider())
     {
         std::shared_ptr<RectColliderComponent> rcc =
-                std::make_shared<RectColliderComponent>(bp.getEncompassingRectColliderLabel());
+                std::make_shared<RectColliderComponent>(bp.getEncompassingRectColliderLabel(), bp.getWidthOffset(), bp.getHeightOffset());
         gameObject.addComponent(rcc);
         rcc->setOrMoveCollider(bp.getLacationX(), bp.getLocationY(), bp.getWidth(), bp.getHeight());
     }

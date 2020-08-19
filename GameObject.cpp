@@ -32,10 +32,18 @@ void GameObject::draw(sf::RenderWindow &window)
             getGraphicsComponent()->draw(window, getTransformComponent());
         }
     }
+	if(m_HasCollider)
+	{
+        getColliderComponent()->draw(window);
+	}
 }
 std::shared_ptr<GraphicsComponent> GameObject::getGraphicsComponent()
 {
     return std::static_pointer_cast<GraphicsComponent>(m_Components[m_GraphicsComponentLocation]);
+}
+std::shared_ptr<RectColliderComponent> GameObject::getColliderComponent()
+{
+    return std::static_pointer_cast<RectColliderComponent>(m_Components[m_FirstRectColliderComponentLocation]);
 }
 std::shared_ptr<TransformComponent> GameObject::getTransformComponent()
 {
@@ -123,7 +131,7 @@ std::shared_ptr<Component> GameObject::getComponentByTypeAndSpecificType(
 #endif
     return m_Components[0];
 }
-sf::FloatRect& GameObject::getEncompassingRectCollider()
+sf::RectangleShape& GameObject::getEncompassingRectCollider()
 {
     if(m_HasCollider)
     {
