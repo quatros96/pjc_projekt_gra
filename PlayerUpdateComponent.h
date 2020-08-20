@@ -28,6 +28,7 @@ private:
     bool m_IsHoldingRight = false;
     bool m_IsHoldingUp = false;
     bool m_IsHoldingDown = false;
+    bool m_SpaceClicked = false;
     std::string m_lastDirection;
 public:
     void updateShipTravelWithController(float x, float y);
@@ -39,6 +40,8 @@ public:
     void stopRight();
     void stopUp();
     void stopDown();
+    void attack();
+    void stopAttack();
 
     std::string getLastDirection()
     {

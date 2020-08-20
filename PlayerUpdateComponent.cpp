@@ -12,6 +12,10 @@ void PlayerUpdateComponent::update(float fps)
         m_TC->getLocation().x += ((m_Speed / 100) * m_XExtent) * fps;
         m_TC->getLocation().y += ((m_Speed / 100) * m_YExtent) * fps;
     }
+    if(m_SpaceClicked)
+    {
+		m_AGC->play("ATTACK", fps, true);
+    }
     if(m_IsHoldingLeft)
     {
         m_TC->moveLeft(fps);
@@ -32,6 +36,7 @@ void PlayerUpdateComponent::update(float fps)
         m_TC->moveDown(fps);
         m_AGC->play("DOWN", fps);
     }
+    
     m_RCC->setOrMoveCollider(m_TC->getLocation().x, m_TC->getLocation().y,
             m_TC->getSize().x, m_TC->getSize().y);
 	//EDGES OF WORLD COLLISIONS
@@ -71,9 +76,10 @@ void PlayerUpdateComponent::update(float fps)
             m_AGC->play("IDLE_DOWN", fps);
         }
     }
-    
-    
-    
+    if (m_AGC->isDone("ATTACK"))
+    {
+        m_SpaceClicked = false;
+    }
     //m_TC->decelerate(fps);
 }
 void PlayerUpdateComponent::updateShipTravelWithController(float x, float y)
@@ -128,4 +134,14 @@ void PlayerUpdateComponent::stopUp()
 void PlayerUpdateComponent::stopDown()
 {
     m_IsHoldingDown = false;
+}
+
+void PlayerUpdateComponent::attack()
+{
+    m_SpaceClicked = true;
+}
+
+void PlayerUpdateComponent::stopAttack()
+{
+    m_SpaceClicked = false;
 }
