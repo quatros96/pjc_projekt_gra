@@ -17,6 +17,7 @@ SelectScreen::SelectScreen(ScreenManagerRemoteControl *smrc, sf::Vector2i res)
     auto textureSize = m_BackgroundSprite.getTexture()->getSize();
     m_BackgroundSprite.setScale(float(m_View.getSize().x) / textureSize.x,
             float(m_View.getSize().y) / textureSize.y);
+    sih->activate();
 }
 void SelectScreen::draw(sf::RenderWindow &window)
 {

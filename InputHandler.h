@@ -20,10 +20,14 @@ private:
     std::vector<std::shared_ptr<Button>> m_Buttons;
     sf::View* m_PointerToUIPanelView;
     ScreenManagerRemoteControl* m_ScreenManagerRemoteControl;
+    bool active = false;
 public:
     void initialiseInputHandler(ScreenManagerRemoteControl* sw,std::vector<std::shared_ptr<Button>> buttons,
             sf::View* pointerToUIView, Screen* parentScreen);
     void handleInput(sf::RenderWindow& window, sf::Event& event);
+    void activate();
+    void deactivate();
+    bool isActive();
     virtual void handleGamepad();
     virtual void HandleKeyPressed(sf::Event& event, sf::RenderWindow& window);
     virtual void handleKeyReleased(sf::Event& event, sf::RenderWindow& window);

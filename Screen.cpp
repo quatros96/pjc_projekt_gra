@@ -21,7 +21,10 @@ void Screen::handleInput(sf::RenderWindow &window)
     {
         for(itr; itr != end; itr++)
         {
-            (*itr)->handleInput(window, event);
+        	if((*itr)->isActive())
+        	{
+                (*itr)->handleInput(window, event);
+        	}
         }
     }
 }
