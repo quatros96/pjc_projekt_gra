@@ -150,6 +150,12 @@
     <ClCompile Include="AnimatedGraphicsComponent.cpp">
       <Filter>Components</Filter>
     </ClCompile>
+    <ClCompile Include="PauseUIPanel.cpp">
+      <Filter>User Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="PauseInputHandler.cpp">
+      <Filter>Input Handlers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PlayModeObjectLoader.h">
@@ -271,6 +277,12 @@
     </ClInclude>
     <ClInclude Include="AnimatedGraphicsComponent.h">
       <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="PauseUIPanel.h">
+      <Filter>User Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="PauseInputHandler.h">
+      <Filter>Input Handlers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

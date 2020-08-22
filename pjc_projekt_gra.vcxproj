@@ -43,6 +43,8 @@
     <ClCompile Include="LevelManager.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="ObjectTags.cpp" />
+    <ClCompile Include="PauseInputHandler.cpp" />
+    <ClCompile Include="PauseUIPanel.cpp" />
     <ClCompile Include="PhysicsEnginePlayMode.cpp" />
     <ClCompile Include="PlayerUpdateComponent.cpp" />
     <ClCompile Include="PlayModeObjectLoader.cpp" />
@@ -84,6 +86,8 @@
     <ClInclude Include="InvaderUpdateComponent.h" />
     <ClInclude Include="LevelManager.h" />
     <ClInclude Include="ObjectTags.h" />
+    <ClInclude Include="PauseInputHandler.h" />
+    <ClInclude Include="PauseUIPanel.h" />
     <ClInclude Include="PhysicsEnginePlayMode.h" />
     <ClInclude Include="PlayerUpdateComponent.h" />
     <ClInclude Include="PlayModeObjectLoader.h" />

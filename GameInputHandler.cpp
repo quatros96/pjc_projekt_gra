@@ -52,8 +52,9 @@ void GameInputHandler::HandleKeyPressed(sf::Event &event, sf::RenderWindow &wind
 {
     if(event.key.code == sf::Keyboard::Escape)
     {
+    	
         SoundEngine::playClick();
-        getPointerToScreenManagerRemoteControl()->SwitchScreens("Select");
+        GameScreen::paused = true;
     }
     else if (event.key.code == sf::Keyboard::Left)
     {

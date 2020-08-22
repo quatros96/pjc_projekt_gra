@@ -43,6 +43,22 @@ void InputHandler::handleInput(sf::RenderWindow &window, sf::Event &event)
     }
     handleGamepad();
 }
+
+void InputHandler::activate()
+{
+    active = true;
+}
+
+void InputHandler::deactivate()
+{
+    active = false;
+}
+
+bool InputHandler::isActive()
+{
+    return active;
+}
+
 void InputHandler::handleGamepad() {};
 void InputHandler::HandleKeyPressed(sf::Event &event, sf::RenderWindow &window) {};
 void InputHandler::handleKeyReleased(sf::Event &event, sf::RenderWindow &window) {};
