@@ -11,6 +11,7 @@
 #include "BulletSpawner.h"
 #include "PhysicsEnginePlayMode.h"
 #include "PauseInputHandler.h"
+#include "TileMap.h"
 
 class GameScreen : public Screen, public BulletSpawner
 {
@@ -30,6 +31,7 @@ private:
     sf::Clock m_BulletClock;
     sf::Texture m_BackgroundTexture;
     sf::Sprite m_BackgroundSprite;
+    TileMap map;
 public:
     static bool m_GameOver;
 	static bool paused;

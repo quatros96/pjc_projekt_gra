@@ -144,10 +144,10 @@ void GameScreen::update(float fps)
 }
 void GameScreen::draw(sf::RenderWindow &window)
 {
-    window.setFramerateLimit(120);
     window.setView(m_View);
     //window.draw((m_BackgroundSprite));
     //draw gameobject instances
+    map.draw(window);
     auto it = m_ScreenManagerRemoteControl->getGameObjects().begin();
     auto end = m_ScreenManagerRemoteControl->getGameObjects().end();
     for(it; it != end; it++)
