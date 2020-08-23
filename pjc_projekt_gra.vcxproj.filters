@@ -31,6 +31,9 @@
     <Filter Include="Levels">
       <UniqueIdentifier>{7818ea8f-cf64-43f9-aa8c-71ac9ed761f6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Map">
+      <UniqueIdentifier>{b39f19f7-fff5-46b0-994b-0cc31a3850b5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BulletSpawner.cpp">
@@ -155,6 +158,15 @@
     </ClCompile>
     <ClCompile Include="PauseInputHandler.cpp">
       <Filter>Input Handlers</Filter>
+    </ClCompile>
+    <ClCompile Include="TileMap.cpp">
+      <Filter>Map</Filter>
+    </ClCompile>
+    <ClCompile Include="Tile.cpp">
+      <Filter>Map</Filter>
+    </ClCompile>
+    <ClCompile Include="SettingsManager.cpp">
+      <Filter>Game Engine</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -283,6 +295,15 @@
     </ClInclude>
     <ClInclude Include="PauseInputHandler.h">
       <Filter>Input Handlers</Filter>
+    </ClInclude>
+    <ClInclude Include="TileMap.h">
+      <Filter>Map</Filter>
+    </ClInclude>
+    <ClInclude Include="Tile.h">
+      <Filter>Map</Filter>
+    </ClInclude>
+    <ClInclude Include="SettingsManager.h">
+      <Filter>Game Engine</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
