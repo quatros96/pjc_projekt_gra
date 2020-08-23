@@ -52,8 +52,9 @@ void GameInputHandler::HandleKeyPressed(sf::Event &event, sf::RenderWindow &wind
 {
     if(event.key.code == sf::Keyboard::Escape)
     {
+    	
         SoundEngine::playClick();
-        getPointerToScreenManagerRemoteControl()->SwitchScreens("Select");
+        GameScreen::paused = true;
     }
     else if (event.key.code == sf::Keyboard::Left)
     {
@@ -73,10 +74,10 @@ void GameInputHandler::HandleKeyPressed(sf::Event &event, sf::RenderWindow &wind
     }
     else
     {
-        m_PUC->stopUp();
-        m_PUC->stopDown();
-        m_PUC->stopLeft();
-        m_PUC->stopRight();
+        //m_PUC->stopUp();
+        //m_PUC->stopDown();
+        //m_PUC->stopLeft();
+        //m_PUC->stopRight();
     }
 }
 void GameInputHandler::handleKeyReleased(sf::Event &event, sf::RenderWindow &window)
@@ -100,10 +101,11 @@ void GameInputHandler::handleKeyReleased(sf::Event &event, sf::RenderWindow &win
     else if(event.key.code ==sf::Keyboard::Space)
     {
         //shoot a bullet
-        SoundEngine::playShoot();
-        sf::Vector2f spawnLocation;
-        spawnLocation.x = m_PTC->getLocation().x + m_PTC->getSize().x / 2;
-        spawnLocation.y = m_PTC->getLocation().y;
-        static_cast<GameScreen*>(getmParentScreen())->spawnBullet(spawnLocation, true);
+        //SoundEngine::playShoot();
+        //sf::Vector2f spawnLocation;
+        //spawnLocation.x = m_PTC->getLocation().x + m_PTC->getSize().x / 2;
+        //spawnLocation.y = m_PTC->getLocation().y;
+        //static_cast<GameScreen*>(getmParentScreen())->spawnBullet(spawnLocation, true);
+        m_PUC->attack();
     }
 }

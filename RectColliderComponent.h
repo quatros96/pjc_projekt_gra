@@ -12,13 +12,19 @@ class RectColliderComponent : public ColliderComponent
 {
 private:
     std::string m_SpecificType = "rect";
-    sf::FloatRect m_Collider;
+    sf::RectangleShape m_Collider;
     std::string m_Tag = "";
+    float m_HeightOffset = 0;
+    float m_WidthOffset = 0;
 public:
-    RectColliderComponent(std::string name);
+    RectColliderComponent(std::string name, float widthOffset, float heightOffset);
     std::string getColliderTag();
     void setOrMoveCollider(float x, float y, float width, float height);
-    sf::FloatRect & getColliderRectF();
+    sf::RectangleShape & getColliderRectF();
+    void draw(sf::RenderWindow& window);
+    sf::Vector2f getPosition();
+    sf::Vector2f getSize();
+    sf::Vector2f getOffsets();
     std::string getSpecificType() override
     {
         return m_SpecificType;

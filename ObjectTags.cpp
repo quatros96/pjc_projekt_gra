@@ -27,3 +27,7 @@ const std::string ObjectTags::ENCOMPASSING_RECT_COLLIDER
         = "[ENCOMPASSING RECT COLLIDER]";
 const std::string ObjectTags::ENCOMPASSING_RECT_COLLIDER_END
         = "[-ENCOMPASSING_RECT COLLIDER]";
+const std::string ObjectTags::WIDTH_OFFSET = "[WIDTHOFF]";
+const std::string ObjectTags::WIDTH_OFFSET_END = "[-WIDTHOFF]";
+const std::string ObjectTags::HEIGHT_OFFSET = "[HEIGHTOFF]";
+const std::string ObjectTags::HEIGHT_OFFSET_END = "[-HEIGHTOFF]";

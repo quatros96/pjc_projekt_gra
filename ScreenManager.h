@@ -28,8 +28,6 @@ public:
     void update(float fps);
     void draw(sf::RenderWindow& window);
     void handleInput(sf::RenderWindow& window);
-
-
     void SwitchScreens(std::string screenTOSwitchTO)
     {
         m_CurrentScreen = "" + screenTOSwitchTO;

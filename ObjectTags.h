@@ -30,6 +30,10 @@ public:
     static const std::string BITMAP_NAME_END;
     static const std::string ENCOMPASSING_RECT_COLLIDER;
     static const std::string ENCOMPASSING_RECT_COLLIDER_END;
+    static const std::string WIDTH_OFFSET;
+    static const std::string WIDTH_OFFSET_END;
+    static const std::string HEIGHT_OFFSET;
+    static const std::string HEIGHT_OFFSET_END;
 };
 
 #endif //GRA_SPACE_INVADERS_OBJECTTAGS_H

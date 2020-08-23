@@ -12,6 +12,7 @@
 #include "GraphicsComponent.h"
 #include "GameObjectSharer.h"
 #include "UpdateComponent.h"
+#include "RectColliderComponent.h"
 
 class GameObject
 {
@@ -40,13 +41,14 @@ public:
     void start(GameObjectSharer* gos);
     std::shared_ptr<Component> getComponentByTypeAndSpecificType(std::string type,
             std::string sepcificType);
-    sf::FloatRect& getEncompassingRectCollider();
+    sf::RectangleShape& getEncompassingRectCollider();
     bool hasCollider();
     bool hasUpdateComponent();
     std::string getEncompassingRectColliderTag();
     std::shared_ptr<GraphicsComponent> getGraphicsComponent();
     std::shared_ptr<TransformComponent> getTransformComponent();
     std::shared_ptr<UpdateComponent> getUpdateComponent();
+    std::shared_ptr<RectColliderComponent> getColliderComponent();
 };
 
 #endif //GRA_SPACE_INVADERS_GAMEOBJECT_H

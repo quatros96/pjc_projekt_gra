@@ -27,7 +27,7 @@ void PhysicsEnginePlayMode::detectInvaderCollisions(std::vector<GameObject> &obj
             for(bulletIt; bulletIt != bulletEnd; bulletIt++)
             {
                 if((*invaderIt).getEncompassingRectCollider().
-                    intersects((*bulletIt).getEncompassingRectCollider())
+                    getGlobalBounds().intersects((*bulletIt).getEncompassingRectCollider().getGlobalBounds())
                     && (*bulletIt).getTag() == "bullet" &&
                     std::static_pointer_cast<BulletUpdateComponent>
                             ((*bulletIt).getUpdateComponent())->m_BelongsToPlayer)
@@ -47,7 +47,7 @@ void PhysicsEnginePlayMode::detectPlayerCollisionsAndInvaderDirection(std::vecto
         &objects, const std::vector<int> &bulletPositions)
 {
     sf::Vector2f offScreen(-1, -1);
-    sf::FloatRect playerCollider = m_Player->getEncompassingRectCollider();
+    sf::RectangleShape playerCollider = m_Player->getEncompassingRectCollider();
     std::shared_ptr<TransformComponent> playerTransform = m_Player->getTransformComponent();
     sf::Vector2f playerLocation = playerTransform->getLocation();
     auto it3 = objects.begin();
@@ -57,9 +57,9 @@ void PhysicsEnginePlayMode::detectPlayerCollisionsAndInvaderDirection(std::vecto
         if((*it3).isActive() && (*it3).hasCollider() && (*it3).getTag() != "Player")
         {
             //get a reference to all parts we might need
-            sf::FloatRect currentCollider = (*it3).getEncompassingRectCollider();
+            sf::RectangleShape currentCollider = (*it3).getEncompassingRectCollider();
             //detect collisions with player
-            if(currentCollider.intersects(playerCollider))
+            if(currentCollider.getGlobalBounds().intersects(playerCollider.getGlobalBounds()))
             {
                 if((*it3).getTag() == "bullet")
                 {

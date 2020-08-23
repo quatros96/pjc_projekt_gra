@@ -12,6 +12,10 @@ void PlayerUpdateComponent::update(float fps)
         m_TC->getLocation().x += ((m_Speed / 100) * m_XExtent) * fps;
         m_TC->getLocation().y += ((m_Speed / 100) * m_YExtent) * fps;
     }
+    if(m_SpaceClicked)
+    {
+		m_AGC->play("ATTACK", fps, true);
+    }
     if(m_IsHoldingLeft)
     {
         m_TC->moveLeft(fps);
@@ -32,24 +36,27 @@ void PlayerUpdateComponent::update(float fps)
         m_TC->moveDown(fps);
         m_AGC->play("DOWN", fps);
     }
+    
     m_RCC->setOrMoveCollider(m_TC->getLocation().x, m_TC->getLocation().y,
             m_TC->getSize().x, m_TC->getSize().y);
-    if(m_TC->getLocation().x > WorldState::WORLD_WIDTH - m_TC->getSize().x)
+	//EDGES OF WORLD COLLISIONS
+    if(m_RCC->getPosition().x > WorldState::WORLD_WIDTH - m_RCC->getSize().x)
     {
-        m_TC->getLocation().x = WorldState::WORLD_WIDTH - m_TC->getSize().x;
+        m_TC->getLocation().x = WorldState::WORLD_WIDTH - m_RCC->getSize().x - m_RCC->getOffsets().x;
     }
-    else if(m_TC->getLocation().x < 0)
+    else if(m_RCC->getPosition().x < 0)
     {
-        m_TC->getLocation().x = 0;
+        m_TC->getLocation().x = -m_RCC->getOffsets().x;
     }
     if(m_TC->getLocation().y > WorldState::WORLD_HEIGHT - m_TC->getSize().y)
     {
-        m_TC->getLocation().y = WorldState::WORLD_HEIGHT - m_TC->getSize().y;
+        m_TC->getLocation().y = WorldState::WORLD_HEIGHT - m_RCC->getSize().y - m_RCC->getOffsets().y;
     }
     else if(m_TC->getLocation().y < 0)
     {
-        m_TC->getLocation().y = 0;
+        m_TC->getLocation().y = -m_RCC->getOffsets().y;
     }
+	//END OF EDGES OF WORLD COLLISIONS
     if(!m_IsHoldingLeft && !m_IsHoldingRight && !m_IsHoldingUp && !m_IsHoldingDown)
     {
 	    if(m_lastDirection == "left")
@@ -69,9 +76,10 @@ void PlayerUpdateComponent::update(float fps)
             m_AGC->play("IDLE_DOWN", fps);
         }
     }
-    
-    
-    
+    if (m_AGC->isDone("ATTACK"))
+    {
+        m_SpaceClicked = false;
+    }
     //m_TC->decelerate(fps);
 }
 void PlayerUpdateComponent::updateShipTravelWithController(float x, float y)
@@ -126,4 +134,14 @@ void PlayerUpdateComponent::stopUp()
 void PlayerUpdateComponent::stopDown()
 {
     m_IsHoldingDown = false;
+}
+
+void PlayerUpdateComponent::attack()
+{
+    m_SpaceClicked = true;
+}
+
+void PlayerUpdateComponent::stopAttack()
+{
+    m_SpaceClicked = false;
 }

@@ -44,6 +44,8 @@
     <ClCompile Include="LevelManager.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="ObjectTags.cpp" />
+    <ClCompile Include="PauseInputHandler.cpp" />
+    <ClCompile Include="PauseUIPanel.cpp" />
     <ClCompile Include="PhysicsEnginePlayMode.cpp" />
     <ClCompile Include="PlayerUpdateComponent.cpp" />
     <ClCompile Include="PlayModeObjectLoader.cpp" />
@@ -54,8 +56,11 @@
     <ClCompile Include="SelectInputHandler.cpp" />
     <ClCompile Include="SelectScreen.cpp" />
     <ClCompile Include="SelectUIPanel.cpp" />
+    <ClCompile Include="SettingsManager.cpp" />
     <ClCompile Include="SoundEngine.cpp" />
     <ClCompile Include="StandardGraphicsComponent.cpp" />
+    <ClCompile Include="Tile.cpp" />
+    <ClCompile Include="TileMap.cpp" />
     <ClCompile Include="TransformComponent.cpp" />
     <ClCompile Include="UIPanel.cpp" />
     <ClCompile Include="UpdateComponent.cpp" />
@@ -86,6 +91,8 @@
     <ClInclude Include="InvaderUpdateComponent.h" />
     <ClInclude Include="LevelManager.h" />
     <ClInclude Include="ObjectTags.h" />
+    <ClInclude Include="PauseInputHandler.h" />
+    <ClInclude Include="PauseUIPanel.h" />
     <ClInclude Include="PhysicsEnginePlayMode.h" />
     <ClInclude Include="PlayerUpdateComponent.h" />
     <ClInclude Include="PlayModeObjectLoader.h" />
@@ -96,8 +103,11 @@
     <ClInclude Include="SelectInputHandler.h" />
     <ClInclude Include="SelectScreen.h" />
     <ClInclude Include="SelectUIPanel.h" />
+    <ClInclude Include="SettingsManager.h" />
     <ClInclude Include="SoundEngine.h" />
     <ClInclude Include="StandardGraphicsComponent.h" />
+    <ClInclude Include="Tile.h" />
+    <ClInclude Include="TileMap.h" />
     <ClInclude Include="TransformComponent.h" />
     <ClInclude Include="UIPanel.h" />
     <ClInclude Include="UpdateComponent.h" />

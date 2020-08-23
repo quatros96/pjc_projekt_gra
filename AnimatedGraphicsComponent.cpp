@@ -11,9 +11,10 @@ AnimatedGraphicsComponent::Animation::Animation(sf::Sprite& sprite, sf::Texture&
 	m_animationSprite.setTextureRect(m_StartRect);
 }
 
-void AnimatedGraphicsComponent::Animation::play(float dt)
+const bool& AnimatedGraphicsComponent::Animation::play(float dt)
 {
 	//timer update
+	done = false;
 	m_timer += 1000.f * dt;
 	if(m_timer >= m_animationTimer)
 	{
@@ -26,9 +27,39 @@ void AnimatedGraphicsComponent::Animation::play(float dt)
 		else
 		{
 			m_CurrRect.left = m_StartRect.left;
+  			done = true;
 		}
 		m_animationSprite.setTextureRect(m_CurrRect);
 	}
+	return done;
+}
+
+const bool& AnimatedGraphicsComponent::Animation::play(float dt, float percentage)
+{
+	//timer update
+	done = false;
+	m_timer += percentage * 1000.f * dt;
+	if (m_timer >= m_animationTimer)
+	{
+		m_timer = 0.f;
+		if (m_CurrRect != m_EndRect)
+		{
+			m_CurrRect.left += m_width;
+		}
+		//reset
+		else
+		{
+			m_CurrRect.left = m_StartRect.left;
+			done = true;
+		}
+		m_animationSprite.setTextureRect(m_CurrRect);
+	}
+	return done;
+}
+
+const bool& AnimatedGraphicsComponent::Animation::isDone()
+{
+	return done;
 }
 
 void AnimatedGraphicsComponent::Animation::reset()
@@ -42,22 +73,106 @@ void AnimatedGraphicsComponent::addAnimation(std::string key, float animationTim
 	animations[key] = std::make_shared<Animation>(m_Sprite, m_textureSheet, animationTimer, start_frame_x, start_frame_y, frame_x, frame_y, width, height);
 }
 
-void AnimatedGraphicsComponent::play(std::string key, float& dt)
+void AnimatedGraphicsComponent::play(std::string key, float& dt, bool priority)
 {
-	if(lastAnimation != animations[key])
+	if (priorityAnimation)
 	{
-		if(lastAnimation == nullptr)
+		if(priorityAnimation == animations[key])
 		{
-			lastAnimation = animations[key];
-		}
-		else
-		{
-			lastAnimation->reset();
-			lastAnimation = animations[key];
+			if (lastAnimation != animations[key])
+			{
+				if (lastAnimation == nullptr)
+				{
+					lastAnimation = animations[key];
+				}
+				else
+				{
+					lastAnimation->reset();
+					lastAnimation = animations[key];
+				}
+			}
+			m_currAnimationSprite = animations[key]->m_animationSprite;
+			if(animations[key]->play(dt))
+			{
+				priorityAnimation = nullptr;
+			}
 		}
 	}
-	m_currAnimationSprite = animations[key]->m_animationSprite;
-	animations[key]->play(dt);
+	else //no priority animation 
+	{
+		if (priority)
+		{
+			priorityAnimation = animations[key];
+		}
+		if (lastAnimation != animations[key])
+		{
+			if (lastAnimation == nullptr)
+			{
+				lastAnimation = animations[key];
+			}
+			else
+			{
+				lastAnimation->reset();
+				lastAnimation = animations[key];
+			}
+		}
+		m_currAnimationSprite = animations[key]->m_animationSprite;
+		animations[key]->play(dt);
+	}
+	//return animations[key]->isDone();
+}
+
+void AnimatedGraphicsComponent::play(std::string key, float& dt, float modifier, float modifier_max, bool priority)
+{
+	if (priorityAnimation)
+	{
+		if (priorityAnimation == animations[key])
+		{
+			if (lastAnimation != animations[key])
+			{
+				if (lastAnimation == nullptr)
+				{
+					lastAnimation = animations[key];
+				}
+				else
+				{
+					lastAnimation->reset();
+					lastAnimation = animations[key];
+				}
+			}
+			m_currAnimationSprite = animations[key]->m_animationSprite;
+			if (animations[key]->play(dt, abs(modifier / modifier_max)))
+			{
+				priorityAnimation = nullptr;
+			}
+		}
+	}
+	else //no priority animation 
+	{
+		if (priority)
+		{
+			priorityAnimation = animations[key];
+		}
+		if (lastAnimation != animations[key])
+		{
+			if (lastAnimation == nullptr)
+			{
+				lastAnimation = animations[key];
+			}
+			else
+			{
+				lastAnimation->reset();
+				lastAnimation = animations[key];
+			}
+		}
+		m_currAnimationSprite = animations[key]->m_animationSprite;
+		animations[key]->play(dt, abs(modifier / modifier_max));
+	}
+}
+
+const bool& AnimatedGraphicsComponent::isDone(std::string key)
+{
+	return animations[key]->isDone();
 }
 
 
@@ -72,7 +187,6 @@ void AnimatedGraphicsComponent::draw(sf::RenderWindow& window, std::shared_ptr<T
 	 */
 	m_currAnimationSprite.setPosition(t->getLocation());
 	window.draw(m_currAnimationSprite);
-	
 }
 
 void AnimatedGraphicsComponent::initializeGraphics(std::string bitmapName, sf::Vector2f objectSize)
@@ -80,7 +194,8 @@ void AnimatedGraphicsComponent::initializeGraphics(std::string bitmapName, sf::V
 	BitmapStore::addBitmap("graphics/" + bitmapName + ".png");
 	m_textureSheet =  BitmapStore::getBitmap("graphics/" + bitmapName + ".png");
 	m_Sprite.setTexture(m_textureSheet, true);
-	m_Sprite.setScale(float(objectSize.x) / 16, float(objectSize.y) / 9);
+	auto textureSize = m_Sprite.getTexture()->getSize();
+	//m_Sprite.setScale(float(objectSize.x) / Animation::m_width, float(objectSize.y) / textureSize.x);
 	//addAnimation("RUNL", 100.f, 0, 0, 7, 0, 108, 140);
 	//addAnimation("RUNR", 100.f, 0, 1, 7, 1, 108, 140);
 	addAnimation("UP", 100.f, 1, 8, 8, 8, 64, 64);
@@ -91,4 +206,5 @@ void AnimatedGraphicsComponent::initializeGraphics(std::string bitmapName, sf::V
 	addAnimation("IDLE_LEFT", 100.f, 0, 9, 0, 9, 64, 64);
 	addAnimation("IDLE_DOWN", 100.f, 0, 10, 0, 10, 64, 64);
 	addAnimation("IDLE_RIGHT", 100.f, 0, 11, 0, 11, 64, 64);
+	addAnimation("ATTACK", 100.f, 1, 5, 7, 5, 64, 64);
 }
