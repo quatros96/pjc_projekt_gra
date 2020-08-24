@@ -27,7 +27,9 @@
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="ColliderComponent.cpp" />
     <ClCompile Include="Component.cpp" />
+    <ClCompile Include="EditorInputHandler.cpp" />
     <ClCompile Include="EditorScreen.cpp" />
+    <ClCompile Include="EditorUIPanel.cpp" />
     <ClCompile Include="GameEngine.cpp" />
     <ClCompile Include="GameInputHandler.cpp" />
     <ClCompile Include="GameObject.cpp" />
@@ -75,7 +77,9 @@
     <ClInclude Include="ColliderComponent.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="developState.h" />
+    <ClInclude Include="EditorInputHandler.h" />
     <ClInclude Include="EditorScreen.h" />
+    <ClInclude Include="EditorUIPanel.h" />
     <ClInclude Include="GameEngine.h" />
     <ClInclude Include="GameInputHandler.h" />
     <ClInclude Include="GameObject.h" />

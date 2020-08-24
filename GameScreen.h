@@ -31,7 +31,7 @@ private:
     sf::Clock m_BulletClock;
     sf::Texture m_BackgroundTexture;
     sf::Sprite m_BackgroundSprite;
-    TileMap map;
+    //TileMap map;
 public:
     static bool m_GameOver;
 	static bool paused;

@@ -10,5 +10,6 @@ public:
 	Tile(float x, float y, float gridSize);
 	void draw(sf::RenderTarget& window);
 	void update();
+	sf::RectangleShape& getTile();
 };
 

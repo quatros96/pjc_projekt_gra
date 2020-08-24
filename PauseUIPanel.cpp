@@ -1,7 +1,9 @@
 #include "PauseUIPanel.h"
 #include "GameScreen.h"
+#include "EditorScreen.h"
 
 bool GameScreen::paused;
+bool EditorScreen::editorPaused;
 
 void PauseUIPanel::initialiseButtons()
 {
@@ -29,7 +31,7 @@ PauseUIPanel::PauseUIPanel(sf::Vector2i res):
 
 void PauseUIPanel::draw(sf::RenderWindow& window)
 {
-    if (GameScreen::paused)
+    if (GameScreen::paused || EditorScreen::editorPaused)
     {
         show();
         UIPanel::draw(window);

@@ -168,6 +168,15 @@
     <ClCompile Include="SettingsManager.cpp">
       <Filter>Game Engine</Filter>
     </ClCompile>
+    <ClCompile Include="EditorScreen.cpp">
+      <Filter>Screens</Filter>
+    </ClCompile>
+    <ClCompile Include="EditorInputHandler.cpp">
+      <Filter>Input Handlers</Filter>
+    </ClCompile>
+    <ClCompile Include="EditorUIPanel.cpp">
+      <Filter>User Interface</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PlayModeObjectLoader.h">
@@ -304,6 +313,15 @@
     </ClInclude>
     <ClInclude Include="SettingsManager.h">
       <Filter>Game Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="EditorScreen.h">
+      <Filter>Screens</Filter>
+    </ClInclude>
+    <ClInclude Include="EditorInputHandler.h">
+      <Filter>Input Handlers</Filter>
+    </ClInclude>
+    <ClInclude Include="EditorUIPanel.h">
+      <Filter>User Interface</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
