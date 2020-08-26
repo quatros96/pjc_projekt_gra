@@ -20,6 +20,7 @@ private:
 	sf::Vector2f mousePosView;
 	sf::Vector2i mousePosGrid;
 	sf::Text mousePosition;
+	sf::IntRect texture_selector;
 public:
 	static bool editorPaused;
 	EditorScreen(ScreenManagerRemoteControl* smrc, sf::Vector2i res);

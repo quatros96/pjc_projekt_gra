@@ -24,6 +24,7 @@ EditorScreen::EditorScreen(ScreenManagerRemoteControl* smrc, sf::Vector2i res)
     mousePosition.setFont(font);
     mousePosition.setCharacterSize(12);
     mousePosition.setFillColor(sf::Color::Red);
+    texture_selector = sf::IntRect(0, 0, WorldState::TILE_SIZE, WorldState::TILE_SIZE);
     initTileMap();
     initSelector();
 }
@@ -65,8 +66,12 @@ void EditorScreen::update(float fps)
         mousePosition.setPosition(sf::Vector2f(mousePosView.x, mousePosView.y + 20));
 		if(sf::Mouse::isButtonPressed(sf::Mouse::Left))
 		{
-            m_Map->addTile(mousePosGrid.x, mousePosGrid.y, 0);
+            m_Map->addTile(mousePosGrid.x, mousePosGrid.y, 0, texture_selector);
 		}
+        else if(sf::Mouse::isButtonPressed(sf::Mouse::Right))
+        {
+            m_Map->removeTile(mousePosGrid.x, mousePosGrid.y, 0);
+        }
 	}
     else
     {
