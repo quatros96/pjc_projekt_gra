@@ -16,4 +16,5 @@ public:
 	void draw(sf::RenderTarget& window);
 	void addTile(unsigned x, unsigned y, unsigned layer, sf::IntRect selector);
 	void removeTile(unsigned x, unsigned y, unsigned layer);
+	sf::Texture& getTileSheet();
 };

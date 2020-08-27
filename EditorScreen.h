@@ -4,6 +4,7 @@
 #include "PauseInputHandler.h"
 #include "EditorInputHandler.h"
 #include "TileMap.h"
+#include "TexturePicker.h"
 
 class EditorScreen :
     public Screen
@@ -21,6 +22,8 @@ private:
 	sf::Vector2i mousePosGrid;
 	sf::Text mousePosition;
 	sf::IntRect texture_selector;
+	sf::Text cursorText;
+	std::shared_ptr<TexturePicker> m_TexturePicker;
 public:
 	static bool editorPaused;
 	EditorScreen(ScreenManagerRemoteControl* smrc, sf::Vector2i res);
@@ -29,5 +32,6 @@ public:
 	void update(float fps);
 	void initTileMap();
 	void initSelector();
+	void initCursorText();
 };
 

@@ -69,3 +69,8 @@ void TileMap::removeTile(unsigned x, unsigned y, unsigned layer)
 		}
 	}
 }
+
+sf::Texture& TileMap::getTileSheet()
+{
+	return m_TextureSheet;
+}

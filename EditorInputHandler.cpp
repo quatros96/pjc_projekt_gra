@@ -1,10 +1,11 @@
 #include "EditorInputHandler.h"
 #include "EditorScreen.h"
 #include "SoundEngine.h"
+#include "TexturePicker.h"
 
+bool TexturePicker::hidden;
 void EditorInputHandler::initialize()
 {
-	
 }
 
 void EditorInputHandler::HandleKeyPressed(sf::Event& event, sf::RenderWindow& window)
@@ -34,7 +35,10 @@ void EditorInputHandler::HandleKeyPressed(sf::Event& event, sf::RenderWindow& wi
 
 void EditorInputHandler::handleKeyReleased(sf::Event& event, sf::RenderWindow& window)
 {
-	
+	if(event.key.code == sf::Keyboard::Q)
+	{
+        TexturePicker::hidden = !TexturePicker::hidden;
+	}
 }
 
 void EditorInputHandler::handleLeftClick(std::string& buttonInteractedWith, sf::RenderWindow& window)

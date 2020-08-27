@@ -177,6 +177,9 @@
     <ClCompile Include="EditorUIPanel.cpp">
       <Filter>User Interface</Filter>
     </ClCompile>
+    <ClCompile Include="TexturePicker.cpp">
+      <Filter>User Interface</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PlayModeObjectLoader.h">
@@ -321,6 +324,9 @@
       <Filter>Input Handlers</Filter>
     </ClInclude>
     <ClInclude Include="EditorUIPanel.h">
+      <Filter>User Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="TexturePicker.h">
       <Filter>User Interface</Filter>
     </ClInclude>
   </ItemGroup>
