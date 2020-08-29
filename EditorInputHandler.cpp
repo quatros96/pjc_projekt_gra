@@ -6,6 +6,8 @@
 bool TexturePicker::hidden;
 bool EditorScreen::savingMap;
 bool EditorScreen::loadingMap;
+bool EditorScreen::m_collision;
+int EditorScreen::m_type;
 void EditorInputHandler::initialize()
 {
 }
@@ -41,6 +43,21 @@ void EditorInputHandler::handleKeyReleased(sf::Event& event, sf::RenderWindow& w
 	{
         TexturePicker::hidden = !TexturePicker::hidden;
 	}
+    else if (event.key.code == sf::Keyboard::C)
+    {
+        EditorScreen::m_collision = !EditorScreen::m_collision;
+    }
+    else if (event.key.code == sf::Keyboard::T)
+    {
+    	if(EditorScreen::m_type == 3)
+    	{
+            EditorScreen::m_type = 0;
+    	}
+        else
+        {
+            EditorScreen::m_type++;
+        }
+    }
 }
 
 void EditorInputHandler::handleLeftClick(std::string& buttonInteractedWith, sf::RenderWindow& window)

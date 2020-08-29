@@ -36,6 +36,7 @@ GameScreen::GameScreen(ScreenManagerRemoteControl *smrc, sf::Vector2i res)
     m_View.setCenter(sf::Vector2f(WorldState::WORLD_WIDTH / 2,
             WorldState::WORLD_HEIGHT / 2));
     paused = false;
+
     //m_BackgroundTexture.loadFromFile("graphics/background.png");
     //m_BackgroundSprite.setTexture(m_BackgroundTexture);
     //auto textureSize = m_BackgroundSprite.getTexture()->getSize();
@@ -49,6 +50,9 @@ void GameScreen::initalise()
     m_GIH->activate();
     m_GOIH->deactivate();
     m_PIH->deactivate();
+    //prepare map
+    m_map = std::make_shared<TileMap>(WorldState::TILE_SIZE, 15, 15, "world_sheet.png");
+    m_map->loadMap("text.txt");
     m_PhysicsEnginePlayMode.initialize(m_ScreenManagerRemoteControl->shareGameObjectSharer());
     WorldState::NUM_INVADERS = 0;
     //store bullets locations and spawn bulletspawner in invaders
@@ -147,7 +151,7 @@ void GameScreen::draw(sf::RenderWindow &window)
     window.setView(m_View);
     //window.draw((m_BackgroundSprite));
     //draw gameobject instances
-    //map.draw(window);
+    m_map->draw(window);
     auto it = m_ScreenManagerRemoteControl->getGameObjects().begin();
     auto end = m_ScreenManagerRemoteControl->getGameObjects().end();
     for(it; it != end; it++)

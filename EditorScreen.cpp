@@ -33,6 +33,8 @@ EditorScreen::EditorScreen(ScreenManagerRemoteControl* smrc, sf::Vector2i res)
 	//init
     savingMap = false;
     loadingMap = false;
+    m_collision = false;
+    m_type = 0;
     initTileMap();
     initSelector();
 }
@@ -81,14 +83,16 @@ void EditorScreen::update(float fps)
         std::stringstream ss;
         ss << mousePosGrid.x;
         ss << "x";
-        ss << mousePosGrid.y;
+        ss << mousePosGrid.y << "\n";
+        ss << "Collision:" << m_collision << "\n";
+        ss << "Type:" << m_type;
         mousePosition.setString(ss.str());
         mousePosition.setPosition(sf::Vector2f(mousePosView.x, mousePosView.y + 20));
 		if(sf::Mouse::isButtonPressed(sf::Mouse::Left))
 		{
 			if(!m_TexturePicker->getActive())
 			{
-                m_Map->addTile(mousePosGrid.x, mousePosGrid.y, 0, texture_selector);
+                m_Map->addTile(mousePosGrid.x, mousePosGrid.y, 0, texture_selector, m_collision, m_type);
 			}
             else
             {
@@ -115,6 +119,22 @@ void EditorScreen::update(float fps)
             {
                 m_TexturePicker->navigateOnSheet(0, -32);
             }
+        }
+        else if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
+        {
+            m_View.move(0, -cameraSpeed * fps);
+        }
+        else if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+        {
+            m_View.move(-cameraSpeed * fps, 0);
+        }
+        else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
+        {
+            m_View.move(0, cameraSpeed * fps);
+        }
+        else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+        {
+            m_View.move(cameraSpeed * fps, 0);
         }
 		if(savingMap)
 		{

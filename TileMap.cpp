@@ -49,13 +49,13 @@ void TileMap::draw(sf::RenderTarget& window)
 	}
 }
 
-void TileMap::addTile(unsigned x, unsigned y, unsigned layer, sf::IntRect selector)
+void TileMap::addTile(unsigned x, unsigned y, unsigned layer, sf::IntRect selector, bool colision, int type)
 {
 	if(x < m_MapSize.x && y < m_MapSize.y && layer < m_NumOfLayers)
 	{
 		if(m_Map[x][y][layer] == nullptr)
 		{
-			m_Map[x][y][layer] = std::make_shared<Tile>(x * WorldState::TILE_SIZE, y * WorldState::TILE_SIZE, WorldState::TILE_SIZE, m_TextureSheet, selector);
+			m_Map[x][y][layer] = std::make_shared<Tile>(x * WorldState::TILE_SIZE, y * WorldState::TILE_SIZE, WorldState::TILE_SIZE, m_TextureSheet, selector, colision, type);
 		}
 	}
 }
