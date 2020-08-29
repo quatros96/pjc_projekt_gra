@@ -4,6 +4,8 @@
 #include "TexturePicker.h"
 
 bool TexturePicker::hidden;
+bool EditorScreen::savingMap;
+bool EditorScreen::loadingMap;
 void EditorInputHandler::initialize()
 {
 }
@@ -43,5 +45,15 @@ void EditorInputHandler::handleKeyReleased(sf::Event& event, sf::RenderWindow& w
 
 void EditorInputHandler::handleLeftClick(std::string& buttonInteractedWith, sf::RenderWindow& window)
 {
-	
+    if (buttonInteractedWith == "Save")
+    {
+        //saving map
+        SoundEngine::playClick();
+        EditorScreen::savingMap = true;
+    }
+	else if (buttonInteractedWith == "Load")
+	{
+        SoundEngine::playClick();
+        EditorScreen::loadingMap = true;
+	}
 }

@@ -26,6 +26,8 @@ private:
 	std::shared_ptr<TexturePicker> m_TexturePicker;
 public:
 	static bool editorPaused;
+	static bool savingMap;
+	static bool loadingMap;
 	EditorScreen(ScreenManagerRemoteControl* smrc, sf::Vector2i res);
 	void getMousePosition(sf::RenderWindow& window);
 	void draw(sf::RenderWindow& window);

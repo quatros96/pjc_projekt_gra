@@ -30,7 +30,9 @@ EditorScreen::EditorScreen(ScreenManagerRemoteControl* smrc, sf::Vector2i res)
     mousePosition.setFillColor(sf::Color::Red);
 	//make texture_selector size of 32x32 
     texture_selector = sf::IntRect(0, 0, WorldState::TILE_SIZE, WorldState::TILE_SIZE);
-	//init 
+	//init
+    savingMap = false;
+    loadingMap = false;
     initTileMap();
     initSelector();
 }
@@ -114,6 +116,16 @@ void EditorScreen::update(float fps)
                 m_TexturePicker->navigateOnSheet(0, -32);
             }
         }
+		if(savingMap)
+		{
+            m_Map->saveMap("text.txt");
+            savingMap = false;
+		}
+		if(loadingMap)
+		{
+            m_Map->loadMap("text.txt");
+            loadingMap = false;
+		}
 	}
     else
     {
@@ -125,7 +137,7 @@ void EditorScreen::update(float fps)
 void EditorScreen::initTileMap()
 {
 	//hard coded values
-    m_Map = std::make_shared<TileMap>(32, 15, 15);
+    m_Map = std::make_shared<TileMap>(WorldState::TILE_SIZE, 15, 15, "world_sheet.png");
 }
 
 void EditorScreen::initSelector()
