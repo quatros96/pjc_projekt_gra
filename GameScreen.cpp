@@ -36,12 +36,6 @@ GameScreen::GameScreen(ScreenManagerRemoteControl *smrc, sf::Vector2i res)
     m_View.setCenter(sf::Vector2f(WorldState::WORLD_WIDTH / 2,
             WorldState::WORLD_HEIGHT / 2));
     paused = false;
-
-    //m_BackgroundTexture.loadFromFile("graphics/background.png");
-    //m_BackgroundSprite.setTexture(m_BackgroundTexture);
-    //auto textureSize = m_BackgroundSprite.getTexture()->getSize();
-    //m_BackgroundSprite.setScale(float(m_View.getSize().x) / 
-    //        float(m_View.getSize().y) / textureSize.y);
 }
 void GameScreen::initalise()
 {
@@ -51,6 +45,7 @@ void GameScreen::initalise()
     m_GOIH->deactivate();
     m_PIH->deactivate();
     //prepare map
+    initPreRender();
     m_map = std::make_shared<TileMap>(WorldState::TILE_SIZE, 15, 15, "world_sheet.png");
     m_map->loadMap("text.txt");
     m_PhysicsEnginePlayMode.initialize(m_ScreenManagerRemoteControl->shareGameObjectSharer());
@@ -91,6 +86,7 @@ void GameScreen::update(float fps)
         m_GIH->activate();
         if (!m_GameOver)
         {
+        	//bullet firing for player
             if (m_WaitingToSpawnBulletForPlayer)
             {
                 std::static_pointer_cast<BulletUpdateComponent>
@@ -104,26 +100,17 @@ void GameScreen::update(float fps)
                     m_NextBullet = 0;
                 }
             }
-            if (m_WaitingToSpawnBulletForInvader)
-            {
-                std::static_pointer_cast<BulletUpdateComponent>(m_ScreenManagerRemoteControl->
-                    getGameObjects()[m_BulletObjectLocations[m_NextBullet]].getUpdateComponent())->
-                    spawnForInvader(m_InvaderBulletSpawnLocation);
-                m_WaitingToSpawnBulletForInvader = false;
-                m_NextBullet++;
-                if (m_NextBullet == m_BulletObjectLocations.size())
-                {
-                    m_NextBullet = 0;
-                }
-            }
+        	//update all in game components
             auto it = m_ScreenManagerRemoteControl->getGameObjects().begin();
             auto end = m_ScreenManagerRemoteControl->getGameObjects().end();
             for (it; it != end; it++)
             {
                 (*it).update(fps);
             }
+        	//handle collisions
             m_PhysicsEnginePlayMode.detectCollisions(m_ScreenManagerRemoteControl->getGameObjects(),
-                m_BulletObjectLocations);
+                m_BulletObjectLocations, m_map);
+        	//next level or game over handling
             if (WorldState::NUM_INVADERS <= 0)
             {
                 //change
@@ -148,10 +135,17 @@ void GameScreen::update(float fps)
 }
 void GameScreen::draw(sf::RenderWindow &window)
 {
+    m_renderTexture.clear();
     window.setView(m_View);
     //window.draw((m_BackgroundSprite));
     //draw gameobject instances
-    m_map->draw(window);
+    
+    //rendering to the texture
+    m_renderTexture.setView(m_View);
+    m_map->draw(m_renderTexture);
+    m_renderTexture.display();
+    m_renderSprite.setTexture(m_renderTexture.getTexture());
+    window.draw(m_renderSprite);
     auto it = m_ScreenManagerRemoteControl->getGameObjects().begin();
     auto end = m_ScreenManagerRemoteControl->getGameObjects().end();
     for(it; it != end; it++)
@@ -174,4 +168,11 @@ void GameScreen::resume()
 BulletSpawner* GameScreen::getBulletSpawner()
 {
     return this;
+}
+
+void GameScreen::initPreRender()
+{
+    m_renderTexture.create(WorldState::WORLD_WIDTH, WorldState::WORLD_HEIGHT);
+    m_renderSprite.setTexture(m_renderTexture.getTexture());
+    m_renderSprite.setTextureRect(sf::IntRect(0, 0, WorldState::WORLD_WIDTH, WorldState::WORLD_HEIGHT));
 }

@@ -11,6 +11,7 @@ private:
 	std::vector<std::vector<std::vector<std::shared_ptr<Tile>>>> m_Map;
 	sf::Texture m_TextureSheet;
 	std::string m_TextureFile;
+	sf::RectangleShape collisionBox;
 public:
 	TileMap(float gridSizeF, unsigned width, unsigned height, std::string textureFile);
 	void update();

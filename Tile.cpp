@@ -41,3 +41,13 @@ std::string Tile::getTileAsString()
 	ss << m_Tile.getTextureRect().left << " " << m_Tile.getTextureRect().top << " " << m_collision << " " << m_type;
 	return ss.str();
 }
+
+const sf::Vector2f& Tile::getTilePosition()
+{
+	return m_Tile.getPosition();
+}
+
+const bool Tile::getCollisionStatus()
+{
+	return m_collision;
+}

@@ -17,5 +17,7 @@ public:
 	void update();
 	sf::RectangleShape& getTile();
 	std::string getTileAsString();
+	const sf::Vector2f& getTilePosition();
+	const bool getCollisionStatus();
 };
 

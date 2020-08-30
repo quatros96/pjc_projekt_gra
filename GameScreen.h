@@ -34,6 +34,8 @@ private:
     std::shared_ptr<TileMap> m_map;
     sf::RenderTexture m_renderTexture;
     sf::Sprite m_renderSprite;
+	//functions
+    void initPreRender();
 public:
     static bool m_GameOver;
 	static bool paused;

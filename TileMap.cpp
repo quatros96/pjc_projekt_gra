@@ -30,6 +30,10 @@ TileMap::TileMap(float gridSizeF, unsigned width, unsigned height, std::string t
 	{
 		std::cout << "Texture loading error!";
 	}
+	collisionBox.setSize(sf::Vector2f(WorldState::TILE_SIZE, WorldState::TILE_SIZE));
+	collisionBox.setOutlineColor(sf::Color(255, 0, 0, 100));
+	collisionBox.setFillColor(sf::Color::Transparent);
+	collisionBox.setOutlineThickness(-1.f);
 }
 
 void TileMap::draw(sf::RenderTarget& window)
@@ -43,6 +47,11 @@ void TileMap::draw(sf::RenderTarget& window)
 				if(tile != nullptr)
 				{
 					tile->draw(window);
+					if(tile->getCollisionStatus())
+					{
+						collisionBox.setPosition(tile->getTilePosition());
+						window.draw(collisionBox);
+					}
 				}
 			}
 		}

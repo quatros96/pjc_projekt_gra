@@ -7,6 +7,7 @@
 
 #include "GameObjectSharer.h"
 #include "PlayerUpdateComponent.h"
+#include "TileMap.h"
 
 class PhysicsEnginePlayMode
 {
@@ -22,11 +23,12 @@ private:
     void detectPlayerCollisionsAndInvaderDirection(std::vector<GameObject>& objects,
             const std::vector<int>& bulletPositions);
     void handleInvaderDirection();
+    void detectPlayerWorldCollisions(std::vector<GameObject>& objects, std::shared_ptr<TileMap> map);
 
 public:
     void initialize(GameObjectSharer& gos);
     void detectCollisions(std::vector<GameObject>& objects,
-                          const std::vector<int>& bulletPositions);
+         const std::vector<int>& bulletPositions, std::shared_ptr<TileMap> map);
 };
 
 #endif //GRA_SPACE_INVADERS_PHYSICSENGINEPLAYMODE_H
