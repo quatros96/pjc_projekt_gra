@@ -27,6 +27,9 @@
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="ColliderComponent.cpp" />
     <ClCompile Include="Component.cpp" />
+    <ClCompile Include="EditorInputHandler.cpp" />
+    <ClCompile Include="EditorScreen.cpp" />
+    <ClCompile Include="EditorUIPanel.cpp" />
     <ClCompile Include="GameEngine.cpp" />
     <ClCompile Include="GameInputHandler.cpp" />
     <ClCompile Include="GameObject.cpp" />
@@ -58,6 +61,7 @@
     <ClCompile Include="SettingsManager.cpp" />
     <ClCompile Include="SoundEngine.cpp" />
     <ClCompile Include="StandardGraphicsComponent.cpp" />
+    <ClCompile Include="TexturePicker.cpp" />
     <ClCompile Include="Tile.cpp" />
     <ClCompile Include="TileMap.cpp" />
     <ClCompile Include="TransformComponent.cpp" />
@@ -74,6 +78,9 @@
     <ClInclude Include="ColliderComponent.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="developState.h" />
+    <ClInclude Include="EditorInputHandler.h" />
+    <ClInclude Include="EditorScreen.h" />
+    <ClInclude Include="EditorUIPanel.h" />
     <ClInclude Include="GameEngine.h" />
     <ClInclude Include="GameInputHandler.h" />
     <ClInclude Include="GameObject.h" />
@@ -104,6 +111,7 @@
     <ClInclude Include="SettingsManager.h" />
     <ClInclude Include="SoundEngine.h" />
     <ClInclude Include="StandardGraphicsComponent.h" />
+    <ClInclude Include="TexturePicker.h" />
     <ClInclude Include="Tile.h" />
     <ClInclude Include="TileMap.h" />
     <ClInclude Include="TransformComponent.h" />

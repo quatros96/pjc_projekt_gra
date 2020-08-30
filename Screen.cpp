@@ -28,6 +28,7 @@ void Screen::handleInput(sf::RenderWindow &window)
         }
     }
 }
+
 void Screen::update(float fps) {};
 void Screen::draw(sf::RenderWindow &window)
 {

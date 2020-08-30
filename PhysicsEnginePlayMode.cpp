@@ -128,6 +128,15 @@ void PhysicsEnginePlayMode::handleInvaderDirection()
         m_NeedToDropDownAndReverse = false;
     }
 }
+
+void PhysicsEnginePlayMode::detectPlayerWorldCollisions(std::vector<GameObject>& objects, std::shared_ptr<TileMap> map)
+{
+    sf::RectangleShape playerCollider = m_Player->getEncompassingRectCollider();
+    std::shared_ptr<TransformComponent> playerTransform = m_Player->getTransformComponent();
+    sf::Vector2f playerLocation = playerTransform->getLocation();
+	
+}
+
 void PhysicsEnginePlayMode::initialize(GameObjectSharer &gos)
 {
     m_PUC = std::static_pointer_cast<PlayerUpdateComponent>
@@ -136,9 +145,10 @@ void PhysicsEnginePlayMode::initialize(GameObjectSharer &gos)
     m_Player = &gos.findFirstObjectWithTag("Player");
 }
 void PhysicsEnginePlayMode::detectCollisions(std::vector<GameObject> &objects,
-        const std::vector<int> &bulletPositions)
+        const std::vector<int> &bulletPositions, std::shared_ptr<TileMap> map)
 {
     detectInvaderCollisions(objects, bulletPositions);
     detectPlayerCollisionsAndInvaderDirection(objects, bulletPositions);
     handleInvaderDirection();
+    detectPlayerWorldCollisions(objects, map);
 }

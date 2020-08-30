@@ -30,6 +30,8 @@ void SelectUIPanel::initialiseButtons()
     addButton(positionX, positionY, m_ButtonWidth, m_ButtonHeight,
             0, 255, 0, "Play");
     addButton(positionX, positionY + buttonOffsetY, m_ButtonWidth, m_ButtonHeight,
+        0, 255, 0, "Editor");
+    addButton(positionX, positionY + buttonOffsetY * 2, m_ButtonWidth, m_ButtonHeight,
             255, 0, 0, "Quit");
 }
 void SelectUIPanel::draw(sf::RenderWindow &window)

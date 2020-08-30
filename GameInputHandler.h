@@ -9,8 +9,6 @@
 #include "PlayerUpdateComponent.h"
 #include "TransformComponent.h"
 
-class GameScreen;
-
 class GameInputHandler : public InputHandler
 {
 private:

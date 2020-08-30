@@ -25,6 +25,11 @@ void SelectInputHandler::handleLeftClick(std::string &buttonInteractedWith, sf::
         WorldState::WAVE_NUMBER = 0;
         getPointerToScreenManagerRemoteControl()->loadLevelInPlayMode("testlvl.txt");
     }
+    if(buttonInteractedWith == "Editor")
+    {
+        SoundEngine::playClick();
+        getPointerToScreenManagerRemoteControl()->SwitchScreens("Editor");
+    }
     if(buttonInteractedWith == "Quit")
     {
         SoundEngine::playClick();
