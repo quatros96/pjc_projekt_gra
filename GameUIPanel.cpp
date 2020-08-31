@@ -1,6 +1,3 @@
-//
-// Created by quatr on 22.04.2020.
-//
 
 #include "GameUIPanel.h"
 #include <sstream>

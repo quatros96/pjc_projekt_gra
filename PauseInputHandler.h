@@ -1,4 +1,5 @@
 #pragma once
+
 #include "InputHandler.h"
 class PauseInputHandler :
     public InputHandler

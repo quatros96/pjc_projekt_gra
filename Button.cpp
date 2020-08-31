@@ -1,7 +1,3 @@
-//
-// Created by quatr on 22.04.2020.
-//
-
 #include "Button.h"
 
 Button::Button(sf::Vector2f position, float width, float height, int red, int green, int blue, std::string text)

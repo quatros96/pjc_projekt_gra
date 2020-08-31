@@ -1,9 +1,5 @@
-//
-// Created by quatr on 21.04.2020.
-//
 
 #include "ScreenManager.h"
-
 #include <memory>
 
 ScreenManager::ScreenManager(sf::Vector2i res)

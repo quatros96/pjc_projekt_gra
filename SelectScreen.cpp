@@ -1,6 +1,3 @@
-//
-// Created by quatr on 22.04.2020.
-//
 
 #include "SelectScreen.h"
 #include "SelectUIPanel.h"

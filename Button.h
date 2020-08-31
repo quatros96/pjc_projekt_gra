@@ -1,9 +1,4 @@
-//
-// Created by quatr on 22.04.2020.
-//
-
-#ifndef GRA_SPACE_INVADERS_BUTTON_H
-#define GRA_SPACE_INVADERS_BUTTON_H
+#pragma once
 
 #include <SFML/Graphics.hpp>
 
@@ -21,5 +16,3 @@ public:
     void draw(sf::RenderWindow& window);
     sf::RectangleShape& getButton();
 };
-
-#endif //GRA_SPACE_INVADERS_BUTTON_H

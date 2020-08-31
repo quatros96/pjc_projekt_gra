@@ -1,9 +1,4 @@
-//
-// Created by quatr on 21.04.2020.
-//
-
-#ifndef GRA_SPACE_INVADERS_BITMAPSTORE_H
-#define GRA_SPACE_INVADERS_BITMAPSTORE_H
+#pragma once
 
 #include <SFML/Graphics.hpp>
 #include <map>
@@ -18,5 +13,3 @@ public:
     static sf::Texture& getBitmap(std::string const& filename);
     static void addBitmap(std::string const& filename);
 };
-
-#endif //GRA_SPACE_INVADERS_BITMAPSTORE_H

@@ -1,9 +1,4 @@
-//
-// Created by quatr on 21.04.2020.
-//
-
-#ifndef GRA_SPACE_INVADERS_SOUNDENGINE_H
-#define GRA_SPACE_INVADERS_SOUNDENGINE_H
+#pragma once
 
 #include <SFML/Audio.hpp>
 
@@ -28,5 +23,3 @@ public:
     static void playClick();
     static SoundEngine* m_s_Instance;
 };
-
-#endif //GRA_SPACE_INVADERS_SOUNDENGINE_H

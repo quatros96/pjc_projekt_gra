@@ -1,9 +1,4 @@
-//
-// Created by quatr on 27.04.2020.
-//
-
-#ifndef GRA_SPACE_INVADERS_LEVELMANAGER_H
-#define GRA_SPACE_INVADERS_LEVELMANAGER_H
+#pragma once
 
 #include "GameObject.h"
 #include <vector>
@@ -46,5 +41,3 @@ public:
         return m_GameObjects[0];
     }
 };
-
-#endif //GRA_SPACE_INVADERS_LEVELMANAGER_H

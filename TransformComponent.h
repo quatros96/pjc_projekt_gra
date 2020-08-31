@@ -1,9 +1,4 @@
-//
-// Created by quatr on 23.04.2020.
-//
-
-#ifndef GRA_SPACE_INVADERS_TRANSFORMCOMPONENT_H
-#define GRA_SPACE_INVADERS_TRANSFORMCOMPONENT_H
+#pragma once
 
 #include "Component.h"
 #include <SFML/Graphics.hpp>
@@ -53,5 +48,3 @@ inline void TransformComponent::decelerate(float dt)
         m_CurrSpeed -= 0.5 * m_Acceleration * dt;
 	}
 }
-
-#endif //GRA_SPACE_INVADERS_TRANSFORMCOMPONENT_H

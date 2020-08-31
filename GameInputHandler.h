@@ -1,9 +1,4 @@
-//
-// Created by quatr on 22.04.2020.
-//
-
-#ifndef GRA_SPACE_INVADERS_GAMEINPUTHANDLER_H
-#define GRA_SPACE_INVADERS_GAMEINPUTHANDLER_H
+#pragma once
 
 #include "InputHandler.h"
 #include "PlayerUpdateComponent.h"
@@ -21,5 +16,3 @@ public:
     void HandleKeyPressed(sf::Event& event, sf::RenderWindow& window) override;
     void handleKeyReleased(sf::Event& event, sf::RenderWindow& window) override;
 };
-
-#endif //GRA_SPACE_INVADERS_GAMEINPUTHANDLER_H

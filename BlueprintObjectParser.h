@@ -1,9 +1,4 @@
-//
-// Created by quatr on 27.04.2020.
-//
-
-#ifndef GRA_SPACE_INVADERS_BLUEPRINTOBJECTPARSER_H
-#define GRA_SPACE_INVADERS_BLUEPRINTOBJECTPARSER_H
+#pragma once
 
 #include "GameObjectBlueprint.h"
 #include <string>
@@ -16,5 +11,3 @@ private:
 public:
     void parseNextObjectForBlueprint(std::ifstream& reader, GameObjectBlueprint& bp);
 };
-
-#endif //GRA_SPACE_INVADERS_BLUEPRINTOBJECTPARSER_H

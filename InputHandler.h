@@ -1,9 +1,4 @@
-//
-// Created by quatr on 22.04.2020.
-//
-
-#ifndef GRA_SPACE_INVADERS_INPUTHANDLER_H
-#define GRA_SPACE_INVADERS_INPUTHANDLER_H
+#pragma once
 
 #include <SFML/Graphics.hpp>
 #include <vector>
@@ -36,5 +31,3 @@ public:
     ScreenManagerRemoteControl* getPointerToScreenManagerRemoteControl();
     Screen* getmParentScreen();
 };
-
-#endif //GRA_SPACE_INVADERS_INPUTHANDLER_H

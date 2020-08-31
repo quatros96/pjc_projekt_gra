@@ -1,6 +1,3 @@
-//
-// Created by quatr on 27.04.2020.
-//
 
 #include "PlayModeObjectLoader.h"
 #include "ObjectTags.h"
