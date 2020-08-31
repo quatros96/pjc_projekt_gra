@@ -1,9 +1,7 @@
 //
 // Created by quatr on 23.04.2020.
 //
-
-#ifndef GRA_SPACE_INVADERS_RECTCOLLIDERCOMPONENT_H
-#define GRA_SPACE_INVADERS_RECTCOLLIDERCOMPONENT_H
+#pragma once
 
 #include "ColliderComponent.h"
 #include <SFML/Graphics.hpp>
@@ -13,6 +11,7 @@ class RectColliderComponent : public ColliderComponent
 private:
     std::string m_SpecificType = "rect";
     sf::RectangleShape m_Collider;
+    sf::FloatRect nextPos;
     std::string m_Tag = "";
     float m_HeightOffset = 0;
     float m_WidthOffset = 0;
@@ -29,10 +28,10 @@ public:
     {
         return m_SpecificType;
     }
+    sf::Vector2u getWorldGridPosition();
+    sf::FloatRect& getNextPos();
     void start(GameObjectSharer* gos, GameObject* self)
     {
 
     }
 };
-
-#endif //GRA_SPACE_INVADERS_RECTCOLLIDERCOMPONENT_H

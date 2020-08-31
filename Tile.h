@@ -19,5 +19,7 @@ public:
 	std::string getTileAsString();
 	const sf::Vector2f& getTilePosition();
 	const bool getCollisionStatus();
+	const bool intersects(sf::FloatRect objectRect);
+	sf::FloatRect getBounds();
 };
 

@@ -46,7 +46,8 @@ void GameScreen::initalise()
     m_PIH->deactivate();
     //prepare map
     initPreRender();
-    m_map = std::make_shared<TileMap>(WorldState::TILE_SIZE, 15, 15, "world_sheet.png");
+    m_PRCC = std::static_pointer_cast<RectColliderComponent>(m_ScreenManagerRemoteControl->shareGameObjectSharer().findFirstObjectWithTag("Player").getComponentByTypeAndSpecificType("collider", "rect"));
+    m_map = std::make_shared<TileMap>(WorldState::TILE_SIZE, 20, 12, "world_sheet.png");
     m_map->loadMap("text.txt");
     m_PhysicsEnginePlayMode.initialize(m_ScreenManagerRemoteControl->shareGameObjectSharer());
     WorldState::NUM_INVADERS = 0;
@@ -137,15 +138,13 @@ void GameScreen::draw(sf::RenderWindow &window)
 {
     m_renderTexture.clear();
     window.setView(m_View);
-    //window.draw((m_BackgroundSprite));
-    //draw gameobject instances
-    
     //rendering to the texture
     m_renderTexture.setView(m_View);
-    m_map->draw(m_renderTexture);
+    m_map->draw(m_renderTexture, m_PRCC->getWorldGridPosition());
     m_renderTexture.display();
     m_renderSprite.setTexture(m_renderTexture.getTexture());
     window.draw(m_renderSprite);
+    //draw gameobject instances
     auto it = m_ScreenManagerRemoteControl->getGameObjects().begin();
     auto end = m_ScreenManagerRemoteControl->getGameObjects().end();
     for(it; it != end; it++)

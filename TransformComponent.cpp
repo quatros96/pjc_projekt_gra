@@ -37,6 +37,12 @@ sf::Vector2f& TransformComponent::getLocation()
 {
     return m_Location;
 }
+
+void TransformComponent::setLocation(sf::Vector2f position)
+{
+    m_Location = position;
+}
+
 sf::Vector2f  TransformComponent::getSize()
 {
     return sf::Vector2f (m_Width, m_Height);

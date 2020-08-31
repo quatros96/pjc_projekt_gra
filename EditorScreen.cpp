@@ -55,7 +55,7 @@ void EditorScreen::draw(sf::RenderWindow& window)
 {
     window.setView(m_View);
     getMousePosition(window);
-    m_Map->draw(window);
+    m_Map->draw(window, sf::Vector2u(mousePosGrid.x, mousePosGrid.y));
 	if(!m_TexturePicker->getActive())
 	{
 		//if texture sheet is active there is no visual indication of tile under it
@@ -157,7 +157,7 @@ void EditorScreen::update(float fps)
 void EditorScreen::initTileMap()
 {
 	//hard coded values
-    m_Map = std::make_shared<TileMap>(WorldState::TILE_SIZE, 15, 15, "world_sheet.png");
+    m_Map = std::make_shared<TileMap>(WorldState::TILE_SIZE, 20, 12, "world_sheet.png");
 }
 
 void EditorScreen::initSelector()

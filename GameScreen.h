@@ -1,9 +1,7 @@
 //
 // Created by quatr on 22.04.2020.
 //
-
-#ifndef GRA_SPACE_INVADERS_GAMESCREEN_H
-#define GRA_SPACE_INVADERS_GAMESCREEN_H
+#pragma once
 
 #include "Screen.h"
 #include "GameInputHandler.h"
@@ -20,6 +18,7 @@ private:
     std::shared_ptr<GameInputHandler> m_GIH;
     std::shared_ptr<GameOverInputHandler> m_GOIH;
     std::shared_ptr<PauseInputHandler> m_PIH;
+    std::shared_ptr<RectColliderComponent> m_PRCC;
     PhysicsEnginePlayMode m_PhysicsEnginePlayMode;
     int m_NumberInvadersInWorldFile = 0;
     std::vector<int> m_BulletObjectLocations;
@@ -34,6 +33,7 @@ private:
     std::shared_ptr<TileMap> m_map;
     sf::RenderTexture m_renderTexture;
     sf::Sprite m_renderSprite;
+	
 	//functions
     void initPreRender();
 public:
@@ -68,4 +68,3 @@ public:
     }
 };
 
-#endif //GRA_SPACE_INVADERS_GAMESCREEN_H

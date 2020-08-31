@@ -20,10 +20,6 @@ TileMap::TileMap(float gridSizeF, unsigned width, unsigned height, std::string t
 		for (int y = 0; y < m_MapSize.y; ++y)
 		{
 			m_Map[x].resize(m_MapSize.y, std::vector<std::shared_ptr<Tile>>());
-			for (int z = 0; z < m_NumOfLayers; ++z)
-			{
-				m_Map[x][y].resize(m_NumOfLayers, nullptr);
-			}
 		}
 	}
 	if(!m_TextureSheet.loadFromFile("graphics/" + textureFile))
@@ -36,22 +32,42 @@ TileMap::TileMap(float gridSizeF, unsigned width, unsigned height, std::string t
 	collisionBox.setOutlineThickness(-1.f);
 }
 
-void TileMap::draw(sf::RenderTarget& window)
+void TileMap::draw(sf::RenderTarget& window, sf::Vector2u playerPosGrid)
 {
-	for (auto &x : m_Map)
+	//getting render bounds
+	x_start = playerPosGrid.x - 19;
+	x_end = playerPosGrid.x + 20;
+	y_start = playerPosGrid.y - 19;
+	y_end = playerPosGrid.y + 20;
+	layer = 0;
+	if (x_start < 0)
 	{
-		for (auto &y : x)
+		x_start = 0;
+	}
+	if (x_end > getMapSize().x)
+	{
+		x_end = getMapSize().x;
+	}
+	if (y_start < 0)
+	{
+		y_start = 0;
+	}
+	if (y_end > getMapSize().y)
+	{
+		y_end = getMapSize().y;
+	}
+
+	for (int x = x_start; x < x_end; x++)
+	{
+		for (int y = y_start; y < y_end; y++)
 		{
-			for (auto &tile : y)
+			for (size_t k = 0; k < m_Map[x][y].size(); k++)
 			{
-				if(tile != nullptr)
+				m_Map[x][y][k]->draw(window);
+				if (m_Map[x][y][k]->getCollisionStatus())
 				{
-					tile->draw(window);
-					if(tile->getCollisionStatus())
-					{
-						collisionBox.setPosition(tile->getTilePosition());
-						window.draw(collisionBox);
-					}
+					collisionBox.setPosition(m_Map[x][y][k]->getTilePosition());
+					window.draw(collisionBox);
 				}
 			}
 		}
@@ -62,10 +78,7 @@ void TileMap::addTile(unsigned x, unsigned y, unsigned layer, sf::IntRect select
 {
 	if(x < m_MapSize.x && y < m_MapSize.y && layer < m_NumOfLayers)
 	{
-		if(m_Map[x][y][layer] == nullptr)
-		{
-			m_Map[x][y][layer] = std::make_shared<Tile>(x * WorldState::TILE_SIZE, y * WorldState::TILE_SIZE, WorldState::TILE_SIZE, m_TextureSheet, selector, colision, type);
-		}
+		m_Map[x][y].push_back(std::make_shared<Tile>(x * WorldState::TILE_SIZE, y * WorldState::TILE_SIZE, WorldState::TILE_SIZE, m_TextureSheet, selector, colision, type));
 	}
 }
 
@@ -73,9 +86,10 @@ void TileMap::removeTile(unsigned x, unsigned y, unsigned layer)
 {
 	if (x < m_MapSize.x && y < m_MapSize.y && layer < m_NumOfLayers)
 	{
-		if (m_Map[x][y][layer] != nullptr)
+		if (!m_Map[x][y].empty())
 		{
-			m_Map[x][y][layer] = nullptr;
+			m_Map[x][y][m_Map[x][y].size() - 1] = nullptr;
+			m_Map[x][y].pop_back();
 		}
 	}
 }
@@ -99,9 +113,9 @@ void TileMap::saveMap(std::string file_name)
 		{
 			for (int y = 0; y < m_MapSize.y; ++y)
 			{
-				for (int z = 0; z < m_NumOfLayers; ++z)
+				for (int z = 0; z < m_Map[x][y].size(); ++z)
 				{
-					if(m_Map[x][y][z] != nullptr)
+					if(!m_Map[x][y].empty())
 					{
 						outputFile << x << " " << y << " " << z << " " << m_Map[x][y][z]->getTileAsString() << " ";
 					}
@@ -112,7 +126,7 @@ void TileMap::saveMap(std::string file_name)
 	}
 	else
 	{
-		std::cout << "could not save map to file!" << std::endl;
+		std::cout << "could not save m_Map to file!" << std::endl;
 	}
 	outputFile.close();
 }
@@ -146,10 +160,6 @@ void TileMap::loadMap(std::string file_name)
 			for (int y = 0; y < m_MapSize.y; ++y)
 			{
 				m_Map[x].resize(m_MapSize.y, std::vector<std::shared_ptr<Tile>>());
-				for (int z = 0; z < m_NumOfLayers; ++z)
-				{
-					m_Map[x][y].resize(m_NumOfLayers, nullptr);
-				}
 			}
 		}
 		if (!m_TextureSheet.loadFromFile("graphics/" + m_TextureFile))
@@ -158,12 +168,22 @@ void TileMap::loadMap(std::string file_name)
 		}
 		while(inputFile >> x >> y >> z >> textureRectX >> textureRecty >> collision >> type)
 		{
-			m_Map[x][y][z] = std::make_shared<Tile>(x * m_GridSizeF, y * m_GridSizeF, m_GridSizeF, m_TextureSheet, sf::IntRect(textureRectX, textureRecty, m_GridSize, m_GridSize), collision, type);
+			m_Map[x][y].push_back(std::make_shared<Tile>(x * m_GridSizeF, y * m_GridSizeF, m_GridSizeF, m_TextureSheet, sf::IntRect(textureRectX, textureRecty, m_GridSize, m_GridSize), collision, type));
 		}
 	}
 	else
 	{
-		std::cout << "could not save map from file!" << std::endl;
+		std::cout << "could not save m_Map from file!" << std::endl;
 	}
 	inputFile.close();
+}
+
+sf::Vector2u TileMap::getMapSize()
+{
+	return m_MapSize;
+}
+
+std::vector<std::vector<std::vector<std::shared_ptr<Tile>>>>& TileMap::getMap()
+{
+	return m_Map;
 }

@@ -51,3 +51,13 @@ const bool Tile::getCollisionStatus()
 {
 	return m_collision;
 }
+
+const bool Tile::intersects(sf::FloatRect objectRect)
+{
+	return m_Tile.getGlobalBounds().intersects(objectRect);
+}
+
+sf::FloatRect Tile::getBounds()
+{
+	return m_Tile.getGlobalBounds();
+}
