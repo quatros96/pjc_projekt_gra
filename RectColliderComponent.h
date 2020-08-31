@@ -13,6 +13,7 @@ class RectColliderComponent : public ColliderComponent
 private:
     std::string m_SpecificType = "rect";
     sf::RectangleShape m_Collider;
+    sf::FloatRect nextPos;
     std::string m_Tag = "";
     float m_HeightOffset = 0;
     float m_WidthOffset = 0;
@@ -29,6 +30,8 @@ public:
     {
         return m_SpecificType;
     }
+    sf::Vector2u getWorldGridPosition();
+    sf::FloatRect& getNextPos();
     void start(GameObjectSharer* gos, GameObject* self)
     {
 

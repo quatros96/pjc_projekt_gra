@@ -3,13 +3,14 @@
 //
 
 #include "RectColliderComponent.h"
+#include "WorldState.h"
 
 RectColliderComponent::RectColliderComponent(std::string name, float widthOffset, float heightOffset) 
 {
     m_Tag = "" + name;
     m_Collider.setFillColor(sf::Color::Transparent);
     m_Collider.setOutlineColor(sf::Color::Red);
-    m_Collider.setOutlineThickness(1.f);
+    m_Collider.setOutlineThickness(-1.f);
     m_WidthOffset = widthOffset;
     m_HeightOffset = heightOffset;
 }
@@ -45,4 +46,9 @@ sf::Vector2f RectColliderComponent::getSize()
 sf::Vector2f RectColliderComponent::getOffsets()
 {
     return sf::Vector2f(m_WidthOffset, m_HeightOffset);
+}
+
+sf::Vector2u RectColliderComponent::getWorldGridPosition()
+{
+    return sf::Vector2u(m_Collider.getPosition().x / WorldState::TILE_SIZE, m_Collider.getPosition().y / WorldState::TILE_SIZE);
 }

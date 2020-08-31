@@ -27,6 +27,7 @@ public:
     void moveDown(float dt);
     void decelerate(float dt);
     sf::Vector2f& getLocation();
+    void setLocation(sf::Vector2f position);
     sf::Vector2f getSize();
     std::string getType()
     {

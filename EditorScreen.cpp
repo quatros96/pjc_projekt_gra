@@ -55,7 +55,7 @@ void EditorScreen::draw(sf::RenderWindow& window)
 {
     window.setView(m_View);
     getMousePosition(window);
-    m_Map->draw(window);
+    m_Map->draw(window, sf::Vector2u(mousePosGrid.x, mousePosGrid.y));
 	if(!m_TexturePicker->getActive())
 	{
 		//if texture sheet is active there is no visual indication of tile under it

@@ -46,6 +46,7 @@ void GameScreen::initalise()
     m_PIH->deactivate();
     //prepare map
     initPreRender();
+    m_PRCC = std::static_pointer_cast<RectColliderComponent>(m_ScreenManagerRemoteControl->shareGameObjectSharer().findFirstObjectWithTag("Player").getComponentByTypeAndSpecificType("collider", "rect"));
     m_map = std::make_shared<TileMap>(WorldState::TILE_SIZE, 15, 15, "world_sheet.png");
     m_map->loadMap("text.txt");
     m_PhysicsEnginePlayMode.initialize(m_ScreenManagerRemoteControl->shareGameObjectSharer());
@@ -142,7 +143,7 @@ void GameScreen::draw(sf::RenderWindow &window)
     
     //rendering to the texture
     m_renderTexture.setView(m_View);
-    m_map->draw(m_renderTexture);
+    m_map->draw(m_renderTexture, m_PRCC->getWorldGridPosition());
     m_renderTexture.display();
     m_renderSprite.setTexture(m_renderTexture.getTexture());
     window.draw(m_renderSprite);

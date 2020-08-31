@@ -14,15 +14,15 @@ TileMap::TileMap(float gridSizeF, unsigned width, unsigned height, std::string t
 	m_MapSize.y = height;
 	m_NumOfLayers = 1;
 	m_TextureFile = textureFile;
-	m_Map.resize(m_MapSize.x, std::vector<std::vector<std::shared_ptr<Tile>>>());
+	m_Map.resize(m_MapSize.x, std::vector<std::vector<std::vector<std::shared_ptr<Tile>>>>());
 	for (int x = 0; x < m_MapSize.x; ++x)
 	{
 		for (int y = 0; y < m_MapSize.y; ++y)
 		{
-			m_Map[x].resize(m_MapSize.y, std::vector<std::shared_ptr<Tile>>());
+			m_Map[x].resize(m_MapSize.y, std::vector<std::vector<std::shared_ptr<Tile>>>());
 			for (int z = 0; z < m_NumOfLayers; ++z)
 			{
-				m_Map[x][y].resize(m_NumOfLayers, nullptr);
+				m_Map[x][y].resize(m_NumOfLayers, std::vector<std::shared_ptr<Tile>>());
 			}
 		}
 	}
@@ -36,18 +36,65 @@ TileMap::TileMap(float gridSizeF, unsigned width, unsigned height, std::string t
 	collisionBox.setOutlineThickness(-1.f);
 }
 
-void TileMap::draw(sf::RenderTarget& window)
+void TileMap::draw(sf::RenderTarget& window, sf::Vector2u playerPosGrid)
 {
-	for (auto &x : m_Map)
+	/*
+	  m_Player = &gos.findFirstObjectWithTag("Player");
+	m_PUC = std::static_pointer_cast<PlayerUpdateComponent>
+		(gos.findFirstObjectWithTag("Player").getComponentByTypeAndSpecificType(
+			"update", "player"));
+	m_PRCC = std::static_pointer_cast<RectColliderComponent>(gos.findFirstObjectWithTag("Player").getComponentByTypeAndSpecificType("collider", "rect"));
+	m_PTC = m_Player->getTransformComponent();
+	 */
+	
+	//getting render bounds
+	x_start = playerPosGrid.x - 8;
+	x_end = playerPosGrid.x + 9;
+	y_start = playerPosGrid.y - 8;
+	y_end = playerPosGrid.y + 9;
+	layer = 0;
+	if (x_start < 0)
 	{
-		for (auto &y : x)
+		x_start = 0;
+	}
+	if (x_end > getMapSize().x)
+	{
+		x_end = getMapSize().x;
+	}
+	if (y_start < 0)
+	{
+		y_start = 0;
+	}
+	if (y_end > getMapSize().y)
+	{
+		y_end = getMapSize().y;
+	}
+
+	for (int x = x_start; x < x_end; x++)
+	{
+		for (int y = y_start; y < y_end; y++)
 		{
-			for (auto &tile : y)
+			for (size_t k = 0; k < m_Map[x][y][layer].size(); k++)
 			{
-				if(tile != nullptr)
+				m_Map[x][y][layer][k]->draw(window);
+				if (m_Map[x][y][layer][k]->getCollisionStatus())
+				{
+					collisionBox.setPosition(m_Map[x][y][layer][k]->getTilePosition());
+					window.draw(collisionBox);
+				}
+			}
+		}
+	}
+	/*for (auto& x : m_Map)
+	{
+		for (auto& y : x)
+		{
+			for (auto& tile : y)
+			{
+				if (tile != nullptr)
 				{
 					tile->draw(window);
-					if(tile->getCollisionStatus())
+					if (tile->getCollisionStatus())
 					{
 						collisionBox.setPosition(tile->getTilePosition());
 						window.draw(collisionBox);
@@ -56,16 +103,14 @@ void TileMap::draw(sf::RenderTarget& window)
 			}
 		}
 	}
+	*/
 }
 
 void TileMap::addTile(unsigned x, unsigned y, unsigned layer, sf::IntRect selector, bool colision, int type)
 {
 	if(x < m_MapSize.x && y < m_MapSize.y && layer < m_NumOfLayers)
 	{
-		if(m_Map[x][y][layer] == nullptr)
-		{
-			m_Map[x][y][layer] = std::make_shared<Tile>(x * WorldState::TILE_SIZE, y * WorldState::TILE_SIZE, WorldState::TILE_SIZE, m_TextureSheet, selector, colision, type);
-		}
+		m_Map[x][y][layer].push_back(std::make_shared<Tile>(x * WorldState::TILE_SIZE, y * WorldState::TILE_SIZE, WorldState::TILE_SIZE, m_TextureSheet, selector, colision, type));
 	}
 }
 
@@ -73,9 +118,10 @@ void TileMap::removeTile(unsigned x, unsigned y, unsigned layer)
 {
 	if (x < m_MapSize.x && y < m_MapSize.y && layer < m_NumOfLayers)
 	{
-		if (m_Map[x][y][layer] != nullptr)
+		if (!m_Map[x][y][layer].empty())
 		{
-			m_Map[x][y][layer] = nullptr;
+			m_Map[x][y][layer][m_Map[x][y][layer].size() - 1] = nullptr;
+			m_Map[x][y][layer].pop_back();
 		}
 	}
 }
@@ -101,9 +147,13 @@ void TileMap::saveMap(std::string file_name)
 			{
 				for (int z = 0; z < m_NumOfLayers; ++z)
 				{
-					if(m_Map[x][y][z] != nullptr)
+					if(!m_Map[x][y][z].empty())
 					{
-						outputFile << x << " " << y << " " << z << " " << m_Map[x][y][z]->getTileAsString() << " ";
+						for (int layer = 0; layer < m_Map[x][y][z].size(); ++layer)
+						{
+							outputFile << x << " " << y << " " << z << " " << m_Map[x][y][z][layer]->getTileAsString() << " ";
+						}
+
 					}
 				}
 			}
@@ -112,7 +162,7 @@ void TileMap::saveMap(std::string file_name)
 	}
 	else
 	{
-		std::cout << "could not save map to file!" << std::endl;
+		std::cout << "could not save m_Map to file!" << std::endl;
 	}
 	outputFile.close();
 }
@@ -140,15 +190,15 @@ void TileMap::loadMap(std::string file_name)
 		m_MapSize.y = size.y;
 		m_NumOfLayers = layers;
 		m_TextureFile = textureFile;
-		m_Map.resize(m_MapSize.x, std::vector<std::vector<std::shared_ptr<Tile>>>());
+		m_Map.resize(m_MapSize.x, std::vector<std::vector<std::vector<std::shared_ptr<Tile>>>>());
 		for (int x = 0; x < m_MapSize.x; ++x)
 		{
 			for (int y = 0; y < m_MapSize.y; ++y)
 			{
-				m_Map[x].resize(m_MapSize.y, std::vector<std::shared_ptr<Tile>>());
+				m_Map[x].resize(m_MapSize.y, std::vector<std::vector<std::shared_ptr<Tile>>>());
 				for (int z = 0; z < m_NumOfLayers; ++z)
 				{
-					m_Map[x][y].resize(m_NumOfLayers, nullptr);
+					m_Map[x][y].resize(m_NumOfLayers, std::vector<std::shared_ptr<Tile>>());
 				}
 			}
 		}
@@ -158,12 +208,22 @@ void TileMap::loadMap(std::string file_name)
 		}
 		while(inputFile >> x >> y >> z >> textureRectX >> textureRecty >> collision >> type)
 		{
-			m_Map[x][y][z] = std::make_shared<Tile>(x * m_GridSizeF, y * m_GridSizeF, m_GridSizeF, m_TextureSheet, sf::IntRect(textureRectX, textureRecty, m_GridSize, m_GridSize), collision, type);
+			m_Map[x][y][z].push_back(std::make_shared<Tile>(x * m_GridSizeF, y * m_GridSizeF, m_GridSizeF, m_TextureSheet, sf::IntRect(textureRectX, textureRecty, m_GridSize, m_GridSize), collision, type));
 		}
 	}
 	else
 	{
-		std::cout << "could not save map from file!" << std::endl;
+		std::cout << "could not save m_Map from file!" << std::endl;
 	}
 	inputFile.close();
+}
+
+sf::Vector2u TileMap::getMapSize()
+{
+	return m_MapSize;
+}
+
+std::vector<std::vector<std::vector<std::vector<std::shared_ptr<Tile>>>>> TileMap::getMap()
+{
+	return m_Map;
 }
