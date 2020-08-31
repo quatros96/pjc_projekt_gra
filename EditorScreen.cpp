@@ -157,7 +157,7 @@ void EditorScreen::update(float fps)
 void EditorScreen::initTileMap()
 {
 	//hard coded values
-    m_Map = std::make_shared<TileMap>(WorldState::TILE_SIZE, 15, 15, "world_sheet.png");
+    m_Map = std::make_shared<TileMap>(WorldState::TILE_SIZE, 20, 12, "world_sheet.png");
 }
 
 void EditorScreen::initSelector()

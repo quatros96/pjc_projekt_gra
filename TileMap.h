@@ -11,7 +11,7 @@ private:
 	unsigned m_GridSize;
 	sf::Vector2u m_MapSize;
 	unsigned m_NumOfLayers;
-	std::vector<std::vector<std::vector<std::vector<std::shared_ptr<Tile>>>>> m_Map;
+	std::vector<std::vector<std::vector<std::shared_ptr<Tile>>>> m_Map;
 	sf::Texture m_TextureSheet;
 	std::string m_TextureFile;
 	sf::RectangleShape collisionBox;
@@ -30,5 +30,5 @@ public:
 	void saveMap(std::string file_name);
 	void loadMap(std::string file_name);
 	sf::Vector2u getMapSize();
-	std::vector<std::vector<std::vector<std::vector<std::shared_ptr<Tile>>>>> getMap();
+	std::vector<std::vector<std::vector<std::shared_ptr<Tile>>>>& getMap();
 };

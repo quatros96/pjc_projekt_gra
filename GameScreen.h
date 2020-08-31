@@ -1,9 +1,7 @@
 //
 // Created by quatr on 22.04.2020.
 //
-
-#ifndef GRA_SPACE_INVADERS_GAMESCREEN_H
-#define GRA_SPACE_INVADERS_GAMESCREEN_H
+#pragma once
 
 #include "Screen.h"
 #include "GameInputHandler.h"
@@ -70,4 +68,3 @@ public:
     }
 };
 
-#endif //GRA_SPACE_INVADERS_GAMESCREEN_H

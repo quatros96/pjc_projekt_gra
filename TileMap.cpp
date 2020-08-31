@@ -14,16 +14,12 @@ TileMap::TileMap(float gridSizeF, unsigned width, unsigned height, std::string t
 	m_MapSize.y = height;
 	m_NumOfLayers = 1;
 	m_TextureFile = textureFile;
-	m_Map.resize(m_MapSize.x, std::vector<std::vector<std::vector<std::shared_ptr<Tile>>>>());
+	m_Map.resize(m_MapSize.x, std::vector<std::vector<std::shared_ptr<Tile>>>());
 	for (int x = 0; x < m_MapSize.x; ++x)
 	{
 		for (int y = 0; y < m_MapSize.y; ++y)
 		{
-			m_Map[x].resize(m_MapSize.y, std::vector<std::vector<std::shared_ptr<Tile>>>());
-			for (int z = 0; z < m_NumOfLayers; ++z)
-			{
-				m_Map[x][y].resize(m_NumOfLayers, std::vector<std::shared_ptr<Tile>>());
-			}
+			m_Map[x].resize(m_MapSize.y, std::vector<std::shared_ptr<Tile>>());
 		}
 	}
 	if(!m_TextureSheet.loadFromFile("graphics/" + textureFile))
@@ -38,20 +34,11 @@ TileMap::TileMap(float gridSizeF, unsigned width, unsigned height, std::string t
 
 void TileMap::draw(sf::RenderTarget& window, sf::Vector2u playerPosGrid)
 {
-	/*
-	  m_Player = &gos.findFirstObjectWithTag("Player");
-	m_PUC = std::static_pointer_cast<PlayerUpdateComponent>
-		(gos.findFirstObjectWithTag("Player").getComponentByTypeAndSpecificType(
-			"update", "player"));
-	m_PRCC = std::static_pointer_cast<RectColliderComponent>(gos.findFirstObjectWithTag("Player").getComponentByTypeAndSpecificType("collider", "rect"));
-	m_PTC = m_Player->getTransformComponent();
-	 */
-	
 	//getting render bounds
-	x_start = playerPosGrid.x - 8;
-	x_end = playerPosGrid.x + 9;
-	y_start = playerPosGrid.y - 8;
-	y_end = playerPosGrid.y + 9;
+	x_start = playerPosGrid.x - 19;
+	x_end = playerPosGrid.x + 20;
+	y_start = playerPosGrid.y - 19;
+	y_end = playerPosGrid.y + 20;
 	layer = 0;
 	if (x_start < 0)
 	{
@@ -74,43 +61,24 @@ void TileMap::draw(sf::RenderTarget& window, sf::Vector2u playerPosGrid)
 	{
 		for (int y = y_start; y < y_end; y++)
 		{
-			for (size_t k = 0; k < m_Map[x][y][layer].size(); k++)
+			for (size_t k = 0; k < m_Map[x][y].size(); k++)
 			{
-				m_Map[x][y][layer][k]->draw(window);
-				if (m_Map[x][y][layer][k]->getCollisionStatus())
+				m_Map[x][y][k]->draw(window);
+				if (m_Map[x][y][k]->getCollisionStatus())
 				{
-					collisionBox.setPosition(m_Map[x][y][layer][k]->getTilePosition());
+					collisionBox.setPosition(m_Map[x][y][k]->getTilePosition());
 					window.draw(collisionBox);
 				}
 			}
 		}
 	}
-	/*for (auto& x : m_Map)
-	{
-		for (auto& y : x)
-		{
-			for (auto& tile : y)
-			{
-				if (tile != nullptr)
-				{
-					tile->draw(window);
-					if (tile->getCollisionStatus())
-					{
-						collisionBox.setPosition(tile->getTilePosition());
-						window.draw(collisionBox);
-					}
-				}
-			}
-		}
-	}
-	*/
 }
 
 void TileMap::addTile(unsigned x, unsigned y, unsigned layer, sf::IntRect selector, bool colision, int type)
 {
 	if(x < m_MapSize.x && y < m_MapSize.y && layer < m_NumOfLayers)
 	{
-		m_Map[x][y][layer].push_back(std::make_shared<Tile>(x * WorldState::TILE_SIZE, y * WorldState::TILE_SIZE, WorldState::TILE_SIZE, m_TextureSheet, selector, colision, type));
+		m_Map[x][y].push_back(std::make_shared<Tile>(x * WorldState::TILE_SIZE, y * WorldState::TILE_SIZE, WorldState::TILE_SIZE, m_TextureSheet, selector, colision, type));
 	}
 }
 
@@ -118,10 +86,10 @@ void TileMap::removeTile(unsigned x, unsigned y, unsigned layer)
 {
 	if (x < m_MapSize.x && y < m_MapSize.y && layer < m_NumOfLayers)
 	{
-		if (!m_Map[x][y][layer].empty())
+		if (!m_Map[x][y].empty())
 		{
-			m_Map[x][y][layer][m_Map[x][y][layer].size() - 1] = nullptr;
-			m_Map[x][y][layer].pop_back();
+			m_Map[x][y][m_Map[x][y].size() - 1] = nullptr;
+			m_Map[x][y].pop_back();
 		}
 	}
 }
@@ -145,15 +113,11 @@ void TileMap::saveMap(std::string file_name)
 		{
 			for (int y = 0; y < m_MapSize.y; ++y)
 			{
-				for (int z = 0; z < m_NumOfLayers; ++z)
+				for (int z = 0; z < m_Map[x][y].size(); ++z)
 				{
-					if(!m_Map[x][y][z].empty())
+					if(!m_Map[x][y].empty())
 					{
-						for (int layer = 0; layer < m_Map[x][y][z].size(); ++layer)
-						{
-							outputFile << x << " " << y << " " << z << " " << m_Map[x][y][z][layer]->getTileAsString() << " ";
-						}
-
+						outputFile << x << " " << y << " " << z << " " << m_Map[x][y][z]->getTileAsString() << " ";
 					}
 				}
 			}
@@ -190,16 +154,12 @@ void TileMap::loadMap(std::string file_name)
 		m_MapSize.y = size.y;
 		m_NumOfLayers = layers;
 		m_TextureFile = textureFile;
-		m_Map.resize(m_MapSize.x, std::vector<std::vector<std::vector<std::shared_ptr<Tile>>>>());
+		m_Map.resize(m_MapSize.x, std::vector<std::vector<std::shared_ptr<Tile>>>());
 		for (int x = 0; x < m_MapSize.x; ++x)
 		{
 			for (int y = 0; y < m_MapSize.y; ++y)
 			{
-				m_Map[x].resize(m_MapSize.y, std::vector<std::vector<std::shared_ptr<Tile>>>());
-				for (int z = 0; z < m_NumOfLayers; ++z)
-				{
-					m_Map[x][y].resize(m_NumOfLayers, std::vector<std::shared_ptr<Tile>>());
-				}
+				m_Map[x].resize(m_MapSize.y, std::vector<std::shared_ptr<Tile>>());
 			}
 		}
 		if (!m_TextureSheet.loadFromFile("graphics/" + m_TextureFile))
@@ -208,7 +168,7 @@ void TileMap::loadMap(std::string file_name)
 		}
 		while(inputFile >> x >> y >> z >> textureRectX >> textureRecty >> collision >> type)
 		{
-			m_Map[x][y][z].push_back(std::make_shared<Tile>(x * m_GridSizeF, y * m_GridSizeF, m_GridSizeF, m_TextureSheet, sf::IntRect(textureRectX, textureRecty, m_GridSize, m_GridSize), collision, type));
+			m_Map[x][y].push_back(std::make_shared<Tile>(x * m_GridSizeF, y * m_GridSizeF, m_GridSizeF, m_TextureSheet, sf::IntRect(textureRectX, textureRecty, m_GridSize, m_GridSize), collision, type));
 		}
 	}
 	else
@@ -223,7 +183,7 @@ sf::Vector2u TileMap::getMapSize()
 	return m_MapSize;
 }
 
-std::vector<std::vector<std::vector<std::vector<std::shared_ptr<Tile>>>>> TileMap::getMap()
+std::vector<std::vector<std::vector<std::shared_ptr<Tile>>>>& TileMap::getMap()
 {
 	return m_Map;
 }

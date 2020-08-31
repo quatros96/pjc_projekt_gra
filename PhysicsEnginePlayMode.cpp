@@ -146,17 +146,15 @@ void PhysicsEnginePlayMode::handlePlayerWorldCollisions(std::vector<GameObject>&
     {
         for (int y = y_start; y < y_end; ++y)
         {
-	        for (int k = 0; k < map->getMap()[x][y][layer].size(); ++k)
+	        for (int k = 0; k < map->getMap()[x][y].size(); ++k)
 	        {
-                if (map->getMap()[x][y][layer][k]->getCollisionStatus())
+                if (map->getMap()[x][y][k]->getCollisionStatus())
                 {
                     sf::FloatRect playerBounds = m_PRCC->getColliderRectF().getGlobalBounds();
-                    
-                    if (map->getMap()[x][y][layer][k]->intersects(playerBounds))
+                    if (map->getMap()[x][y][k]->intersects(playerBounds))
                     {
-                        sf::FloatRect obstacleBounds = map->getMap()[x][y][layer][k]->getBounds();
-                        std::cout << "collision" << std::endl;
-                        //Bottom collision
+                        sf::FloatRect obstacleBounds = map->getMap()[x][y][k]->getBounds();
+                        //Bottom 
                         if (playerBounds.top < obstacleBounds.top
                             && playerBounds.top + playerBounds.height < obstacleBounds.top + obstacleBounds.height
                             && playerBounds.left < obstacleBounds.left + obstacleBounds.width
@@ -166,7 +164,7 @@ void PhysicsEnginePlayMode::handlePlayerWorldCollisions(std::vector<GameObject>&
                             m_PTC->setLocation(sf::Vector2f(playerBounds.left - m_PRCC->getOffsets().x, obstacleBounds.top - playerBounds.height));
                         }
 
-                        //Top collision
+                        //Top 
                         else if (playerBounds.top > obstacleBounds.top
                             && playerBounds.top + playerBounds.height > obstacleBounds.top + obstacleBounds.height
                             && playerBounds.left < obstacleBounds.left + obstacleBounds.width
@@ -176,7 +174,7 @@ void PhysicsEnginePlayMode::handlePlayerWorldCollisions(std::vector<GameObject>&
                             m_PTC->setLocation(sf::Vector2f(playerBounds.left - m_PRCC->getOffsets().x, obstacleBounds.top + obstacleBounds.height));
                         }
 
-                        //Right collision
+                        //Right
                         if (playerBounds.left < obstacleBounds.left
                             && playerBounds.left + playerBounds.width < obstacleBounds.left + obstacleBounds.width
                             && playerBounds.top < obstacleBounds.top + obstacleBounds.height
@@ -186,7 +184,7 @@ void PhysicsEnginePlayMode::handlePlayerWorldCollisions(std::vector<GameObject>&
                             m_PTC->setLocation(sf::Vector2f(obstacleBounds.left - playerBounds.width - m_PRCC->getOffsets().x, playerBounds.top));
                         }
 
-                        //Left collision
+                        //Left
                         else if (playerBounds.left > obstacleBounds.left
                             && playerBounds.left + playerBounds.width > obstacleBounds.left + obstacleBounds.width
                             && playerBounds.top < obstacleBounds.top + obstacleBounds.height
