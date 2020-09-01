@@ -72,7 +72,7 @@ void GameScreen::initalise()
     {
         WorldState::NUM_INVADERS_AT_START = WorldState::NUM_INVADERS;
         WorldState::WAVE_NUMBER = 1;
-        WorldState::LIVES = 3;
+        WorldState::LIVES = 100;
         WorldState::SCORE = 0;
     }
 }

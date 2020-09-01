@@ -6,6 +6,7 @@
 
 void InvaderUpdateComponent::update(float fps)
 {
+	m_AttackTimer += 10.f * fps;
 	if(abs(m_PlayerRCC->getPosition().x - m_RCC->getPosition().x) < 100 && abs(m_PlayerRCC->getPosition().y - m_RCC->getPosition().y) < 100)
 	{
 		chasePlayer(fps);
@@ -28,6 +29,11 @@ void InvaderUpdateComponent::update(float fps)
 			m_TC->moveRight(fps);
 			m_AGC->play("RIGHT", fps);
 		}
+	}
+	if(m_AttackTimer > 10)
+	{
+		isAbleToAttack = true;
+		m_AttackTimer = 0;
 	}
 	m_RCC->setOrMoveCollider(m_TC->getLocation().x, m_TC->getLocation().y,
 		m_TC->getSize().x, m_TC->getSize().y);
@@ -59,6 +65,16 @@ void InvaderUpdateComponent::chasePlayer(float& fps)
 		m_TC->moveDown(fps);
 		m_AGC->play("DOWN", fps);
 	}
+}
+
+void InvaderUpdateComponent::Attack()
+{
+	isAbleToAttack = false;
+}
+
+bool InvaderUpdateComponent::canAttack()
+{
+	return isAbleToAttack;
 }
 
 void InvaderUpdateComponent::initializeBulletSpawner(BulletSpawner *bulletSpawner, int randSeed)

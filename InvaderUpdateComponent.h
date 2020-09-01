@@ -26,11 +26,15 @@ class InvaderUpdateComponent : public UpdateComponent
     float m_SpeedModifier{0.05};
     int m_RandSpeed;
     float m_Timer = 0;
+    float m_AttackTimer = 0;
     bool goLeft = true;
+    bool isAbleToAttack = true;
 public:
     void initializeBulletSpawner(BulletSpawner *bulletSpawner, int randSeed);
     void update(float fps) override;
     void chasePlayer(float& fps);
+    void Attack();
+    bool canAttack();
     std::string getSpecificType()
     {
 

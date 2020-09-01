@@ -17,12 +17,14 @@ SoundEngine::SoundEngine()
     m_InvaderExplodeBuffer.loadFromFile("sound/invaderexplode.ogg");
     m_ClickBuffer.loadFromFile("sound/click.ogg");
     m_FireballExplodeBuffer.loadFromFile("sound/fireball-impact.wav");
+    m_HitBuffer.loadFromFile("sound/hit.wav");
     //link sounds with buffers
     m_ShootSound.setBuffer(m_ShootBuffer);
     m_PlayerExplodeSound.setBuffer(m_PlayerExplodeBuffer);
     m_InvaderExplodeSound.setBuffer(m_InvaderExplodeBuffer);
     m_ClickSound.setBuffer(m_ClickBuffer);
     m_FireballExplode.setBuffer(m_FireballExplodeBuffer);
+    m_HitSound.setBuffer(m_HitBuffer);
     m_ShootSound.setPitch(1.5);
 }
 void SoundEngine::playShoot()
@@ -46,5 +48,10 @@ void SoundEngine::playClick()
 void SoundEngine::playFireballExplode()
 {
     m_s_Instance->m_FireballExplode.play();
+}
+
+void SoundEngine::playHit()
+{
+    m_s_Instance->m_HitSound.play();
 }
 
