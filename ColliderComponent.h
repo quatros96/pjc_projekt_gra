@@ -1,9 +1,4 @@
-//
-// Created by quatr on 23.04.2020.
-//
-
-#ifndef GRA_SPACE_INVADERS_COLLIDERCOMPONENT_H
-#define GRA_SPACE_INVADERS_COLLIDERCOMPONENT_H
+#pragma once
 
 #include "Component.h"
 #include <iostream>
@@ -35,5 +30,3 @@ public:
 
     }
 };
-
-#endif //GRA_SPACE_INVADERS_COLLIDERCOMPONENT_H

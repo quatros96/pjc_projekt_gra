@@ -48,6 +48,16 @@ sf::Vector2f RectColliderComponent::getOffsets()
     return sf::Vector2f(m_WidthOffset, m_HeightOffset);
 }
 
+void RectColliderComponent::setColliderRotation(int angle)
+{
+    m_Collider.setRotation(angle);
+}
+
+int RectColliderComponent::getColliderRotation()
+{
+    return m_Collider.getRotation();
+}
+
 sf::Vector2u RectColliderComponent::getWorldGridPosition()
 {
     return sf::Vector2u(m_Collider.getPosition().x / WorldState::TILE_SIZE, m_Collider.getPosition().y / WorldState::TILE_SIZE);

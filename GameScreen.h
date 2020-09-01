@@ -51,7 +51,7 @@ public:
         if(forPlayer)
         {
             sf::Time elapsedTime = m_BulletClock.getElapsedTime();
-            if(elapsedTime.asMilliseconds() > 100)
+            if(elapsedTime.asMilliseconds() > 400)
             {
                 m_PlayerBulletSpawnLocation.x = spawnLocation.x;
                 m_PlayerBulletSpawnLocation.y = spawnLocation.y;

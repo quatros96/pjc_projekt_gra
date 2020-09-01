@@ -1,6 +1,3 @@
-//
-// Created by quatr on 22.04.2020.
-//
 
 #include "GameScreen.h"
 #include "GameUIPanel.h"
@@ -151,6 +148,7 @@ void GameScreen::draw(sf::RenderWindow &window)
     {
         it->draw(window);
     }
+    m_map->lateRenderTiles(window);
     Screen::draw(window);
 }
 

@@ -1,9 +1,4 @@
-//
-// Created by quatr on 23.04.2020.
-//
-
-#ifndef GRA_SPACE_INVADERS_PLAYERUPDATECOMPONENT_H
-#define GRA_SPACE_INVADERS_PLAYERUPDATECOMPONENT_H
+#pragma once
 
 #include <memory>
 #include "UpdateComponent.h"
@@ -69,5 +64,3 @@ public:
     }
     void update(float fps) override;
 };
-
-#endif //GRA_SPACE_INVADERS_PLAYERUPDATECOMPONENT_H

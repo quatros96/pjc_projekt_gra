@@ -1,9 +1,4 @@
-//
-// Created by quatr on 23.04.2020.
-//
-
-#ifndef GRA_SPACE_INVADERS_GAMEOBJECT_H
-#define GRA_SPACE_INVADERS_GAMEOBJECT_H
+#pragma once
 
 #include <SFML/Graphics.hpp>
 #include <vector>
@@ -50,5 +45,3 @@ public:
     std::shared_ptr<UpdateComponent> getUpdateComponent();
     std::shared_ptr<RectColliderComponent> getColliderComponent();
 };
-
-#endif //GRA_SPACE_INVADERS_GAMEOBJECT_H

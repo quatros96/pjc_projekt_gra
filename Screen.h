@@ -1,9 +1,4 @@
-//
-// Created by quatr on 22.04.2020.
-//
-
-#ifndef GRA_SPACE_INVADERS_SCREEN_H
-#define GRA_SPACE_INVADERS_SCREEN_H
+#pragma once
 
 #include <SFML/Graphics.hpp>
 #include <vector>
@@ -29,5 +24,3 @@ public:
     void virtual handleInput(sf::RenderWindow& window);
     sf::View m_View;
 };
-
-#endif //GRA_SPACE_INVADERS_SCREEN_H

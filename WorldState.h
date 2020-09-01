@@ -1,9 +1,4 @@
-//
-// Created by quatr on 22.04.2020.
-//
-
-#ifndef GRA_SPACE_INVADERS_WORLDSTATE_H
-#define GRA_SPACE_INVADERS_WORLDSTATE_H
+#pragma once
 
 class WorldState
 {
@@ -18,5 +13,3 @@ public:
     static int WAVE_NUMBER;
 
 };
-
-#endif //GRA_SPACE_INVADERS_WORLDSTATE_H

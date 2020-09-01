@@ -1,9 +1,4 @@
-//
-// Created by quatr on 21.04.2020.
-//
-
-#ifndef GRA_SPACE_INVADERS_SCREENMANAGER_H
-#define GRA_SPACE_INVADERS_SCREENMANAGER_H
+#pragma once
 
 #include <SFML/Graphics.hpp>
 #include <map>
@@ -49,5 +44,3 @@ public:
     }
 
 };
-
-#endif //GRA_SPACE_INVADERS_SCREENMANAGER_H

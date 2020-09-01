@@ -1,6 +1,3 @@
-//
-// Created by quatr on 23.04.2020.
-//
 
 #include "PlayerUpdateComponent.h"
 #include "WorldState.h"
@@ -16,6 +13,7 @@ void PlayerUpdateComponent::update(float fps)
     if(m_SpaceClicked)
     {
 		m_AGC->play("ATTACK", fps, true);
+    	
     }
     if(m_IsHoldingLeft)
     {

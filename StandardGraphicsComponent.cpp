@@ -1,6 +1,3 @@
-//
-// Created by quatr on 23.04.2020.
-//
 
 #include "StandardGraphicsComponent.h"
 #include "BitmapStore.h"
@@ -22,4 +19,9 @@ void StandardGraphicsComponent::draw(sf::RenderWindow &window, std::shared_ptr<T
 void StandardGraphicsComponent::setRotation(float angle)
 {
     m_Sprite.setRotation(angle);
+}
+
+int StandardGraphicsComponent::getRotation()
+{
+    return m_Sprite.getRotation();
 }

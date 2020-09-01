@@ -1,9 +1,4 @@
-//
-// Created by quatr on 23.04.2020.
-//
-
-#ifndef GRA_SPACE_INVADERS_GRAPHICSCOMPONENT_H
-#define GRA_SPACE_INVADERS_GRAPHICSCOMPONENT_H
+#pragma once
 
 #include "Component.h"
 #include "TransformComponent.h"
@@ -42,5 +37,3 @@ public:
 
     }
 };
-
-#endif //GRA_SPACE_INVADERS_GRAPHICSCOMPONENT_H

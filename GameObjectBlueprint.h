@@ -1,9 +1,4 @@
-//
-// Created by quatr on 27.04.2020.
-//
-
-#ifndef GRA_SPACE_INVADERS_GAMEOBJECTBLUEPRINT_H
-#define GRA_SPACE_INVADERS_GAMEOBJECTBLUEPRINT_H
+#pragma once
 
 #include <vector>
 #include <string>
@@ -50,5 +45,3 @@ public:
     bool getEncompassingRectCollider();
     void setEncompassingRectCollider(std::string label);
 };
-
-#endif //GRA_SPACE_INVADERS_GAMEOBJECTBLUEPRINT_H

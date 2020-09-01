@@ -1,10 +1,4 @@
-//
-// Created by quatr on 27.04.2020.
-//
-
-#ifndef GRA_SPACE_INVADERS_OBJECTTAGS_H
-#define GRA_SPACE_INVADERS_OBJECTTAGS_H
-
+#pragma once
 #include <string>
 
 class ObjectTags
@@ -35,5 +29,3 @@ public:
     static const std::string HEIGHT_OFFSET;
     static const std::string HEIGHT_OFFSET_END;
 };
-
-#endif //GRA_SPACE_INVADERS_OBJECTTAGS_H

@@ -1,9 +1,4 @@
-//
-// Created by quatr on 23.04.2020.
-//
-
-#ifndef GRA_SPACE_INVADERS_BULLETUPDATECOMPONENT_H
-#define GRA_SPACE_INVADERS_BULLETUPDATECOMPONENT_H
+#pragma once
 
 #include <memory>
 #include "UpdateComponent.h"
@@ -22,6 +17,7 @@ private:
     std::shared_ptr<RectColliderComponent> m_RCC;
     std::shared_ptr<PlayerUpdateComponent> m_PlayerUpdateComponent;
     std::shared_ptr<StandardGraphicsComponent> m_BulletGraphicsComponent;
+    std::shared_ptr<RectColliderComponent> m_PRCC;
     float m_Speed {200.0f};
 
     int m_AlienBulletSpeedModifier;
@@ -58,8 +54,10 @@ public:
 
         m_BulletGraphicsComponent = std::static_pointer_cast<StandardGraphicsComponent>
                 (self->getComponentByTypeAndSpecificType("graphics", "standard"));
+    	m_PRCC = std::static_pointer_cast<RectColliderComponent>(
+            gos->findFirstObjectWithTag("Player")
+            .getComponentByTypeAndSpecificType(
+                "collider", "rect"));
     }
     void update(float fps) override;
 };
-
-#endif //GRA_SPACE_INVADERS_BULLETUPDATECOMPONENT_H

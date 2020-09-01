@@ -1,9 +1,4 @@
-//
-// Created by quatr on 23.04.2020.
-//
-
-#ifndef GRA_SPACE_INVADERS_STANDARDGRAPHICSCOMPONENT_H
-#define GRA_SPACE_INVADERS_STANDARDGRAPHICSCOMPONENT_H
+#pragma once
 
 #include "Component.h"
 #include "GraphicsComponent.h"
@@ -28,6 +23,6 @@ public:
     void draw(sf::RenderWindow& window, std::shared_ptr<TransformComponent> t) override;
     void initializeGraphics(std::string bitmapName, sf::Vector2f objectSize) override;
     void setRotation(float angle);
+    int getRotation();
 };
 
-#endif //GRA_SPACE_INVADERS_STANDARDGRAPHICSCOMPONENT_H

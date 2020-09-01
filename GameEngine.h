@@ -1,9 +1,4 @@
-//
-// Created by quatr on 21.04.2020.
-//
-
-#ifndef GRA_SPACE_INVADERS_GAMEENGINE_H
-#define GRA_SPACE_INVADERS_GAMEENGINE_H
+#pragma once
 
 #include <SFML/Graphics.hpp>
 #include "ScreenManager.h"
@@ -31,5 +26,3 @@ public:
     GameEngine();
     void run();
 };
-
-#endif //GRA_SPACE_INVADERS_GAMEENGINE_H
