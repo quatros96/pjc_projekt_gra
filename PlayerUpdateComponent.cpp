@@ -13,6 +13,7 @@ void PlayerUpdateComponent::update(float fps)
     if(m_SpaceClicked)
     {
 		m_AGC->play("ATTACK", fps, true);
+    	
     }
     if(m_IsHoldingLeft)
     {

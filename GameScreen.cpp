@@ -148,6 +148,7 @@ void GameScreen::draw(sf::RenderWindow &window)
     {
         it->draw(window);
     }
+    m_map->lateRenderTiles(window);
     Screen::draw(window);
 }
 

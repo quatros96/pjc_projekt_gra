@@ -10,7 +10,7 @@
 void PhysicsEnginePlayMode::detectInvaderCollisions(std::vector<GameObject> &objects,
         const std::vector<int> &bulletPositions)
 {
-    sf::Vector2f offScreen(-1, -1);
+    sf::Vector2f offScreen(-100, -100);
     auto invaderIt = objects.begin();
     auto invaderEnd = objects.end();
     for(invaderIt; invaderIt != invaderEnd; invaderIt++)
@@ -43,7 +43,7 @@ void PhysicsEnginePlayMode::detectInvaderCollisions(std::vector<GameObject> &obj
 void PhysicsEnginePlayMode::detectPlayerCollisionsAndInvaderDirection(std::vector<GameObject>
         &objects, const std::vector<int> &bulletPositions)
 {
-    sf::Vector2f offScreen(-1, -1);
+    sf::Vector2f offScreen(-100, -100);
     sf::RectangleShape playerCollider = m_Player->getEncompassingRectCollider();
     std::shared_ptr<TransformComponent> playerTransform = m_Player->getTransformComponent();
     sf::Vector2f playerLocation = playerTransform->getLocation();
@@ -72,42 +72,6 @@ void PhysicsEnginePlayMode::detectPlayerCollisionsAndInvaderDirection(std::vecto
                     (*it3).getTransformComponent()->getLocation() = offScreen;
                     WorldState::SCORE++;
                     (*it3).setInactive();
-                }
-            }
-            std::shared_ptr<TransformComponent> currentTransform =
-                    (*it3).getTransformComponent();
-            sf::Vector2f currentLocation = currentTransform->getLocation();
-            std::string currentTag = (*it3).getTag();
-            sf::Vector2f  currentSize = currentTransform->getSize();
-            //handle direction and descent
-            if(currentTag == "invader")
-            {
-                if(!m_NeedToDropDownAndReverse && !m_InvaderHitWallThisFrame)
-                {
-                    if(currentLocation.x >= WorldState::WORLD_WIDTH - currentSize.x)
-                    {
-                        if(std::static_pointer_cast<InvaderUpdateComponent>
-                                ((*it3).getUpdateComponent())->isMovingRight())
-                        {
-                            m_InvaderHitWallThisFrame = true;
-                        }
-                    }
-                    else if(currentLocation.x < 0)
-                    {
-                        if(!std::static_pointer_cast<InvaderUpdateComponent>
-                                ((*it3).getUpdateComponent())->isMovingRight())
-                        {
-                            m_InvaderHitWallThisFrame = true;
-                        }
-                    }
-                }
-                else if(m_NeedToDropDownAndReverse && !m_InvaderHitWallPreviousFrame)
-                {
-                    if((*it3).hasUpdateComponent())
-                    {
-                        std::static_pointer_cast<InvaderUpdateComponent>
-                                ((*it3).getUpdateComponent())->dropDownAndReverse();
-                    }
                 }
             }
         }
@@ -217,6 +181,47 @@ void PhysicsEnginePlayMode::handlePlayerWorldEdgeCollisions()
     }
 }
 
+void PhysicsEnginePlayMode::handleBulletWorldEdgeCollisions(std::vector<GameObject>& objects,
+    const std::vector<int>& bulletPositions)
+{
+    auto it3 = objects.begin();
+    auto end3 = objects.end();
+    for (it3; it3 != end3; it3++)
+    {
+        if ((*it3).isActive() && (*it3).hasCollider() && (*it3).getTag() == "bullet")
+        {
+            //get a reference to all parts we might need
+            sf::RectangleShape currentCollider = (*it3).getEncompassingRectCollider();
+            auto bulletUpdateComp = std::dynamic_pointer_cast<BulletUpdateComponent>((*it3).getComponentByTypeAndSpecificType("update", "bullet"));
+            //detect collisions with player
+            if (currentCollider.getGlobalBounds().left + currentCollider.getGlobalBounds().width > WorldState::WORLD_WIDTH)
+            {
+                bulletUpdateComp->deSpawn();
+                std::cout << "Bullet Despawned!" << std::endl;
+                SoundEngine::playFireballExplode();
+            }
+            else if (currentCollider.getGlobalBounds().left < 0 && currentCollider.getGlobalBounds().left > -10)
+            {
+                bulletUpdateComp->deSpawn();
+                std::cout << "Bullet Despawned!" << std::endl;
+                SoundEngine::playFireballExplode();
+            }
+            else if(currentCollider.getGlobalBounds().top < 0 && currentCollider.getGlobalBounds().top > -10)
+            {
+                bulletUpdateComp->deSpawn();
+                std::cout << "Bullet Despawned!" << std::endl;
+                SoundEngine::playFireballExplode();
+            }
+            else if(currentCollider.getGlobalBounds().top > WorldState::WORLD_HEIGHT)
+            {
+                bulletUpdateComp->deSpawn();
+                std::cout << "Bullet Despawned!" << std::endl;
+                SoundEngine::playFireballExplode();
+            }
+        }
+    }
+}
+
 void PhysicsEnginePlayMode::initialize(GameObjectSharer &gos)
 {
     m_Player = &gos.findFirstObjectWithTag("Player");
@@ -239,4 +244,5 @@ void PhysicsEnginePlayMode::detectCollisions(std::vector<GameObject> &objects,
     //detectPlayerCollisionsAndInvaderDirection(objects, bulletPositions);
     handlePlayerWorldCollisions(objects, map);
     handlePlayerWorldEdgeCollisions();
+    handleBulletWorldEdgeCollisions(objects, bulletPositions);
 }

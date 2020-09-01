@@ -20,3 +20,8 @@ void StandardGraphicsComponent::setRotation(float angle)
 {
     m_Sprite.setRotation(angle);
 }
+
+int StandardGraphicsComponent::getRotation()
+{
+    return m_Sprite.getRotation();
+}

@@ -18,6 +18,12 @@ void GameInputHandler::initialize()
     m_PTC = getPointerToScreenManagerRemoteControl()->
             shareGameObjectSharer().findFirstObjectWithTag(
             "Player").getTransformComponent();
+	m_PRCC = std::static_pointer_cast<RectColliderComponent>
+        (getPointerToScreenManagerRemoteControl()
+            ->shareGameObjectSharer()
+            .findFirstObjectWithTag("Player")
+            .getComponentByTypeAndSpecificType(
+                "collider", "rect"));
 }
 void GameInputHandler::handleGamepad()
 {
@@ -101,11 +107,11 @@ void GameInputHandler::handleKeyReleased(sf::Event &event, sf::RenderWindow &win
     else if(event.key.code ==sf::Keyboard::Space)
     {
         //shoot a bullet
-        //SoundEngine::playShoot();
-        //sf::Vector2f spawnLocation;
-        //spawnLocation.x = m_PTC->getLocation().x + m_PTC->getSize().x / 2;
-        //spawnLocation.y = m_PTC->getLocation().y;
-        //static_cast<GameScreen*>(getmParentScreen())->spawnBullet(spawnLocation, true);
-        m_PUC->attack();
+        SoundEngine::playShoot();
+        sf::Vector2f spawnLocation;
+        spawnLocation.x = m_PRCC->getPosition().x;
+        spawnLocation.y = m_PRCC->getPosition().y;
+        dynamic_cast<GameScreen*>(getmParentScreen())->spawnBullet(spawnLocation, true);
+        //m_PUC->attack();
     }
 }

@@ -32,7 +32,7 @@ TileMap::TileMap(float gridSizeF, unsigned width, unsigned height, std::string t
 	collisionBox.setOutlineThickness(-1.f);
 }
 
-void TileMap::draw(sf::RenderTarget& window, sf::Vector2u playerPosGrid)
+void TileMap::draw(sf::RenderTarget& window, sf::Vector2u playerPosGrid, bool showColliders)
 {
 	//getting render bounds
 	x_start = playerPosGrid.x - 19;
@@ -63,8 +63,15 @@ void TileMap::draw(sf::RenderTarget& window, sf::Vector2u playerPosGrid)
 		{
 			for (size_t k = 0; k < m_Map[x][y].size(); k++)
 			{
-				m_Map[x][y][k]->draw(window);
-				if (m_Map[x][y][k]->getCollisionStatus())
+				if(m_Map[x][y][k]->getType() == ONTOP)
+				{
+					lateRenderStack.push(m_Map[x][y][k]);
+				}
+				else
+				{
+					m_Map[x][y][k]->draw(window);
+				}
+				if (m_Map[x][y][k]->getCollisionStatus() && showColliders)
 				{
 					collisionBox.setPosition(m_Map[x][y][k]->getTilePosition());
 					window.draw(collisionBox);
@@ -186,4 +193,13 @@ sf::Vector2u TileMap::getMapSize()
 std::vector<std::vector<std::vector<std::shared_ptr<Tile>>>>& TileMap::getMap()
 {
 	return m_Map;
+}
+
+void TileMap::lateRenderTiles(sf::RenderTarget& window)
+{
+	while (!lateRenderStack.empty())
+	{
+		lateRenderStack.top()->draw(window);
+		lateRenderStack.pop();
+	}
 }

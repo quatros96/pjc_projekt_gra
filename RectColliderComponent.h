@@ -24,6 +24,8 @@ public:
     sf::Vector2f getPosition();
     sf::Vector2f getSize();
     sf::Vector2f getOffsets();
+    void setColliderRotation(int angle);
+    int getColliderRotation();
     std::string getSpecificType() override
     {
         return m_SpecificType;

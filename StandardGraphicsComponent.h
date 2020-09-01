@@ -23,5 +23,6 @@ public:
     void draw(sf::RenderWindow& window, std::shared_ptr<TransformComponent> t) override;
     void initializeGraphics(std::string bitmapName, sf::Vector2f objectSize) override;
     void setRotation(float angle);
+    int getRotation();
 };
 

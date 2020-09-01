@@ -57,9 +57,6 @@
     <ClCompile Include="ObjectTags.cpp">
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
-    <ClCompile Include="PhysicsEnginePlayMode.cpp">
-      <Filter>Pliki źródłowe</Filter>
-    </ClCompile>
     <ClCompile Include="PlayModeObjectLoader.cpp">
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
@@ -180,12 +177,12 @@
     <ClCompile Include="TexturePicker.cpp">
       <Filter>User Interface</Filter>
     </ClCompile>
+    <ClCompile Include="PhysicsEnginePlayMode.cpp">
+      <Filter>Game Engine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PlayModeObjectLoader.h">
-      <Filter>Pliki nagłówkowe</Filter>
-    </ClInclude>
-    <ClInclude Include="PhysicsEnginePlayMode.h">
       <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
     <ClInclude Include="ObjectTags.h">
@@ -328,6 +325,9 @@
     </ClInclude>
     <ClInclude Include="TexturePicker.h">
       <Filter>User Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsEnginePlayMode.h">
+      <Filter>Game Engine</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

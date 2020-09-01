@@ -1,4 +1,5 @@
 #pragma once
+#include <stack>
 #include <SFML/Graphics.hpp>
 
 #include "PlayerUpdateComponent.h"
@@ -20,10 +21,11 @@ private:
 	std::shared_ptr<TransformComponent> m_PTC;
 	GameObject* m_Player;
 	int x_start, x_end, y_start, y_end, layer;
+	std::stack<std::shared_ptr<Tile>> lateRenderStack;
 public:
 	TileMap(float gridSizeF, unsigned width, unsigned height, std::string textureFile);
 	void update();
-	void draw(sf::RenderTarget& window, sf::Vector2u playerPosGrid);
+	void draw(sf::RenderTarget& window, sf::Vector2u playerPosGrid, bool showColliders = false);
 	void addTile(unsigned x, unsigned y, unsigned layer, sf::IntRect selector, bool colision, int type);
 	void removeTile(unsigned x, unsigned y, unsigned layer);
 	sf::Texture& getTileSheet();
@@ -31,4 +33,5 @@ public:
 	void loadMap(std::string file_name);
 	sf::Vector2u getMapSize();
 	std::vector<std::vector<std::vector<std::shared_ptr<Tile>>>>& getMap();
+	void lateRenderTiles(sf::RenderTarget& window);
 };

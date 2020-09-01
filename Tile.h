@@ -1,7 +1,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 
-enum TileTypes {DEFAULT = 0, DAMAGING};
+enum TileTypes {DEFAULT = 0, DAMAGING, ONTOP};
 
 class Tile
 {
@@ -21,5 +21,6 @@ public:
 	const bool getCollisionStatus();
 	const bool intersects(sf::FloatRect objectRect);
 	sf::FloatRect getBounds();
+	const int& getType();
 };
 

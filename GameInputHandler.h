@@ -9,6 +9,7 @@ class GameInputHandler : public InputHandler
 private:
     std::shared_ptr<PlayerUpdateComponent> m_PUC;
     std::shared_ptr<TransformComponent> m_PTC;
+    std::shared_ptr<RectColliderComponent> m_PRCC;
     bool mBButtonPressed {false};
 public:
     void initialize();

@@ -8,36 +8,39 @@ void BulletUpdateComponent::spawnForPlayer(sf::Vector2f spawnPosition)
     m_MovingUp = true;
     m_BelongsToPlayer = true;
     m_IsSpawned = true;
-
     if(m_PlayerUpdateComponent->getLastDirection() == "up")
     {
-        m_TC->getLocation().x = spawnPosition.x;
+        m_BulletGraphicsComponent->setRotation(90);
+        m_RCC->setColliderRotation(90);
+        m_TC->getLocation().x = spawnPosition.x + (m_PRCC->getSize().x / 2.f) + (m_TC->getSize().y / 2.f);
         //tweak y location for spawn
-        m_TC->getLocation().y = spawnPosition.y - m_TC->getSize().y;
+        m_TC->getLocation().y = spawnPosition.y - m_TC->getSize().x;
         m_Direction = "up";
     }
     else if(m_PlayerUpdateComponent->getLastDirection() == "down")
     {
-        m_TC->getLocation().x = spawnPosition.x;
+        m_BulletGraphicsComponent->setRotation(-90);
+        m_RCC->setColliderRotation(-90);
+        m_TC->getLocation().x = spawnPosition.x + (m_PRCC->getSize().x / 2.f) - (m_TC->getSize().y / 2.f);
         //tweak y location for spawn
-        m_TC->getLocation().y = spawnPosition.y + 3 * m_TC->getSize().y;
+        m_TC->getLocation().y = spawnPosition.y + m_TC->getSize().x + m_RCC->getSize().y;
         m_Direction = "down";
     }
     else if(m_PlayerUpdateComponent->getLastDirection() == "left")
     {
-        m_TC->getLocation().x = spawnPosition.x;
+        m_TC->getLocation().x = spawnPosition.x - m_TC->getSize().x;
         //tweak y location for spawn
-        m_TC->getLocation().y = spawnPosition.y + 3 * m_TC->getSize().y;
+        m_TC->getLocation().y = spawnPosition.y + (m_PRCC->getSize().y / 2.f) - (m_TC->getSize().y / 2.f);
         m_Direction = "left";
-        m_BulletGraphicsComponent->setRotation(90);
     }
     else if(m_PlayerUpdateComponent->getLastDirection() == "right")
     {
-        m_TC->getLocation().x = spawnPosition.x;
+        m_BulletGraphicsComponent->setRotation(180);
+        m_RCC->setColliderRotation(180);
+        m_TC->getLocation().x = spawnPosition.x + m_PRCC->getSize().x + m_TC->getSize().x;
         //tweak y location for spawn
-        m_TC->getLocation().y = spawnPosition.y + 3 * m_TC->getSize().y;
+        m_TC->getLocation().y = spawnPosition.y + (m_PRCC->getSize().y / 2.f) + (m_TC->getSize().y / 2.f);
         m_Direction = "right";
-        m_BulletGraphicsComponent->setRotation(90);
     }
     //update collider
     m_RCC->setOrMoveCollider(m_TC->getLocation().x, m_TC->getLocation().y,
@@ -58,12 +61,15 @@ void BulletUpdateComponent::spawnForInvader(sf::Vector2f spawnPosition)
 void BulletUpdateComponent::deSpawn()
 {
     m_IsSpawned = false;
-	if(m_Direction == "left" || m_Direction == "right")
+    m_TC->setLocation(sf::Vector2f(-100, 100));
+    m_RCC->setOrMoveCollider(m_TC->getLocation().x, m_TC->getLocation().y,
+        m_TC->getSize().x, m_TC->getSize().y);
+	if(m_BulletGraphicsComponent->getRotation() != 0)
 	{
-        m_BulletGraphicsComponent->setRotation(-90);
+        m_BulletGraphicsComponent->setRotation(0);
+        m_RCC->setColliderRotation(0);
 	}
-    else
-		m_BulletGraphicsComponent->setRotation(0);
+	
 }
 bool BulletUpdateComponent::isMovingUp()
 {
@@ -95,10 +101,6 @@ void BulletUpdateComponent::update(float fps)
         else
         {
             m_TC->getLocation().y += m_Speed / m_AlienBulletSpeedModifier * fps;
-        }
-        if (m_TC->getLocation().y > WorldState::WORLD_HEIGHT || m_TC->getLocation().y < -2)
-        {
-            deSpawn();
         }
         m_RCC->setOrMoveCollider(m_TC->getLocation().x, m_TC->getLocation().y,
                                  m_TC->getSize().x, m_TC->getSize().y);

@@ -17,6 +17,7 @@ private:
     std::shared_ptr<RectColliderComponent> m_RCC;
     std::shared_ptr<PlayerUpdateComponent> m_PlayerUpdateComponent;
     std::shared_ptr<StandardGraphicsComponent> m_BulletGraphicsComponent;
+    std::shared_ptr<RectColliderComponent> m_PRCC;
     float m_Speed {200.0f};
 
     int m_AlienBulletSpeedModifier;
@@ -53,6 +54,10 @@ public:
 
         m_BulletGraphicsComponent = std::static_pointer_cast<StandardGraphicsComponent>
                 (self->getComponentByTypeAndSpecificType("graphics", "standard"));
+    	m_PRCC = std::static_pointer_cast<RectColliderComponent>(
+            gos->findFirstObjectWithTag("Player")
+            .getComponentByTypeAndSpecificType(
+                "collider", "rect"));
     }
     void update(float fps) override;
 };

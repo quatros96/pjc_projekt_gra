@@ -4,7 +4,7 @@
 SelectUIPanel::SelectUIPanel(sf::Vector2i res) :
 
     //new uipanel creation
-    UIPanel(res, res.x / 3, res.y / 3, res.x / 3, res.y / 3,
+    UIPanel(res, res.x / 3, res.y / 3, res.x / 3, res.y / 2,
             50, 255, 255, 255)
 {
     m_ButtonWidth = res.x / 20;
