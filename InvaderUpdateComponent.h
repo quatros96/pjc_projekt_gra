@@ -17,20 +17,14 @@ class InvaderUpdateComponent : public UpdateComponent
     std::shared_ptr<TransformComponent> m_PlayerTC;
     std::shared_ptr<RectColliderComponent> m_PlayerRCC;
     BulletSpawner *m_BulletSpawner;
-    float m_Speed{10.0f};
-    bool m_MovingRight{true};
+    float m_Speed{60.0f};
     float m_TimeSinceLastShot;
     float m_TimeBetweenShots{5.0f};
     float m_AccuracyModifier;
     float m_SpeedModifier{0.05};
     int m_RandSpeed;
 public:
-    void dropDownAndReverse();
-
-    bool isMovingRight();
-
     void initializeBulletSpawner(BulletSpawner *bulletSpawner, int randSeed);
-
     void update(float fps) override;
 
     std::string getSpecificType()

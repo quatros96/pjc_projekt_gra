@@ -1,5 +1,6 @@
 #include "AnimatedGraphicsComponent.h"
 #include "BitmapStore.h"
+#include <sstream>
 
 AnimatedGraphicsComponent::Animation::Animation(sf::Sprite& sprite, sf::Texture& texture, float animationTimer,int start_frame_x, int start_frame_y, int frame_x, int frame_y, int width, int height):
 	m_animationSprite(sprite), m_animationTexture(texture), m_animationTimer(animationTimer), m_width(width), m_height(height)
@@ -66,6 +67,21 @@ void AnimatedGraphicsComponent::Animation::reset()
 {
 	m_timer = 0.f;
 	m_CurrRect = m_StartRect;
+}
+
+void AnimatedGraphicsComponent::addAnimationsFromStrings()
+{
+	auto it = m_AnimationsInStrings->begin();
+	auto end = m_AnimationsInStrings->end();
+	std::string key;
+	float animationTimer;
+	int start_frame_x, start_frame_y, frame_x, frame_y, width, height;
+	for (it; it != end; it++)
+	{
+		std::stringstream ss(*it);
+		ss >> key >> animationTimer >> start_frame_x >> start_frame_y >> frame_x >> frame_y >> width >> height;
+		addAnimation(key, animationTimer, start_frame_x, start_frame_y, frame_x, frame_y, width, height);
+	}
 }
 
 void AnimatedGraphicsComponent::addAnimation(std::string key, float animationTimer, int start_frame_x, int start_frame_y, int frame_x, int frame_y, int width, int height)
@@ -196,15 +212,4 @@ void AnimatedGraphicsComponent::initializeGraphics(std::string bitmapName, sf::V
 	m_Sprite.setTexture(m_textureSheet, true);
 	auto textureSize = m_Sprite.getTexture()->getSize();
 	//m_Sprite.setScale(float(objectSize.x) / Animation::m_width, float(objectSize.y) / textureSize.x);
-	//addAnimation("RUNL", 100.f, 0, 0, 7, 0, 108, 140);
-	//addAnimation("RUNR", 100.f, 0, 1, 7, 1, 108, 140);
-	addAnimation("UP", 100.f, 1, 8, 8, 8, 64, 64);
-	addAnimation("LEFT", 100.f, 1, 9, 8, 9, 64, 64);
-	addAnimation("DOWN", 100.f, 1, 10, 8, 10, 64, 64);
-	addAnimation("RIGHT", 100.f, 1, 11, 8, 11, 64, 64);
-	addAnimation("IDLE_UP", 100.f, 0, 8, 0, 8, 64, 64);
-	addAnimation("IDLE_LEFT", 100.f, 0, 9, 0, 9, 64, 64);
-	addAnimation("IDLE_DOWN", 100.f, 0, 10, 0, 10, 64, 64);
-	addAnimation("IDLE_RIGHT", 100.f, 0, 11, 0, 11, 64, 64);
-	addAnimation("ATTACK", 100.f, 1, 5, 7, 5, 64, 64);
 }

@@ -24,6 +24,7 @@ private:
     int m_NumberRectColliderComponents {};
     int m_FirstRectColliderComponentLocation {-1};
     bool m_HasCollider {false};
+    std::vector<std::string> m_ObjectAnimations;
 public:
     void update(float fps);
     void draw(sf::RenderWindow& window);
@@ -33,6 +34,8 @@ public:
     bool isActive();
     void setTag(std::string tag);
     std::string getTag();
+    void setObjectAnimations(std::vector<std::string> animations);
+    std::shared_ptr<std::vector<std::string>> getObjectAnimations();
     void start(GameObjectSharer* gos);
     std::shared_ptr<Component> getComponentByTypeAndSpecificType(std::string type,
             std::string sepcificType);

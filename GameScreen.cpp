@@ -137,7 +137,7 @@ void GameScreen::draw(sf::RenderWindow &window)
     window.setView(m_View);
     //rendering to the texture
     m_renderTexture.setView(m_View);
-    m_map->draw(m_renderTexture, m_PRCC->getWorldGridPosition());
+    m_map->draw(m_renderTexture, m_PRCC->getWorldGridPosition(), WorldState::DEBUG_MODE);
     m_renderTexture.display();
     m_renderSprite.setTexture(m_renderTexture.getTexture());
     window.draw(m_renderSprite);

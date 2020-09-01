@@ -1,5 +1,6 @@
 #pragma once
 #include "GraphicsComponent.h"
+#include "GameObject.h"
 
 class AnimatedGraphicsComponent : public GraphicsComponent
 {
@@ -19,7 +20,6 @@ private:
 		//size of rect
         int m_width = 108;
         int m_height = 140;
-        
 		//functions
 		Animation(sf::Sprite& sprite, sf::Texture& texture, float animationTimer, int start_x, int start_y, int end_x, int end_y, int width, int height);
         const bool& play(float dt);
@@ -29,13 +29,14 @@ private:
         void reset();
 	};
     std::map<std::string, std::shared_ptr<Animation>> animations;
+    std::shared_ptr<std::vector<std::string>> m_AnimationsInStrings;
     std::shared_ptr<Animation> priorityAnimation = nullptr;
     sf::Texture m_textureSheet;
     sf::Sprite m_Sprite;
     sf::Sprite m_currAnimationSprite;
     std::string m_SpecificType = "animated";
     std::shared_ptr<Animation> lastAnimation = nullptr;
-	
+    void addAnimationsFromStrings();
 public:
     AnimatedGraphicsComponent() = default;
     void addAnimation(std::string key, float animationTimer, int start_frame_x, int start_frame_y, int frame_x, int frame_y, int width, int height);
@@ -49,9 +50,10 @@ public:
     {
         return m_SpecificType;
     }
-    void start(GameObjectSharer* gos, GameObject* self)
+    void start(GameObjectSharer* gos, GameObject* self) override
     {
-
+        m_AnimationsInStrings = self->getObjectAnimations();
+        addAnimationsFromStrings();
     }
 };
 

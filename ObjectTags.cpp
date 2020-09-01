@@ -28,3 +28,5 @@ const std::string ObjectTags::WIDTH_OFFSET = "[WIDTHOFF]";
 const std::string ObjectTags::WIDTH_OFFSET_END = "[-WIDTHOFF]";
 const std::string ObjectTags::HEIGHT_OFFSET = "[HEIGHTOFF]";
 const std::string ObjectTags::HEIGHT_OFFSET_END = "[-HEIGHTOFF]";
+const std::string ObjectTags::ANIMATION = "[ANIMATION]";
+const std::string ObjectTags::ANIMATION_END = "[-ANIMATION]";

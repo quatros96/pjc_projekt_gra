@@ -100,3 +100,8 @@ void GameObjectBlueprint::setEncompassingRectCollider(std::string label)
     m_EncompassingRectCollider = true;
     m_EncompassingRectColliderLabel = "" + label;
 }
+
+std::vector<std::string>& GameObjectBlueprint::getAnimations()
+{
+    return m_Animations;
+}
