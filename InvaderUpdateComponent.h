@@ -6,6 +6,7 @@
 #include "GameObjectSharer.h"
 #include "RectColliderComponent.h"
 #include "GameObject.h"
+#include "AnimatedGraphicsComponent.h"
 
 class BulletSpawner;
 
@@ -16,6 +17,7 @@ class InvaderUpdateComponent : public UpdateComponent
     std::shared_ptr<RectColliderComponent> m_RCC;
     std::shared_ptr<TransformComponent> m_PlayerTC;
     std::shared_ptr<RectColliderComponent> m_PlayerRCC;
+    std::shared_ptr<AnimatedGraphicsComponent> m_AGC;
     BulletSpawner *m_BulletSpawner;
     float m_Speed{60.0f};
     float m_TimeSinceLastShot;
@@ -23,10 +25,12 @@ class InvaderUpdateComponent : public UpdateComponent
     float m_AccuracyModifier;
     float m_SpeedModifier{0.05};
     int m_RandSpeed;
+    float m_Timer = 0;
+    bool goLeft = true;
 public:
     void initializeBulletSpawner(BulletSpawner *bulletSpawner, int randSeed);
     void update(float fps) override;
-
+    void chasePlayer(float& fps);
     std::string getSpecificType()
     {
 
@@ -52,5 +56,9 @@ public:
         m_RCC = std::static_pointer_cast<RectColliderComponent>(
                 self->getComponentByTypeAndSpecificType(
                         "collider", "rect"));
+        m_AGC = std::static_pointer_cast<AnimatedGraphicsComponent>(
+            gos->findFirstObjectWithTag("invader")
+            .getComponentByTypeAndSpecificType(
+                "graphics", "animated"));
     }
 };
