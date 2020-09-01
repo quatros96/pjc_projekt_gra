@@ -20,6 +20,7 @@ private:
     float m_HeightOffset;
     bool m_EncompassingRectCollider {false};
     std::string m_EncompassingRectColliderLabel {""};
+    std::vector<std::string> m_Animations;
 public:
     float getWidthOffset();
     void setWidthOffset(float widthoff);
@@ -44,4 +45,5 @@ public:
     std::string getEncompassingRectColliderLabel();
     bool getEncompassingRectCollider();
     void setEncompassingRectCollider(std::string label);
+    std::vector<std::string>& getAnimations();
 };

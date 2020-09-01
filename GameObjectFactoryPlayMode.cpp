@@ -65,6 +65,6 @@ void GameObjectFactoryPlayMode::buildGameObject(GameObjectBlueprint &bp, std::ve
         gameObject.addComponent(rcc);
         rcc->setOrMoveCollider(bp.getLacationX(), bp.getLocationY(), bp.getWidth(), bp.getHeight());
     }
-
+    gameObject.setObjectAnimations(bp.getAnimations());
     gameObjects.push_back(gameObject);
 }

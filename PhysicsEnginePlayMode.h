@@ -20,9 +20,9 @@ private:
     bool m_InvaderHitWallPreviousFrame {false};
     bool m_NeedToDropDownAndReverse {false};
     bool m_CompletedDropDownAndReverse {false};
-    void detectInvaderCollisions(std::vector<GameObject>& objects,
+    void detectEnemyCollisions(std::vector<GameObject>& objects,
             const std::vector<int>& bulletPositions);
-    void detectPlayerCollisionsAndInvaderDirection(std::vector<GameObject>& objects,
+    void detectPlayerCollisionsAndEnemy(std::vector<GameObject>& objects,
             const std::vector<int>& bulletPositions);
     void handlePlayerWorldCollisions(std::vector<GameObject>& objects, std::shared_ptr<TileMap>& map);
     void handlePlayerWorldEdgeCollisions();
@@ -31,6 +31,7 @@ private:
     void handleBulletWorldCollisions(std::vector<GameObject>& objects, std::shared_ptr<TileMap>& map, const std::vector<int>& bulletPositions);
     //variables for collision detection
     int x_start, x_end, y_start, y_end, layer;
+    sf::Clock clock;
 public:
     void initialize(GameObjectSharer& gos);
     void detectCollisions(std::vector<GameObject>& objects,

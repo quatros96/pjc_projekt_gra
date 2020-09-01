@@ -11,5 +11,5 @@ public:
     static int NUM_INVADERS_AT_START;
     static int NUM_INVADERS;
     static int WAVE_NUMBER;
-
+    inline static bool DEBUG_MODE = false;
 };

@@ -28,4 +28,6 @@ public:
     static const std::string WIDTH_OFFSET_END;
     static const std::string HEIGHT_OFFSET;
     static const std::string HEIGHT_OFFSET_END;
+    static const std::string ANIMATION;
+    static const std::string ANIMATION_END;
 };

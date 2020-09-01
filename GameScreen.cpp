@@ -72,7 +72,7 @@ void GameScreen::initalise()
     {
         WorldState::NUM_INVADERS_AT_START = WorldState::NUM_INVADERS;
         WorldState::WAVE_NUMBER = 1;
-        WorldState::LIVES = 3;
+        WorldState::LIVES = 100;
         WorldState::SCORE = 0;
     }
 }
@@ -137,7 +137,7 @@ void GameScreen::draw(sf::RenderWindow &window)
     window.setView(m_View);
     //rendering to the texture
     m_renderTexture.setView(m_View);
-    m_map->draw(m_renderTexture, m_PRCC->getWorldGridPosition());
+    m_map->draw(m_renderTexture, m_PRCC->getWorldGridPosition(), WorldState::DEBUG_MODE);
     m_renderTexture.display();
     m_renderSprite.setTexture(m_renderTexture.getTexture());
     window.draw(m_renderSprite);

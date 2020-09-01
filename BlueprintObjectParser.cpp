@@ -77,6 +77,12 @@ void BlueprintObjectParser::parseNextObjectForBlueprint(std::ifstream &reader, G
                 ObjectTags::HEIGHT_OFFSET, ObjectTags::HEIGHT_OFFSET_END);
             bp.setHeightOffset(stof(value));
         }
+        else if(lineFromFile.find(ObjectTags::ANIMATION) != std::string::npos)
+        {
+	        value = extractStringBetweenTags(lineFromFile,
+                ObjectTags::ANIMATION, ObjectTags::ANIMATION_END);
+            bp.getAnimations().push_back(value);
+        }
     	
         else if(lineFromFile.find(ObjectTags::END_OF_OBJECT) != std::string::npos)
         {

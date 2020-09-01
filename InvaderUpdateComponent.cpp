@@ -6,52 +6,82 @@
 
 void InvaderUpdateComponent::update(float fps)
 {
-    if(m_MovingRight)
-    {
-        m_TC->getLocation().x += m_Speed * fps;
-    }
-    else
-    {
-        m_TC->getLocation().x -= m_Speed * fps;
-    }
-    m_RCC->setOrMoveCollider(m_TC->getLocation().x, m_TC->getLocation().y,
-            m_TC->getSize().x, m_TC->getSize().y);
-    m_TimeSinceLastShot += fps;
-    if((m_TC->getLocation().x + (m_TC->getSize().x / 2)) >
-            (m_PlayerTC->getLocation().x - m_AccuracyModifier) &&
-            (m_TC->getLocation().x + (m_TC->getSize().x / 2)) <
-                    (m_PlayerTC->getLocation().x + (m_PlayerTC->getSize().x + m_AccuracyModifier)))
-    {
-        if(m_TimeSinceLastShot > m_TimeBetweenShots)
-        {
-            SoundEngine::playShoot();
-            sf::Vector2f spawnLocation;
-            spawnLocation.x = m_TC->getLocation().x + m_TC->getSize().x / 2;
-            spawnLocation.y = m_TC->getLocation().y + m_TC->getSize().y;
-            m_BulletSpawner->spawnBullet(spawnLocation, false);
-            srand(m_RandSpeed);
-            int mTimeBetweenShoots = (((rand() % 10)) + 1) / WorldState::WAVE_NUMBER;
-            m_TimeSinceLastShot = 0;
-        }
-    }
+	m_AttackTimer += 10.f * fps;
+	if(abs(m_PlayerRCC->getPosition().x - m_RCC->getPosition().x) < 100 && abs(m_PlayerRCC->getPosition().y - m_RCC->getPosition().y) < 100)
+	{
+		chasePlayer(fps);
+	}
+	else
+	{
+		m_Timer += 4.f * fps;
+		if(m_Timer > 10)
+		{
+			goLeft = !goLeft;
+			m_Timer = 0;
+		}
+		if(goLeft)
+		{
+			m_TC->moveLeft(fps);
+			m_AGC->play("LEFT", fps);
+		}
+		else
+		{
+			m_TC->moveRight(fps);
+			m_AGC->play("RIGHT", fps);
+		}
+	}
+	if(m_AttackTimer > 10)
+	{
+		isAbleToAttack = true;
+		m_AttackTimer = 0;
+	}
+	m_RCC->setOrMoveCollider(m_TC->getLocation().x, m_TC->getLocation().y,
+		m_TC->getSize().x, m_TC->getSize().y);
 }
-void InvaderUpdateComponent::dropDownAndReverse()
+
+void InvaderUpdateComponent::chasePlayer(float& fps)
 {
-    m_MovingRight = !m_MovingRight;
-    m_TC->getLocation().y += m_TC->getSize().y;
-    m_Speed += (WorldState::WAVE_NUMBER) + (WorldState::NUM_INVADERS_AT_START -
-            WorldState::NUM_INVADERS) * m_SpeedModifier;
+	if(m_RCC->getWorldGridPosition().x > m_PlayerRCC->getWorldGridPosition().x)
+	{
+		//go left
+		m_TC->moveLeft(fps);
+		m_AGC->play("LEFT", fps);
+	}
+	else if (m_RCC->getWorldGridPosition().x < m_PlayerRCC->getWorldGridPosition().x)
+	{
+		//go right
+		m_TC->moveRight(fps);
+		m_AGC->play("RIGHT", fps);
+	}
+	else if(m_RCC->getWorldGridPosition().y > m_PlayerRCC->getWorldGridPosition().y)
+	{
+		//go up
+		m_TC->moveUp(fps);
+		m_AGC->play("UP", fps);
+	}
+	else if (m_RCC->getWorldGridPosition().y < m_PlayerRCC->getWorldGridPosition().y)
+	{
+		//go down
+		m_TC->moveDown(fps);
+		m_AGC->play("DOWN", fps);
+	}
 }
-bool InvaderUpdateComponent::isMovingRight()
+
+void InvaderUpdateComponent::Attack()
 {
-    return m_MovingRight;
+	isAbleToAttack = false;
 }
+
+bool InvaderUpdateComponent::canAttack()
+{
+	return isAbleToAttack;
+}
+
 void InvaderUpdateComponent::initializeBulletSpawner(BulletSpawner *bulletSpawner, int randSeed)
 {
     m_BulletSpawner = bulletSpawner;
     m_RandSpeed = randSeed;
     srand(m_RandSpeed);
     m_TimeBetweenShots = (rand() % 15 + m_RandSpeed);
-    m_AccuracyModifier = (rand() % 2);
-    m_AccuracyModifier += 0 + static_cast<float>(rand()) / (static_cast<float>(RAND_MAX / 10));
+
 }

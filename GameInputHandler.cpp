@@ -5,6 +5,7 @@
 #include "GameInputHandler.h"
 #include "SoundEngine.h"
 #include "GameScreen.h"
+#include "WorldState.h"
 class BulletSpawner;
 
 void GameInputHandler::initialize()
@@ -113,5 +114,9 @@ void GameInputHandler::handleKeyReleased(sf::Event &event, sf::RenderWindow &win
         spawnLocation.y = m_PRCC->getPosition().y;
         dynamic_cast<GameScreen*>(getmParentScreen())->spawnBullet(spawnLocation, true);
         //m_PUC->attack();
+    }
+    else if(event.key.code == sf::Keyboard::PageUp)
+    {
+        WorldState::DEBUG_MODE = !WorldState::DEBUG_MODE;
     }
 }

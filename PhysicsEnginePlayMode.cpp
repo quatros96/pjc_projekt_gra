@@ -7,7 +7,7 @@
 #include "InvaderUpdateComponent.h"
 #include "BulletUpdateComponent.h"
 
-void PhysicsEnginePlayMode::detectInvaderCollisions(std::vector<GameObject> &objects,
+void PhysicsEnginePlayMode::detectEnemyCollisions(std::vector<GameObject> &objects,
         const std::vector<int> &bulletPositions)
 {
     sf::Vector2f offScreen(-100, -100);
@@ -29,20 +29,22 @@ void PhysicsEnginePlayMode::detectInvaderCollisions(std::vector<GameObject> &obj
                     std::static_pointer_cast<BulletUpdateComponent>
                             ((*bulletIt).getUpdateComponent())->m_BelongsToPlayer)
                 {
-                    SoundEngine::playInvaderExplode();
+                    SoundEngine::playHit();
                     (*invaderIt).getTransformComponent()->getLocation() = offScreen;
                     (*bulletIt).getTransformComponent()->getLocation() = offScreen;
                     WorldState::SCORE++;
                     WorldState::NUM_INVADERS--;
                     (*invaderIt).setInactive();
+                    (*invaderIt).getEncompassingRectCollider().setPosition(offScreen);
                 }
             }
         }
     }
 }
-void PhysicsEnginePlayMode::detectPlayerCollisionsAndInvaderDirection(std::vector<GameObject>
+void PhysicsEnginePlayMode::detectPlayerCollisionsAndEnemy(std::vector<GameObject>
         &objects, const std::vector<int> &bulletPositions)
 {
+    sf::Time elapsed = clock.restart();
     sf::Vector2f offScreen(-100, -100);
     sf::RectangleShape playerCollider = m_Player->getEncompassingRectCollider();
     std::shared_ptr<TransformComponent> playerTransform = m_Player->getTransformComponent();
@@ -58,20 +60,21 @@ void PhysicsEnginePlayMode::detectPlayerCollisionsAndInvaderDirection(std::vecto
             //detect collisions with player
             if(currentCollider.getGlobalBounds().intersects(playerCollider.getGlobalBounds()))
             {
-                if((*it3).getTag() == "bullet")
+                if((*it3).getTag() == "bullet" && !(std::static_pointer_cast<BulletUpdateComponent>
+                    ((*it3).getUpdateComponent())->m_BelongsToPlayer))
                 {
                     SoundEngine::playPlayerExplode();
                     WorldState::LIVES--;
                     (*it3).getTransformComponent()->getLocation() = offScreen;
                 }
-                if((*it3).getTag() == "invader")
+                if((*it3).getTag() == "invader" && std::static_pointer_cast<InvaderUpdateComponent>((*it3).getUpdateComponent())->canAttack())
                 {
-                    SoundEngine::playPlayerExplode();
-                    SoundEngine::playInvaderExplode();
+                    SoundEngine::playHit();
                     WorldState::LIVES--;
-                    (*it3).getTransformComponent()->getLocation() = offScreen;
-                    WorldState::SCORE++;
-                    (*it3).setInactive();
+                    std::static_pointer_cast<InvaderUpdateComponent>((*it3).getUpdateComponent())->Attack();
+                    //(*it3).getTransformComponent()->getLocation() = offScreen;
+                    //WorldState::SCORE++;
+                    //(*it3).setInactive();
                 }
             }
         }
@@ -272,8 +275,8 @@ void PhysicsEnginePlayMode::initialize(GameObjectSharer &gos)
 void PhysicsEnginePlayMode::detectCollisions(std::vector<GameObject> &objects,
         const std::vector<int> &bulletPositions, std::shared_ptr<TileMap>& map)
 {
-    //detectInvaderCollisions(objects, bulletPositions);
-    //detectPlayerCollisionsAndInvaderDirection(objects, bulletPositions);
+    detectEnemyCollisions(objects, bulletPositions);
+    detectPlayerCollisionsAndEnemy(objects, bulletPositions);
     handlePlayerWorldCollisions(objects, map);
     handlePlayerWorldEdgeCollisions();
     handleBulletWorldEdgeCollisions(objects, bulletPositions);

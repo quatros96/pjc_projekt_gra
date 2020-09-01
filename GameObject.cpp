@@ -99,6 +99,17 @@ std::string GameObject::getTag()
 {
     return m_Tag;
 }
+
+void GameObject::setObjectAnimations(std::vector<std::string> animations)
+{
+    m_ObjectAnimations = animations;
+}
+
+std::shared_ptr<std::vector<std::string>> GameObject::getObjectAnimations()
+{
+    return std::make_shared<std::vector<std::string>>(m_ObjectAnimations);
+}
+
 void GameObject::start(GameObjectSharer *gos)
 {
     auto it = m_Components.begin();

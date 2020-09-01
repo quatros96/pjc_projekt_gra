@@ -30,6 +30,14 @@ sf::RectangleShape& RectColliderComponent::getColliderRectF()
 
 void RectColliderComponent::draw(sf::RenderWindow& window)
 {
+	if(WorldState::DEBUG_MODE)
+	{
+        m_Collider.setOutlineThickness(-1.f);
+	}
+    else
+    {
+        m_Collider.setOutlineThickness(0);
+    }
     window.draw(m_Collider);
 }
 
