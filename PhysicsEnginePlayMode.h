@@ -24,15 +24,16 @@ private:
             const std::vector<int>& bulletPositions);
     void detectPlayerCollisionsAndInvaderDirection(std::vector<GameObject>& objects,
             const std::vector<int>& bulletPositions);
-    void handlePlayerWorldCollisions(std::vector<GameObject>& objects, std::shared_ptr<TileMap> map);
+    void handlePlayerWorldCollisions(std::vector<GameObject>& objects, std::shared_ptr<TileMap>& map);
     void handlePlayerWorldEdgeCollisions();
     void handleBulletWorldEdgeCollisions(std::vector<GameObject>& objects,
         const std::vector<int>& bulletPositions);
+    void handleBulletWorldCollisions(std::vector<GameObject>& objects, std::shared_ptr<TileMap>& map, const std::vector<int>& bulletPositions);
     //variables for collision detection
     int x_start, x_end, y_start, y_end, layer;
 public:
     void initialize(GameObjectSharer& gos);
     void detectCollisions(std::vector<GameObject>& objects,
-         const std::vector<int>& bulletPositions, std::shared_ptr<TileMap> map);
+         const std::vector<int>& bulletPositions, std::shared_ptr<TileMap>& map);
 };
 

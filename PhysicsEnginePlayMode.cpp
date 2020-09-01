@@ -78,7 +78,7 @@ void PhysicsEnginePlayMode::detectPlayerCollisionsAndInvaderDirection(std::vecto
     }
 }
 
-void PhysicsEnginePlayMode::handlePlayerWorldCollisions(std::vector<GameObject>& objects, std::shared_ptr<TileMap> map)
+void PhysicsEnginePlayMode::handlePlayerWorldCollisions(std::vector<GameObject>& objects, std::shared_ptr<TileMap>& map)
 {
 	//getting grid position
     x_start = m_PRCC->getWorldGridPosition().x - 1;
@@ -185,15 +185,16 @@ void PhysicsEnginePlayMode::handleBulletWorldEdgeCollisions(std::vector<GameObje
     const std::vector<int>& bulletPositions)
 {
     auto it3 = objects.begin();
+    std::advance(it3, bulletPositions[0]);
     auto end3 = objects.end();
     for (it3; it3 != end3; it3++)
     {
         if ((*it3).isActive() && (*it3).hasCollider() && (*it3).getTag() == "bullet")
         {
-            //get a reference to all parts we might need
+            //get a reference to all parts
             sf::RectangleShape currentCollider = (*it3).getEncompassingRectCollider();
             auto bulletUpdateComp = std::dynamic_pointer_cast<BulletUpdateComponent>((*it3).getComponentByTypeAndSpecificType("update", "bullet"));
-            //detect collisions with player
+            //detect collisions with world edge
             if (currentCollider.getGlobalBounds().left + currentCollider.getGlobalBounds().width > WorldState::WORLD_WIDTH)
             {
                 bulletUpdateComp->deSpawn();
@@ -222,6 +223,37 @@ void PhysicsEnginePlayMode::handleBulletWorldEdgeCollisions(std::vector<GameObje
     }
 }
 
+void PhysicsEnginePlayMode::handleBulletWorldCollisions(std::vector<GameObject>& objects, std::shared_ptr<TileMap>& map,
+	const std::vector<int>& bulletPositions)
+{
+    auto it3 = objects.begin();
+    std::advance(it3, bulletPositions[0]);
+    auto end3 = objects.end();
+    for (it3; it3 != end3; it3++)
+    {
+        if ((*it3).isActive() && (*it3).hasCollider() && (*it3).getTag() == "bullet")
+        {
+            //get a reference to all parts
+            sf::RectangleShape currentCollider = (*it3).getEncompassingRectCollider();
+            auto bulletUpdateComp = std::dynamic_pointer_cast<BulletUpdateComponent>((*it3).getComponentByTypeAndSpecificType("update", "bullet"));
+            auto bulletRectangleCollider = std::dynamic_pointer_cast<RectColliderComponent>((*it3).getComponentByTypeAndSpecificType("collider", "rect"));
+        	if(!(bulletRectangleCollider->getWorldGridPosition().x > 100) && !(bulletRectangleCollider->getWorldGridPosition().y > 100))
+        	{
+                auto positionGrid = bulletRectangleCollider->getWorldGridPosition();
+                for (auto tile : map->getMap()[positionGrid.x][positionGrid.y])
+                {
+                    if (tile->getCollisionStatus())
+                    {
+                        bulletUpdateComp->deSpawn();
+                        std::cout << "Bullet Despawned!" << std::endl;
+                        SoundEngine::playFireballExplode();
+                    }
+                }
+        	}
+        }
+    }
+}
+
 void PhysicsEnginePlayMode::initialize(GameObjectSharer &gos)
 {
     m_Player = &gos.findFirstObjectWithTag("Player");
@@ -238,11 +270,12 @@ void PhysicsEnginePlayMode::initialize(GameObjectSharer &gos)
     
 }
 void PhysicsEnginePlayMode::detectCollisions(std::vector<GameObject> &objects,
-        const std::vector<int> &bulletPositions, std::shared_ptr<TileMap> map)
+        const std::vector<int> &bulletPositions, std::shared_ptr<TileMap>& map)
 {
     //detectInvaderCollisions(objects, bulletPositions);
     //detectPlayerCollisionsAndInvaderDirection(objects, bulletPositions);
     handlePlayerWorldCollisions(objects, map);
     handlePlayerWorldEdgeCollisions();
     handleBulletWorldEdgeCollisions(objects, bulletPositions);
+    handleBulletWorldCollisions(objects, map, bulletPositions);
 }
